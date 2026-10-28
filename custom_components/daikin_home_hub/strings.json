@@ -1,0 +1,305 @@
+{
+  "title": "Daikin Home Hub Modbus",
+  "config": {
+    "step": {
+      "user": {
+        "title": "Connect your Daikin HomeHub",
+        "description": "Enable unencrypted Modbus TCP and the matching use case on HomeHub first. Select the equipment profile using its model code and Micon ID. A successful read confirms the interface responds; it cannot verify model, firmware or installed accessories.",
+        "data": {
+          "host": "Hostname or IP address",
+          "port": "TCP port",
+          "unit_id": "Modbus unit ID",
+          "model": "Equipment compatibility profile"
+        }
+      },
+      "reconfigure": {
+        "title": "Change the connection or equipment profile",
+        "description": "Common entity IDs and options are preserved. Entities outside the new profile are removed after successful setup; update automations using those entities.",
+        "data": {
+          "host": "Hostname or IP address",
+          "port": "TCP port",
+          "unit_id": "Modbus unit ID",
+          "model": "Equipment compatibility profile"
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Unable to read HomeHub. Check the host, port, unit ID, use case and unencrypted Modbus TCP configuration. Another integration may be using conflicting connection settings.",
+      "invalid_response": "The selected register map returned an unexpected probe value. Check the HomeHub use case, equipment profile and firmware.",
+      "invalid_input": "Enter a valid hostname or IP address, an integer TCP port (1-65535), unit ID (1-247) and a supported equipment profile.",
+      "unknown": "Unexpected error while checking HomeHub. See the Home Assistant log for details."
+    },
+    "abort": {
+      "already_configured": "This endpoint and unit ID are already configured.",
+      "reconfigure_successful": "The connection and equipment profile were updated."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Polling options",
+        "description": "The integration reloads automatically after changing the refresh interval.",
+        "data": {
+          "scan_interval": "Refresh interval"
+        },
+        "data_description": {
+          "scan_interval": "Whole seconds between polls (minimum 5)."
+        }
+      }
+    },
+    "error": {
+      "invalid_scan_interval": "Enter a whole number of seconds, 5 or greater."
+    }
+  },
+  "selector": {
+    "model": {
+      "options": {
+        "altherma_3_h_ht": "Daikin Altherma 3 H HT - EPRA14/16/18DV37/W17 - Micon 20017705",
+        "altherma_3_h_mt": "Daikin Altherma 3 H MT - EPRA08/10/12EV3/W1 - Micon 20007903",
+        "altherma_3_r_erga": "Daikin Altherma 3 R ERGA floor/wall - ERGA-EV(7)(H)(A), EHVH/X/Z-E or EHBH/X-E - Micon 20002203",
+        "altherma_3_r_erga_ech2o": "Daikin Altherma 3 R ERGA ECH₂O - ERGA-EV(7)(H)(A), EHSH(B)/X(B)-P-E - Micon 20017704",
+        "altherma_3_r_erla": "Daikin Altherma 3 R ERLA - ERLA11/14/16DV3/W1 - Micon 20007903",
+        "altherma_3_r_mt": "Daikin Altherma 3 R MT - ERRA-EV3/W1 - Micon 22009C01",
+        "altherma_3_m_d": "Daikin Altherma 3 M D-series - EBLA/EDLA09/11/14/16D - Micon 20002203",
+        "altherma_3_m_e": "Daikin Altherma 3 M E-series - EBLA/EDLA04/06/08E - Micon 20017704",
+        "air_to_air": "Daikin air-to-air installation - BRP069C4* WLAN adapter, outdoor Demand Control, maximum 5 units"
+      }
+    }
+  },
+  "entity": {
+    "sensor": {
+      "unit_abnormality": {
+        "name": "Unit abnormality",
+        "state": {
+          "no_error": "No error",
+          "fault": "Fault",
+          "warning": "Warning"
+        }
+      },
+      "unit_abnormality_code": {
+        "name": "Unit abnormality code"
+      },
+      "unit_abnormality_subcode": {
+        "name": "Unit abnormality subcode"
+      },
+      "three_way_valve": {
+        "name": "Three-way valve",
+        "state": {
+          "space_heating": "Space heating",
+          "dhw": "Dhw"
+        }
+      },
+      "actual_operation_mode": {
+        "name": "Actual operation mode",
+        "state": {
+          "heating": "Heating",
+          "cooling": "Cooling"
+        }
+      },
+      "leaving_water_phe_temperature": {
+        "name": "Leaving water PHE temperature"
+      },
+      "leaving_water_buh_temperature": {
+        "name": "Leaving water BUH temperature"
+      },
+      "return_water_temperature": {
+        "name": "Return water temperature"
+      },
+      "dhw_temperature": {
+        "name": "DHW temperature"
+      },
+      "outside_temperature": {
+        "name": "Outside temperature"
+      },
+      "liquid_refrigerant_temperature": {
+        "name": "Liquid refrigerant temperature"
+      },
+      "room_temperature": {
+        "name": "Remote controller room temperature"
+      },
+      "flow_rate": {
+        "name": "Flow rate"
+      },
+      "power_consumption": {
+        "name": "Heat pump power consumption"
+      },
+      "main_heating_lower_limit": {
+        "name": "Main heating setpoint lower limit"
+      },
+      "main_heating_upper_limit": {
+        "name": "Main heating setpoint upper limit"
+      },
+      "main_cooling_lower_limit": {
+        "name": "Main cooling setpoint lower limit"
+      },
+      "main_cooling_upper_limit": {
+        "name": "Main cooling setpoint upper limit"
+      },
+      "additional_heating_lower_limit": {
+        "name": "Additional heating setpoint lower limit"
+      },
+      "additional_heating_upper_limit": {
+        "name": "Additional heating setpoint upper limit"
+      },
+      "additional_cooling_lower_limit": {
+        "name": "Additional cooling setpoint lower limit"
+      },
+      "additional_cooling_upper_limit": {
+        "name": "Additional cooling setpoint upper limit"
+      },
+      "dhw_upper_temperature": {
+        "name": "DHW upper temperature"
+      },
+      "dhw_lower_temperature": {
+        "name": "DHW lower temperature"
+      },
+      "room_heating_lower_limit": {
+        "name": "Room heating setpoint lower limit"
+      },
+      "room_heating_upper_limit": {
+        "name": "Room heating setpoint upper limit"
+      },
+      "room_cooling_lower_limit": {
+        "name": "Room cooling setpoint lower limit"
+      },
+      "room_cooling_upper_limit": {
+        "name": "Room cooling setpoint upper limit"
+      }
+    },
+    "binary_sensor": {
+      "circulation_pump_running": {
+        "name": "Circulation pump running"
+      },
+      "compressor_running": {
+        "name": "Compressor running"
+      },
+      "booster_heater_running": {
+        "name": "Booster heater running"
+      },
+      "disinfection_running": {
+        "name": "Disinfection operation"
+      },
+      "defrost": {
+        "name": "Defrost"
+      },
+      "hot_start": {
+        "name": "Hot start"
+      },
+      "dhw_normal_operation": {
+        "name": "DHW normal operation"
+      },
+      "space_normal_operation": {
+        "name": "Space heating/cooling normal operation"
+      }
+    },
+    "number": {
+      "main_heating_setpoint": {
+        "name": "Main heating water setpoint"
+      },
+      "main_cooling_setpoint": {
+        "name": "Main cooling water setpoint"
+      },
+      "room_heating_setpoint": {
+        "name": "Room heating setpoint"
+      },
+      "room_cooling_setpoint": {
+        "name": "Room cooling setpoint"
+      },
+      "dhw_reheat_setpoint": {
+        "name": "DHW reheat setpoint"
+      },
+      "main_heating_offset": {
+        "name": "Main weather dependent heating offset"
+      },
+      "main_cooling_offset": {
+        "name": "Main weather dependent cooling offset"
+      },
+      "buffering_power_limit": {
+        "name": "Buffering power limit"
+      },
+      "general_power_limit": {
+        "name": "General power limit"
+      },
+      "additional_heating_setpoint": {
+        "name": "Additional heating water setpoint"
+      },
+      "additional_cooling_setpoint": {
+        "name": "Additional cooling water setpoint"
+      },
+      "additional_heating_offset": {
+        "name": "Additional weather dependent heating offset"
+      },
+      "additional_cooling_offset": {
+        "name": "Additional weather dependent cooling offset"
+      },
+      "demand_power_limit": {
+        "name": "Demand Control power limit"
+      }
+    },
+    "select": {
+      "operation_mode": {
+        "name": "Requested operation mode",
+        "state": {
+          "auto": "Auto",
+          "heating": "Heating",
+          "cooling": "Cooling"
+        }
+      },
+      "main_weather_mode": {
+        "name": "Main weather dependent mode",
+        "state": {
+          "fixed": "Fixed",
+          "weather_dependent": "Weather dependent",
+          "fixed_scheduled": "Fixed scheduled",
+          "weather_dependent_scheduled": "Weather dependent scheduled"
+        }
+      },
+      "smart_grid_mode": {
+        "name": "Smart Grid mode",
+        "state": {
+          "free_running": "Free running",
+          "forced_off": "Forced off",
+          "recommended_on": "Recommended on",
+          "forced_on": "Forced on"
+        }
+      },
+      "additional_weather_mode": {
+        "name": "Additional weather dependent mode",
+        "state": {
+          "fixed": "Fixed",
+          "weather_dependent": "Weather dependent",
+          "fixed_scheduled": "Fixed scheduled",
+          "weather_dependent_scheduled": "Weather dependent scheduled"
+        }
+      }
+    },
+    "switch": {
+      "space_conditioning": {
+        "name": "Space heating/cooling"
+      },
+      "quiet_mode": {
+        "name": "Quiet mode"
+      },
+      "dhw_reheat": {
+        "name": "DHW reheat"
+      },
+      "dhw_booster": {
+        "name": "DHW powerful mode"
+      },
+      "main_thermostat_input": {
+        "name": "Main thermostat input A"
+      },
+      "additional_thermostat_input": {
+        "name": "Additional thermostat input A"
+      }
+    }
+  },
+  "exceptions": {
+    "invalid_setting": {
+      "message": "Unable to change setting: {reason}"
+    },
+    "write_failed": {
+      "message": "HomeHub did not confirm the write. Check the actual device state before retrying."
+    }
+  }
+}
