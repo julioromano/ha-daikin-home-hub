@@ -28,6 +28,9 @@ class HomeHubEntity[DescriptionT: EntityDescription](
         self._attr_device_info: DeviceInfo | ChildDeviceInfo | None = (
             coordinator.device_info
         )
+        self._attr_entity_registry_enabled_default: bool = (
+            coordinator.entity_enabled_default(description.key)
+        )
         self._update_state()
 
     @property

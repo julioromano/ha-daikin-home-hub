@@ -159,7 +159,13 @@ def _decode(register: Register, value: Value) -> Value:
 class HomeHub:
     """One installation behind a HomeHub, with no socket ownership or HA imports."""
 
-    def __init__(self, unit: ModbusUnit, model: str) -> None:
+    def __init__(
+        self,
+        unit: ModbusUnit,
+        model: str,
+        *,
+        active_fields: frozenset[str] | None = None,
+    ) -> None:
         self.profile = MODELS[model]
         self.registers = {
             key: value
@@ -169,6 +175,9 @@ class HomeHub:
         self.optional_fields = frozenset(
             key for key, register in self.registers.items() if register.optional
         )
+        self.active_fields = frozenset(self.registers)
+        if active_fields is not None:
+            self.active_fields &= active_fields
         self._unit = unit
         self._lock = asyncio.Lock()
 
@@ -196,7 +205,9 @@ class HomeHub:
         async with self._lock:
             keys = set(self.registers) - self.optional_fields
             keys.update(optional_fields & self.optional_fields)
-            return await self._read(self._dependencies(keys))
+            return await self._read(
+                self._dependencies(keys & self.active_fields) & self.active_fields
+            )
 
     def _dependencies(self, keys: set[str]) -> set[str]:
         return keys | {
@@ -286,6 +297,8 @@ class HomeHub:
             register = self.registers.get(key)
             if register is None or register.space != "holding":
                 raise ValueError(f"Unknown writable field: {key}")
+            if key not in self.active_fields:
+                raise ValueError("Setting is not enabled for this installation")
             if register.platform == "switch":
                 if not isinstance(value, bool):
                     raise ValueError("Expected a boolean")

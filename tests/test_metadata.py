@@ -52,7 +52,7 @@ def test_documented_inventory_contains_every_published_offset_and_key():
 
 
 def test_protocol_modules_have_no_home_assistant_imports():
-    for filename in ("protocol.py", "registers.py", "models.py"):
+    for filename in ("protocol.py", "registers.py", "models.py", "installation.py"):
         tree = ast.parse((COMPONENT / filename).read_text())
         for node in ast.walk(tree):
             if isinstance(node, ast.Import):

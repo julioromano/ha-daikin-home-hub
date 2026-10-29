@@ -21,13 +21,30 @@
           "unit_id": "Modbus unit ID",
           "model": "Equipment compatibility profile"
         }
+      },
+      "installation": {
+        "title": "Describe your installation",
+        "description": "Match these choices to your installed equipment and its existing configuration. They enable related Home Assistant entities; they do not change Daikin installer settings. You can change them later using Configure.",
+        "data": {
+          "dhw_present": "DHW tank present",
+          "additional_zone": "Additional zone present",
+          "control_method": "Main zone control method",
+          "cooling_available": "Cooling available"
+        },
+        "data_description": {
+          "dhw_present": "Enable the DHW controls and related tank, heater and valve measurements.",
+          "additional_zone": "Enable additional-zone controls, limits and its thermostat input where supported.",
+          "control_method": "Select the main zone control method already configured on the unit. Thermostat inputs remain subject to equipment support.",
+          "cooling_available": "Clear this for a heating-only installation to disable cooling entities and the requested operation-mode selector."
+        }
       }
     },
     "error": {
       "cannot_connect": "Unable to read HomeHub. Check the host, port, unit ID, use case and unencrypted Modbus TCP configuration. Another integration may be using conflicting connection settings.",
       "invalid_response": "The selected register map returned an unexpected probe value. Check the HomeHub use case, equipment profile and firmware.",
       "invalid_input": "Enter a valid hostname or IP address, an integer TCP port (1-65535), unit ID (1-247) and a supported equipment profile.",
-      "unknown": "Unexpected error while checking HomeHub. See the Home Assistant log for details."
+      "unknown": "Unexpected error while checking HomeHub. See the Home Assistant log for details.",
+      "invalid_installation": "Choose valid installation options and a listed control method."
     },
     "abort": {
       "already_configured": "This endpoint and unit ID are already configured.",
@@ -37,18 +54,27 @@
   "options": {
     "step": {
       "init": {
-        "title": "Polling options",
-        "description": "The integration reloads automatically after changing the refresh interval.",
+        "title": "Integration options",
+        "description": "Saving reloads the integration. Match any installation choices to your actual equipment; they do not change installer settings. Entity IDs, names and individual disable choices are preserved.",
         "data": {
-          "scan_interval": "Refresh interval"
+          "scan_interval": "Refresh interval",
+          "dhw_present": "DHW tank present",
+          "additional_zone": "Additional zone present",
+          "control_method": "Main zone control method",
+          "cooling_available": "Cooling available"
         },
         "data_description": {
-          "scan_interval": "Whole seconds between polls (minimum 5)."
+          "scan_interval": "Whole seconds between polls (minimum 5).",
+          "dhw_present": "Enable the DHW controls and related tank, heater and valve measurements.",
+          "additional_zone": "Enable additional-zone controls, limits and its thermostat input where supported.",
+          "control_method": "Select the main zone control method already configured on the unit. Thermostat inputs remain subject to equipment support.",
+          "cooling_available": "Clear this for a heating-only installation to disable cooling entities and the requested operation-mode selector."
         }
       }
     },
     "error": {
-      "invalid_scan_interval": "Enter a whole number of seconds, 5 or greater."
+      "invalid_scan_interval": "Enter a whole number of seconds, 5 or greater.",
+      "invalid_installation": "Choose valid installation options and a listed control method."
     }
   },
   "selector": {
@@ -63,6 +89,13 @@
         "altherma_3_m_d": "Daikin Altherma 3 M D-series - EBLA/EDLA09/11/14/16D - Micon 20002203",
         "altherma_3_m_e": "Daikin Altherma 3 M E-series - EBLA/EDLA04/06/08E - Micon 20017704",
         "air_to_air": "Daikin air-to-air installation - BRP069C4* WLAN adapter, outdoor Demand Control, maximum 5 units"
+      }
+    },
+    "control_method": {
+      "options": {
+        "leaving_water": "Leaving water temperature control",
+        "room_thermostat": "Room thermostat control",
+        "external_thermostat": "External room thermostat control"
       }
     }
   },

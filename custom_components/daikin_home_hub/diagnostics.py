@@ -17,6 +17,10 @@ async def async_get_config_entry_diagnostics(
     return {
         "configuration": {**entry.data, CONF_HOST: "**REDACTED**"},
         "last_update_success": entry.runtime_data.last_update_success,
+        "installation": entry.runtime_data.installation.as_options()
+        if entry.runtime_data.installation
+        else None,
+        "active_fields": sorted(entry.runtime_data.device.active_fields),
         "values": data.values,
         "raw_registers": data.raw,
         "unavailable": data.unavailable,

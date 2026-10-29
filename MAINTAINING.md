@@ -8,6 +8,8 @@ The protocol module consumes a `ModbusUnit` and owns no connection. Home Assista
 
 Register metadata drives HA descriptions and translations; explicit typed components define wire encodings. Model profiles apply manufacturer exclusions. The read planner restricts components to consecutive selected fields, adds enabled controls' limit dependencies, and isolates failed groups. Maintain these boundaries when adding features.
 
+Installation options apply a field mask to polling and writes, and set entity defaults centrally. Toggled-off groups retain integration-disabled registry entries to preserve identifiers and customizations. Re-enabling clears only integration-owned disable states, never user/device/config-entry disable states. Model-incompatible fields retain the existing removal behavior. Entries without installation options keep the legacy policy until Configure is saved; do not infer commissioning from these stored choices.
+
 Use current stable development tooling within the HA/Python constraints. Run formatting, linting, basedpyright, unit coverage, independent TCP tests and hassfest. HACS validation runs on GitHub pushes, pull requests, weekly and manual dispatch.
 
 ## GitHub setup after publication

@@ -40,6 +40,24 @@ async def async_setup_entry(hass: HomeAssistant, entry: HomeHubConfigEntry) -> b
             not in coordinator.device.registers
         ):
             registry.async_remove(entity.entity_id)
+        elif (
+            entity.platform == DOMAIN
+            and entity.unique_id.startswith(prefix)
+            and coordinator.installation is not None
+        ):
+            key = entity.unique_id.removeprefix(prefix)
+            if (
+                key not in coordinator.device.active_fields
+                and entity.disabled_by is None
+            ):
+                _ = registry.async_update_entity(
+                    entity.entity_id, disabled_by=er.RegistryEntryDisabler.INTEGRATION
+                )
+            elif (
+                key in coordinator.device.active_fields
+                and entity.disabled_by is er.RegistryEntryDisabler.INTEGRATION
+            ):
+                _ = registry.async_update_entity(entity.entity_id, disabled_by=None)
     await hass.config_entries.async_forward_entry_setups(entry, PLATFORMS)
     # Enabled optional entities restored by the registry now have contexts.
     await coordinator.async_refresh()

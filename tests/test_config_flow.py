@@ -15,6 +15,12 @@ from custom_components.daikin_home_hub.const import DOMAIN
 from .conftest import CONNECTION_DATA
 from .reference import PROFILES
 
+DEFAULT_INSTALLATION_OPTIONS = {
+    "dhw_present": False,
+    "additional_zone": False,
+    "control_method": "leaving_water",
+    "cooling_available": True,
+}
 pytestmark = pytest.mark.usefixtures("enable_custom_integrations", "mock_connection")
 
 
@@ -73,9 +79,12 @@ async def test_form_and_read_only_validation(hass, unit, connection):
                 "unit_id": 1.0,
             },
         )
+        assert result["step_id"] == "installation"
+        result = await hass.config_entries.flow.async_configure(result["flow_id"], {})
         await hass.async_block_till_done()
     assert result["type"] is FlowResultType.CREATE_ENTRY
     assert result["data"] == CONNECTION_DATA
+    assert result["options"] == DEFAULT_INSTALLATION_OPTIONS
     assert type(result["data"]["port"]) is int
     assert type(result["data"]["unit_id"]) is int
     assert writes == []
@@ -230,6 +239,10 @@ async def test_probe_accepts_markers_without_writing(
         result = await hass.config_entries.flow.async_init(
             DOMAIN, context={"source": "user"}, data={**CONNECTION_DATA, "model": model}
         )
+        if model != "air_to_air":
+            result = await hass.config_entries.flow.async_configure(
+                result["flow_id"], {}
+            )
         await hass.async_block_till_done()
     assert result["type"] is FlowResultType.CREATE_ENTRY
     assert writes == []
@@ -239,10 +252,13 @@ async def test_probe_accepts_markers_without_writing(
 
 
 @pytest.mark.parametrize("options", [{}, {"scan_interval": 30}])
+@pytest.mark.parametrize("model", ["altherma_3_m_e", "air_to_air"])
 async def test_options_gui_and_validation_errors_are_serializable(
-    hass, hass_client, entry, options
+    hass, hass_client, entry, options, model
 ):
-    hass.config_entries.async_update_entry(entry, options=options)
+    hass.config_entries.async_update_entry(
+        entry, options=options, data={**entry.data, "model": model}
+    )
     assert await async_setup_component(hass, "config", {})
     client = await hass_client()
     response = await client.post(
@@ -252,7 +268,12 @@ async def test_options_gui_and_validation_errors_are_serializable(
     form = await response.json()
     assert form["type"] == "form"
     assert form["step_id"] == "init"
-    assert len(form["data_schema"]) == 1
+    expected_fields = (
+        {"scan_interval"}
+        if model == "air_to_air"
+        else {"scan_interval", *DEFAULT_INSTALLATION_OPTIONS}
+    )
+    assert {field["name"] for field in form["data_schema"]} == expected_fields
     field = form["data_schema"][0]
     assert field["name"] == "scan_interval"
     assert field["default"] == 5
@@ -272,7 +293,7 @@ async def test_options_gui_and_validation_errors_are_serializable(
     assert response.status == 200
     form = await response.json()
     assert form["errors"] == {"scan_interval": "invalid_scan_interval"}
-    assert len(form["data_schema"]) == 1
+    assert len(form["data_schema"]) == len(expected_fields)
     assert entry.options == options
 
 
@@ -289,7 +310,10 @@ async def test_options_save_and_prefill_current_interval(
         )
         await hass.async_block_till_done()
     assert result["type"] is FlowResultType.CREATE_ENTRY
-    assert entry.options == {"scan_interval": int(interval)}
+    assert entry.options == {
+        "scan_interval": int(interval),
+        **DEFAULT_INSTALLATION_OPTIONS,
+    }
     assert type(entry.options["scan_interval"]) is int
     assert entry.data == CONNECTION_DATA
     reload.assert_awaited_once_with(entry.entry_id)

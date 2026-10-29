@@ -159,3 +159,65 @@ async def test_tcp_setup_writes_sharing_reconnect_and_unload(
             for entry in (first, second):
                 if entry.state.value == "loaded":
                     await hass.config_entries.async_unload(entry.entry_id)
+
+
+async def test_tcp_installation_setup_and_configure_groups(
+    hass, enable_custom_integrations
+):
+    """Installation choices reach the actual backend without commissioning writes."""
+    from homeassistant.exceptions import ServiceValidationError
+
+    async with gateway_server() as (gateway, port):
+        entry = None
+        options = {
+            "dhw_present": True,
+            "additional_zone": False,
+            "control_method": "room_thermostat",
+            "cooling_available": False,
+        }
+        try:
+            flow = await hass.config_entries.flow.async_init(
+                DOMAIN,
+                context={"source": "user"},
+                data={
+                    "host": "127.0.0.1",
+                    "port": port,
+                    "unit_id": 7,
+                    "model": "altherma_3_m_e",
+                },
+            )
+            assert flow["step_id"] == "installation"
+            assert gateway.requests == [(7, 4, 20, 1)]
+            result = await hass.config_entries.flow.async_configure(
+                flow["flow_id"], options
+            )
+            entry = result["result"]
+            await hass.async_block_till_done()
+            assert entry.state.value == "loaded"
+            assert entry.runtime_data.data.values["dhw_temperature"] == 49.5
+            assert entry.runtime_data.data.values["room_temperature"] == 21.25
+            assert "main_cooling_setpoint" not in entry.runtime_data.data.values
+            assert "additional_heating_setpoint" not in entry.runtime_data.data.values
+            assert not any(fc == 6 for _, fc, _, _ in gateway.requests)
+            assert gateway.rejected == []
+            await entry.runtime_data.async_write("dhw_reheat_setpoint", 45)
+            assert (7, 6, 9, 45) in gateway.requests
+            assert entry.runtime_data.data.values["dhw_reheat_setpoint"] == 45
+            gateway.requests.clear()
+            flow = await hass.config_entries.options.async_init(entry.entry_id)
+            await hass.config_entries.options.async_configure(
+                flow["flow_id"], {**options, "dhw_present": False, "scan_interval": 15}
+            )
+            await hass.async_block_till_done()
+            assert "dhw_temperature" not in entry.runtime_data.data.values
+            assert entry.runtime_data.data.values["room_temperature"] == 21.25
+            with pytest.raises(ServiceValidationError, match="enabled"):
+                await entry.runtime_data.async_write("dhw_reheat_setpoint", 50)
+            for _, fc, address, count in gateway.requests:
+                assert fc in (3, 4)
+                excluded = {31, 32, 36, 42, 51, 75, 76} if fc == 4 else {9, 11, 12}
+                assert not excluded.intersection(range(address, address + count))
+            assert gateway.rejected == []
+        finally:
+            if entry is not None and entry.state.value == "loaded":
+                await hass.config_entries.async_unload(entry.entry_id)

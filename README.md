@@ -12,7 +12,7 @@ Support is based on Daikin's published compatibility and register tables, unit t
 
 The authoritative source is Daikin's [EKRHH installer reference guide, 4P744838-1E, January 2026](https://www.daikin.eu/content/dam/document-library/Installer-reference-guide/heat/accessories/ekrhh/EKRHH_Installer%20reference%20guide_4PEN744838-1E_English.pdf), linked from the [official HomeHub product page](https://www.daikin.eu/en_us/products/product.html/EKRHH.html). Pages 7-8 establish compatibility, 39-44 describe use case 3 (Altherma), and 48-50 describe use case 4 (air-to-air).
 
-| Setup profile | Equipment / Micon ID | Entities / disabled by default |
+| Setup profile | Equipment / Micon ID | Registered entities / disabled with default installation options |
 | --- | --- | --- |
 | Altherma 3 H HT | EPRA14/16/18DV37/W17; `20017705` | 59 / 28 |
 | Altherma 3 H MT | EPRA08/10/12EV3/W1; `20007903` | 59 / 28 |
@@ -61,6 +61,7 @@ For air-to-air, commission use case 4 and its Modbus settings through **ONECTA**
 | TCP port | `502`; unencrypted Modbus TCP |
 | Unit ID | `1`; configurable from 1 to 247 |
 | Equipment profile | Required explicit choice; labels include equipment/Micon details |
+| Installation options | Altherma only; choose DHW tank, additional zone, main control method and cooling capability |
 | Refresh interval | Configure after setup; default/minimum five whole seconds |
 
 Setup reads Altherma input register 21 or air-to-air holding register 1001. Fault/warning states and the three documented no-value markers do not block setup. A successful probe confirms a response at the selected map address; it cannot authenticate HomeHub, verify a model or read serial/firmware information. An illegal address or unexpected probe code requires checking the selected use case and profile.
@@ -73,7 +74,26 @@ Use **Reconfigure** to change the endpoint or correct a profile. Common entity/d
 
 Altherma provides heating/cooling water setpoints, requested operation mode, space operation, quiet mode, weather-dependent modes and offsets, Smart Grid controls, measurements, equipment state and fault reporting. Holding registers are exposed through their controls' actual readback states, without duplicate sensors.
 
-DHW, additional-zone, room-thermostat and external-thermostat fields start **disabled**. Enable only relevant entities on the device's entity page. Disabled optional fields are not polled, except when they supply limits required by an enabled control. Enabling/disabling can reload the integration. A zero value does not prove a feature is installed. Heating-only and differently commissioned installations can return unavailable markers for otherwise eligible fields.
+### Installation options
+
+After the connection check, Altherma setup asks about the installation. You can change these choices later through **Configure**, alongside the refresh interval. Air-to-air skips this step and offers only the refresh interval in Configure.
+
+| Setting | Entity behavior |
+| --- | --- |
+| **DHW tank present** | Enable the DHW controls, tank temperatures, booster/disinfection states and three-way valve state as a group. |
+| **Additional zone present** | Enable additional-zone water setpoints, weather settings, limits and the additional thermostat input where supported. |
+| **Main zone control method** | Choose leaving-water-temperature, room-thermostat or external-room-thermostat control. Room control enables the room temperature/setpoints/limits; external control enables the main thermostat input where supported. |
+| **Cooling available** | Enable cooling-related entities. Clear this for heating-only installations; the requested operation-mode selector is also disabled because its register is unavailable on heating-only units. The actual-operation-mode sensor remains available. |
+
+These choices describe existing equipment and commissioning; they **do not configure the Daikin unit**. Profiles combine multiple indoor/outdoor variants, so cooling capability cannot be inferred from the selected profile alone. Defaults are no DHW tank, no additional zone, leaving-water-temperature control and cooling available; review each choice against your installation.
+
+Group changes enable/disable all related sensors and controls and adjust polling. Registry entries, entity IDs, names and customizations are retained when a group is switched off. Entities you individually disabled in HA stay disabled when their group is switched back on. An inactive group cannot be enabled by manually enabling one of its entities; enable the group in Configure first. Only documented model exclusions remove entities entirely.
+
+The control-method choice refers to the **main zone**. The additional zone's thermostat input follows the additional-zone setting independently, allowing a different thermostat arrangement there. Selecting external control never overrides the documented thermostat-register exclusions for Micon `20002203`; it does not create unsupported inputs.
+
+**Existing entries keep their previous individual entity selections until installation options are saved.** Configure suggests choices from the existing entity registry, not from hardware discovery. Review them before saving. Once saved, groups are managed by these installation options while individual user-disabled entities remain respected.
+
+Disabled groups are not polled or writable. Within an enabled group, optional entities disabled individually are not polled, except for limits required by an enabled control. A zero value does not prove a feature is installed. Commissioning and hardware limitations can still make an enabled entity unavailable.
 
 ### Setpoints and operating conditions
 
@@ -107,7 +127,7 @@ Only consecutive selected registers are grouped. Polls do not bridge undocumente
 
 The raw markers are handled before sign conversion/scaling: `32767` means unsupported, `32766` means unavailable in the current configuration, and `32765` means waiting for a value. Waiting can occur while HomeHub synchronizes with Altherma. These responses are retried normally; they never become temperatures, limits or true boolean states.
 
-Download diagnostics from the integration menu. They include decoded values, raw registers, writable bounds, per-field unavailability reasons, optional fields polled and sanitized error types/codes. Hostnames are redacted; persistent entry/device identifiers and exception messages are omitted. When reporting a discrepancy, supply actual equipment and firmware details separately, plus the relevant raw values and unit-display comparison.
+Download diagnostics from the integration menu. They include the saved installation choices (or `null` for legacy entity selection), the installation's permitted fields, decoded values, raw registers, writable bounds, per-field unavailability reasons, optional fields polled and sanitized error types/codes. Hostnames are redacted; persistent entry/device identifiers and exception messages are omitted. When reporting a discrepancy, supply actual equipment and firmware details separately, plus the relevant raw values and unit-display comparison.
 
 ## Development and validation
 
@@ -122,14 +142,15 @@ uv run pytest tests/integration --no-cov
 
 CI publishes unit XML/HTML coverage even on failure and enforces a 95% combined statement/branch coverage gate. Independent TCP tests run separately. Hassfest validates HA metadata; the HACS workflow validates the published GitHub repository. See [contribution guidance](CONTRIBUTING.md) and [maintenance/release instructions](MAINTAINING.md).
 
-Tests transcribe reference values independently of production declarations and exercise all profiles, all 61 registers and all marker encodings, write validation, dynamic limits, optional polling, HA services and lifecycle, connection sharing, partial failures and recovery. Simulated verification does not replace hardware testing.
+Tests transcribe reference values independently of production declarations and exercise all profiles, all 61 registers and all marker encodings, write validation, dynamic limits, installation groups, legacy entity selections, registry preservation, HA services and lifecycle, connection sharing, partial failures and recovery. Simulated verification does not replace hardware testing.
 
 ### Hardware verification checklist
 
 - [ ] Record indoor/outdoor model codes, Micon ID, MMI/unit/HomeHub firmware and selected use case/profile.
 - [ ] Compare measurements, actual mode, faults and raw diagnostics with the unit/ONECTA.
 - [ ] Verify setpoint integer encoding, dynamic min/max limits and unavailable controls on the actual commissioning configuration.
-- [ ] Enable installed DHW, additional-zone or thermostat features only; confirm disabled features are not polled and documented exclusions are absent.
+- [ ] Set installation options to match the actual tank, additional zone, main control method and cooling capability; verify that inactive groups are not polled or writable and model exclusions remain absent.
+- [ ] Toggle groups and confirm entity IDs/customizations and individually disabled entities are preserved; verify legacy entity selections survive upgrading until options are saved.
 - [ ] Exercise individual controls and actual readback; verify schedule/local-control arbitration and the conditional DHW/thermostat behavior.
 - [ ] Observe Smart Grid and power-limit behavior, including the compressor-start override or air-to-air capacity restrictions.
 - [ ] Check offline/synchronizing markers, partial failures, reconnection, restart, reconfiguration and unload while another consumer shares the connection.

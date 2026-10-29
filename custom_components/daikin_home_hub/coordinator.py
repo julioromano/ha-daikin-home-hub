@@ -13,6 +13,8 @@ from homeassistant.helpers.update_coordinator import DataUpdateCoordinator, Upda
 from modbus_connection import ModbusError, ModbusUnit
 
 from .const import DEFAULT_SCAN_INTERVAL_SECONDS, DOMAIN
+from .installation import Installation
+from .models import MODELS
 from .protocol import HomeHub, Snapshot, Value
 
 _LOGGER = logging.getLogger(__name__)
@@ -24,7 +26,15 @@ class HomeHubCoordinator(DataUpdateCoordinator[Snapshot]):
     def __init__(
         self, hass: HomeAssistant, entry: HomeHubConfigEntry, unit: ModbusUnit
     ) -> None:
-        self.device = HomeHub(unit, entry.data[CONF_MODEL])
+        self.installation = Installation.from_options(entry.options)
+        profile = MODELS[entry.data[CONF_MODEL]]
+        self.device = HomeHub(
+            unit,
+            entry.data[CONF_MODEL],
+            active_fields=self.installation.active_fields(profile)
+            if self.installation
+            else None,
+        )
         super().__init__(
             hass,
             _LOGGER,
@@ -42,6 +52,14 @@ class HomeHubCoordinator(DataUpdateCoordinator[Snapshot]):
             name=self.device.profile.name,
             manufacturer="Daikin",
             model=self.device.profile.name,
+        )
+
+    def entity_enabled_default(self, key: str) -> bool:
+        """Installation choices govern new entities; legacy entries retain defaults."""
+        return (
+            key in self.device.active_fields
+            if self.installation
+            else not self.device.registers[key].optional
         )
 
     @override
