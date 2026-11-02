@@ -51,6 +51,24 @@ def test_documented_inventory_contains_every_published_offset_and_key():
             assert (offset, offset - 1, key) in actual
 
 
+def test_icon_keys_and_states_match_the_entity_contract():
+    icons = json.loads((COMPONENT / "icons.json").read_text())["entity"]
+    entities = json.loads((COMPONENT / "strings.json").read_text())["entity"]
+    for platform, entries in icons.items():
+        for key, entry in entries.items():
+            entity = entities[platform][key]
+            states = entry.get("state", {})
+            allowed_states = (
+                {"on", "off"}
+                if platform in ("binary_sensor", "switch")
+                else set(entity.get("state", {}))
+            )
+            assert set(states) <= allowed_states
+            assert entry["default"].startswith("mdi:")
+            assert all(icon.startswith("mdi:") for icon in states.values())
+            assert entry["default"] not in states.values()
+
+
 def test_protocol_modules_have_no_home_assistant_imports():
     for filename in ("protocol.py", "registers.py", "models.py", "installation.py"):
         tree = ast.parse((COMPONENT / filename).read_text())

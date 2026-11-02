@@ -1,0 +1,140 @@
+{
+  "entity": {
+    "binary_sensor": {
+      "circulation_pump_running": {
+        "default": "mdi:pump",
+        "state": {
+          "off": "mdi:pump-off"
+        }
+      },
+      "compressor_running": {
+        "default": "mdi:heat-pump-outline",
+        "state": {
+          "on": "mdi:heat-pump"
+        }
+      },
+      "booster_heater_running": {
+        "default": "mdi:fire",
+        "state": {
+          "off": "mdi:fire-off"
+        }
+      },
+      "disinfection_running": {
+        "default": "mdi:shield-check-outline",
+        "state": {
+          "on": "mdi:shield-check"
+        }
+      },
+      "defrost": {
+        "default": "mdi:snowflake",
+        "state": {
+          "on": "mdi:snowflake-melt"
+        }
+      },
+      "hot_start": {
+        "default": "mdi:thermometer",
+        "state": {
+          "on": "mdi:thermometer-chevron-up"
+        }
+      },
+      "dhw_normal_operation": {
+        "default": "mdi:water-boiler",
+        "state": {
+          "off": "mdi:water-boiler-off"
+        }
+      },
+      "space_normal_operation": {
+        "default": "mdi:home-thermometer-outline",
+        "state": {
+          "on": "mdi:home-thermometer"
+        }
+      }
+    },
+    "sensor": {
+      "unit_abnormality": {
+        "default": "mdi:alert-circle-outline",
+        "state": {
+          "no_error": "mdi:check-circle-outline",
+          "fault": "mdi:alert-circle",
+          "warning": "mdi:alert-outline"
+        }
+      },
+      "unit_abnormality_code": {
+        "default": "mdi:alert-circle-outline"
+      },
+      "unit_abnormality_subcode": {
+        "default": "mdi:alert-circle-outline"
+      },
+      "three_way_valve": {
+        "default": "mdi:valve"
+      },
+      "actual_operation_mode": {
+        "default": "mdi:thermostat",
+        "state": {
+          "heating": "mdi:fire",
+          "cooling": "mdi:snowflake"
+        }
+      }
+    },
+    "select": {
+      "operation_mode": {
+        "default": "mdi:thermostat",
+        "state": {
+          "heating": "mdi:fire",
+          "cooling": "mdi:snowflake"
+        }
+      },
+      "main_weather_mode": {
+        "default": "mdi:weather-partly-cloudy",
+        "state": {
+          "fixed": "mdi:thermometer",
+          "fixed_scheduled": "mdi:calendar-clock",
+          "weather_dependent_scheduled": "mdi:calendar-clock"
+        }
+      },
+      "smart_grid_mode": {
+        "default": "mdi:transmission-tower"
+      },
+      "additional_weather_mode": {
+        "default": "mdi:weather-partly-cloudy",
+        "state": {
+          "fixed": "mdi:thermometer",
+          "fixed_scheduled": "mdi:calendar-clock",
+          "weather_dependent_scheduled": "mdi:calendar-clock"
+        }
+      }
+    },
+    "switch": {
+      "space_conditioning": {
+        "default": "mdi:home-thermometer-outline",
+        "state": {
+          "on": "mdi:home-thermometer"
+        }
+      },
+      "quiet_mode": {
+        "default": "mdi:volume-high",
+        "state": {
+          "on": "mdi:volume-low"
+        }
+      },
+      "dhw_reheat": {
+        "default": "mdi:water-boiler",
+        "state": {
+          "off": "mdi:water-boiler-off"
+        }
+      },
+      "dhw_booster": {
+        "default": "mdi:water-boiler",
+        "state": {
+          "off": "mdi:water-boiler-off"
+        }
+      },
+      "main_thermostat_input": {
+        "default": "mdi:thermostat-box"
+      },
+      "additional_thermostat_input": {
+        "default": "mdi:thermostat-box"
+      }
+    }
+  }
+}

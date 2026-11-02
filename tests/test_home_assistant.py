@@ -9,6 +9,7 @@ from homeassistant.config_entries import ConfigEntryState
 from homeassistant.exceptions import HomeAssistantError, ServiceValidationError
 from homeassistant.helpers import device_registry as dr
 from homeassistant.helpers import entity_registry as er
+from homeassistant.helpers.icon import async_get_icons
 from modbus_connection.exceptions import ModbusTimeoutError
 from pytest_homeassistant_custom_component.common import MockConfigEntry
 
@@ -69,6 +70,34 @@ async def test_values_service_writes_and_immediate_readback(hass, configured, un
     assert [w.address for w in writes] == [0, 55, 3, 8]
     assert state("main_heating_setpoint", "number").state == "40"
     assert state("smart_grid_mode", "select").state == "recommended_on"
+
+
+async def test_activity_sensors_report_running_and_preserve_unavailability(
+    hass, configured, unit
+):
+    registry = er.async_get(hass)
+    for item in er.async_entries_for_config_entry(registry, configured.entry_id):
+        if item.domain == "binary_sensor" and item.disabled_by:
+            registry.async_update_entity(item.entity_id, disabled_by=None)
+    await hass.config_entries.async_reload(configured.entry_id)
+    activities = hass.states.async_all("binary_sensor")
+    assert len(activities) == 8
+    assert all(state.attributes["device_class"] == "running" for state in activities)
+
+    compressor = entity_id(hass, configured, "compressor_running", "binary_sensor")
+    for raw, expected in [(0, "off"), (1, "on"), (32766, "unavailable")]:
+        unit.input[30] = raw
+        await configured.runtime_data.async_refresh()
+        assert hass.states.get(compressor).state == expected
+
+
+async def test_entity_icons_are_available_to_home_assistant(hass, configured):
+    icons = (await async_get_icons(hass, "entity", [DOMAIN]))[DOMAIN]
+    pump = icons["binary_sensor"]["circulation_pump_running"]
+    assert pump["default"] == "mdi:pump"
+    assert pump["state"]["off"] == "mdi:pump-off"
+    assert icons["switch"]["quiet_mode"]["state"]["on"] == "mdi:volume-low"
+    assert icons["select"]["operation_mode"]["state"]["cooling"] == "mdi:snowflake"
 
 
 async def test_diagnostics_are_sanitized_and_distinguish_markers(

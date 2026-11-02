@@ -6,6 +6,7 @@ from homeassistant.components.binary_sensor import (
     BinarySensorEntity,
     BinarySensorEntityDescription,
 )
+from homeassistant.components.binary_sensor.const import BinarySensorDeviceClass
 from homeassistant.core import HomeAssistant
 from homeassistant.helpers.entity_platform import AddEntitiesCallback
 
@@ -24,6 +25,7 @@ async def async_setup_entry(
             BinarySensorEntityDescription(
                 key=key,
                 translation_key=key,
+                device_class=BinarySensorDeviceClass.RUNNING,
                 entity_registry_enabled_default=not register.optional,
             ),
         )

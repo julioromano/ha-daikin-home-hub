@@ -1,0 +1,602 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%3E%3Cpath%20fill%3D%22%23086aaa%22%20d%3D%22M19%203H5C3.9%203%203%203.9%203%205V19C3%2020.1%203.9%2021%205%2021H19C20.1%2021%2021%2020.1%2021%2019V5C21%203.9%2020.1%203%2019%203M12.75%207.08C13.57%207.2%2014.32%207.5%2014.95%208L12.75%2010.19V7.08M11.25%207.08V10.19L9.05%208C9.68%207.5%2010.43%207.2%2011.25%207.08M8%209.05L10.19%2011.25H7.08C7.2%2010.43%207.5%209.68%208%209.05M7.08%2012.75H10.19L8%2014.95C7.5%2014.32%207.2%2013.57%207.08%2012.75M11.25%2016.92C10.43%2016.8%209.68%2016.5%209.05%2016L11.25%2013.81V16.92M12%2013C11.45%2013%2011%2012.55%2011%2012S11.45%2011%2012%2011%2013%2011.45%2013%2012%2012.55%2013%2012%2013M12.75%2016.92V13.81L14.95%2016C14.32%2016.5%2013.57%2016.8%2012.75%2016.92M16%2014.95L13.81%2012.75H16.92C16.8%2013.57%2016.5%2014.32%2016%2014.95M13.81%2011.25L16%209.05C16.5%209.69%2016.8%2010.44%2016.92%2011.25H13.81Z%22%2F%3E%3C%2Fsvg%3E">
+<title>Daikin Home Hub — Entity icon states</title>
+<style>
+:root{--bg:#f3f6fa;--surface:#fff;--ink:#1d2939;--secondary:#526274;--border:#dfe6ee;--accent:#086aaa;--soft:#eaf3fa;--muted:#78889b;--input:#fff;--row-hover:#f7faff;color-scheme:light}
+body.dark{--bg:#101722;--surface:#192330;--ink:#e3eaf2;--secondary:#acbacb;--border:#334153;--accent:#73c5ff;--soft:#223a4e;--muted:#8a9bb0;--input:#131d29;--row-hover:#1e2d3c;color-scheme:dark}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.5 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+main{max-width:1640px;margin:auto;padding:40px 32px 28px}header{display:flex;justify-content:space-between;align-items:flex-start;gap:24px;margin-bottom:22px}
+.eyebrow{font-size:11px;font-weight:750;letter-spacing:.15em;color:var(--accent);margin:0 0 8px}h1{font-size:34px;line-height:1.15;letter-spacing:-.035em;margin:0 0 12px;font-weight:700}
+.intro{max-width:880px;margin:0;color:var(--secondary);font-size:15px}button,input,select{font:inherit}button{cursor:pointer}
+.theme{border:1px solid var(--border);border-radius:8px;padding:9px 14px;background:var(--surface);color:var(--ink);white-space:nowrap}
+.stats{display:flex;gap:24px;flex-wrap:wrap;margin:22px 0;color:var(--secondary);font-size:13px}.stats b{color:var(--ink);font-size:17px;margin-right:5px}
+.toolbar{display:flex;flex-wrap:wrap;gap:12px;align-items:flex-end;background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:16px;margin-bottom:12px}
+.field{display:flex;flex-direction:column;gap:5px;min-width:140px}.field label{font-size:11px;text-transform:uppercase;letter-spacing:.07em;font-weight:700;color:var(--secondary)}
+.field.search{flex:1;min-width:230px}input[type="search"],select{width:100%;padding:9px 11px;border:1px solid var(--border);border-radius:7px;background:var(--input);color:var(--ink);height:40px}
+input:focus-visible,select:focus-visible,button:focus-visible{outline:3px solid var(--accent);outline-offset:2px}.options{display:flex;flex-wrap:wrap;gap:18px;align-items:center;margin:14px 0 7px;color:var(--secondary);font-size:13px}
+.check{display:flex;align-items:center;gap:7px;cursor:pointer}input[type="checkbox"]{accent-color:var(--accent);width:15px;height:15px;margin:0}
+.result-count{margin-left:auto;font-variant-numeric:tabular-nums;color:var(--ink);font-size:12px}.note{margin:0 0 17px;font-size:12px;color:var(--secondary);max-width:1100px}
+.table-wrap{overflow-x:auto;background:var(--surface);border:1px solid var(--border);border-radius:12px}table{width:100%;border-collapse:collapse;table-layout:fixed;min-width:1100px}
+col.entity{width:30%}col.meta{width:12%}thead th{text-align:left;padding:12px 18px;color:var(--secondary);font-size:11px;letter-spacing:.08em;text-transform:uppercase;background:var(--soft);border-bottom:1px solid var(--border)}
+tbody th,tbody td{padding:17px 18px;border-bottom:1px solid var(--border);vertical-align:middle}tbody tr:last-child>*{border-bottom:0}tbody tr:hover{background:var(--row-hover)}tbody th{text-align:left;font-weight:400}
+.entity-name{display:block;font-size:14px;font-weight:650;line-height:1.5}.entity-key{display:block;color:var(--muted);font-size:11px;line-height:1.8;overflow-wrap:anywhere}
+.entity-tags{display:flex;gap:6px;flex-wrap:wrap}.tag{font-size:10px;color:var(--secondary);border:1px solid var(--border);border-radius:4px;padding:1px 5px;margin-top:5px}
+.metadata{font-size:11px;color:var(--secondary)}.platform{display:block;text-transform:capitalize;color:var(--ink);font-weight:600}.source,.device-class{display:block;margin-top:3px}
+.states{display:flex;align-items:flex-start;gap:7px;flex-wrap:wrap}.state{width:108px;min-height:85px;display:flex;align-items:center;text-align:center;flex-direction:column;gap:3px;border:1px solid var(--border);border-radius:8px;padding:8px 4px;background:var(--surface)}
+.glyph{width:27px;height:27px;fill:currentColor;color:var(--secondary);flex-shrink:0}.state-label{font-size:11px;font-weight:600;line-height:1.25;min-height:14px}.state code{font-size:9px;line-height:1.2;color:var(--muted);overflow-wrap:anywhere;max-width:100%}
+.state[data-tone="muted"]{border-style:dashed}.state[data-tone="muted"] .glyph{opacity:.52}.state[data-tone="muted"] .state-label{color:var(--muted)}
+.preview-colors .state[data-tone="active"] .glyph,.preview-colors .state[data-tone="warning"] .glyph{color:#c68a00}
+.preview-colors .state[data-tone="heat"] .glyph,.preview-colors .state[data-tone="fault"] .glyph{color:#d34938}.preview-colors .state[data-tone="cool"] .glyph{color:#1685c8}.preview-colors .state[data-tone="healthy"] .glyph{color:#2f8b58}
+.dark.preview-colors .state[data-tone="active"] .glyph,.dark.preview-colors .state[data-tone="warning"] .glyph{color:#ffd057}.dark.preview-colors .state[data-tone="heat"] .glyph,.dark.preview-colors .state[data-tone="fault"] .glyph{color:#ff8c7b}.dark.preview-colors .state[data-tone="cool"] .glyph{color:#6dc6ff}.dark.preview-colors .state[data-tone="healthy"] .glyph{color:#77dca1}
+.empty{padding:48px;text-align:center;color:var(--secondary)}[hidden]{display:none!important}
+footer{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;margin-top:20px;font-size:11px;line-height:1.7;color:var(--secondary)}a{color:var(--accent)}footer p{margin:0;max-width:900px}
+@media(max-width:700px){main{padding:24px 16px}h1{font-size:28px}header{gap:12px}.theme{font-size:12px;padding:8px 10px}.stats{gap:14px}.field{flex:1;min-width:130px}.field.search{flex-basis:100%}.result-count{margin-left:0;flex-basis:100%}.intro{font-size:14px}}
+@media print{body{background:white;color:black}main{padding:0;max-width:none}.toolbar,.options,.theme{display:none}.table-wrap{overflow:visible;border:0}table{min-width:0}col.entity{width:28%}col.meta{width:12%}.state{width:84px;min-height:75px}.state code{font-size:8px}tbody th,tbody td{padding:10px 7px}tr{break-inside:avoid}thead{display:table-header-group}footer{display:block}}
+</style>
+</head>
+<body class="preview-colors">
+<svg aria-hidden="true" width="0" height="0" style="position:absolute;overflow:hidden"><defs>
+<symbol id="icon-alert-circle" viewBox="0 0 24 24"><path d="M13,13H11V7H13M13,17H11V15H13M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z"/></symbol>
+<symbol id="icon-alert-circle-outline" viewBox="0 0 24 24"><path d="M11,15H13V17H11V15M11,7H13V13H11V7M12,2C6.47,2 2,6.5 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M12,20A8,8 0 0,1 4,12A8,8 0 0,1 12,4A8,8 0 0,1 20,12A8,8 0 0,1 12,20Z"/></symbol>
+<symbol id="icon-alert-outline" viewBox="0 0 24 24"><path d="M12,2L1,21H23M12,6L19.53,19H4.47M11,10V14H13V10M11,16V18H13V16"/></symbol>
+<symbol id="icon-calendar-clock" viewBox="0 0 24 24"><path d="M15,13H16.5V15.82L18.94,17.23L18.19,18.53L15,16.69V13M19,8H5V19H9.67C9.24,18.09 9,17.07 9,16A7,7 0 0,1 16,9C17.07,9 18.09,9.24 19,9.67V8M5,21C3.89,21 3,20.1 3,19V5C3,3.89 3.89,3 5,3H6V1H8V3H16V1H18V3H19A2,2 0 0,1 21,5V11.1C22.24,12.36 23,14.09 23,16A7,7 0 0,1 16,23C14.09,23 12.36,22.24 11.1,21H5M16,11.15A4.85,4.85 0 0,0 11.15,16C11.15,18.68 13.32,20.85 16,20.85A4.85,4.85 0 0,0 20.85,16C20.85,13.32 18.68,11.15 16,11.15Z"/></symbol>
+<symbol id="icon-check-circle-outline" viewBox="0 0 24 24"><path d="M12 2C6.5 2 2 6.5 2 12S6.5 22 12 22 22 17.5 22 12 17.5 2 12 2M12 20C7.59 20 4 16.41 4 12S7.59 4 12 4 20 7.59 20 12 16.41 20 12 20M16.59 7.58L10 14.17L7.41 11.59L6 13L10 17L18 9L16.59 7.58Z"/></symbol>
+<symbol id="icon-fire" viewBox="0 0 24 24"><path d="M17.66 11.2C17.43 10.9 17.15 10.64 16.89 10.38C16.22 9.78 15.46 9.35 14.82 8.72C13.33 7.26 13 4.85 13.95 3C13 3.23 12.17 3.75 11.46 4.32C8.87 6.4 7.85 10.07 9.07 13.22C9.11 13.32 9.15 13.42 9.15 13.55C9.15 13.77 9 13.97 8.8 14.05C8.57 14.15 8.33 14.09 8.14 13.93C8.08 13.88 8.04 13.83 8 13.76C6.87 12.33 6.69 10.28 7.45 8.64C5.78 10 4.87 12.3 5 14.47C5.06 14.97 5.12 15.47 5.29 15.97C5.43 16.57 5.7 17.17 6 17.7C7.08 19.43 8.95 20.67 10.96 20.92C13.1 21.19 15.39 20.8 17.03 19.32C18.86 17.66 19.5 15 18.56 12.72L18.43 12.46C18.22 12 17.66 11.2 17.66 11.2M14.5 17.5C14.22 17.74 13.76 18 13.4 18.1C12.28 18.5 11.16 17.94 10.5 17.28C11.69 17 12.4 16.12 12.61 15.23C12.78 14.43 12.46 13.77 12.33 13C12.21 12.26 12.23 11.63 12.5 10.94C12.69 11.32 12.89 11.7 13.13 12C13.9 13 15.11 13.44 15.37 14.8C15.41 14.94 15.43 15.08 15.43 15.23C15.46 16.05 15.1 16.95 14.5 17.5H14.5Z"/></symbol>
+<symbol id="icon-fire-off" viewBox="0 0 24 24"><path d="M22.11 21.46L2.39 1.73L1.11 3L7.09 9C5.66 10.36 4.88 12.47 5 14.47C5.06 14.97 5.12 15.47 5.29 15.97C5.43 16.57 5.7 17.17 6 17.7C7.08 19.43 8.95 20.67 10.96 20.92C13.1 21.19 15.39 20.8 17.03 19.32C17.1 19.26 17.15 19.18 17.22 19.11L20.84 22.73L22.11 21.46M8.8 14.05C8.57 14.15 8.33 14.09 8.14 13.93C8.08 13.88 8.04 13.83 8 13.76C7 12.47 6.74 10.69 7.26 9.15L8.58 10.47C8.58 11.4 8.73 12.33 9.07 13.22C9.11 13.32 9.15 13.42 9.15 13.55C9.15 13.77 9 13.97 8.8 14.05M14.5 17.5C14.22 17.74 13.76 18 13.4 18.1C12.28 18.5 11.16 17.94 10.5 17.28C11.69 17 12.4 16.12 12.61 15.23C12.66 15 12.66 14.76 12.64 14.53L15 16.88C14.85 17.11 14.69 17.33 14.5 17.5M18.92 15.72L9.65 6.46C10.12 5.65 10.72 4.92 11.46 4.32C12.17 3.75 13 3.23 13.95 3C13 4.85 13.33 7.26 14.82 8.72C15.46 9.35 16.22 9.78 16.89 10.38C17.15 10.64 17.43 10.9 17.66 11.2C17.66 11.2 18.22 12 18.43 12.46L18.56 12.72C18.96 13.69 19.06 14.72 18.92 15.72Z"/></symbol>
+<symbol id="icon-flash" viewBox="0 0 24 24"><path d="M7,2V13H10V22L17,10H13L17,2H7Z"/></symbol>
+<symbol id="icon-heat-pump" viewBox="0 0 24 24"><path d="M19 3H5C3.9 3 3 3.9 3 5V19C3 20.1 3.9 21 5 21H19C20.1 21 21 20.1 21 19V5C21 3.9 20.1 3 19 3M12.75 7.08C13.57 7.2 14.32 7.5 14.95 8L12.75 10.19V7.08M11.25 7.08V10.19L9.05 8C9.68 7.5 10.43 7.2 11.25 7.08M8 9.05L10.19 11.25H7.08C7.2 10.43 7.5 9.68 8 9.05M7.08 12.75H10.19L8 14.95C7.5 14.32 7.2 13.57 7.08 12.75M11.25 16.92C10.43 16.8 9.68 16.5 9.05 16L11.25 13.81V16.92M12 13C11.45 13 11 12.55 11 12S11.45 11 12 11 13 11.45 13 12 12.55 13 12 13M12.75 16.92V13.81L14.95 16C14.32 16.5 13.57 16.8 12.75 16.92M16 14.95L13.81 12.75H16.92C16.8 13.57 16.5 14.32 16 14.95M13.81 11.25L16 9.05C16.5 9.69 16.8 10.44 16.92 11.25H13.81Z"/></symbol>
+<symbol id="icon-heat-pump-outline" viewBox="0 0 24 24"><path d="M19 3H5C3.9 3 3 3.9 3 5V19C3 20.1 3.9 21 5 21H19C20.1 21 21 20.1 21 19V5C21 3.9 20.1 3 19 3M19 19H5V5H19V19M12 18C15.31 18 18 15.31 18 12S15.31 6 12 6 6 8.69 6 12 8.69 18 12 18M11.25 15.92C10.7 15.82 10.2 15.6 9.75 15.3L11.25 13.8V15.92M12.75 15.92V13.81L14.25 15.31C13.8 15.61 13.3 15.82 12.75 15.92M15.31 14.25L13.81 12.75H15.92C15.82 13.3 15.61 13.8 15.31 14.25M15.92 11.25H13.81L15.31 9.75C15.61 10.2 15.82 10.7 15.92 11.25M12.75 8.08C13.3 8.18 13.8 8.4 14.25 8.7L12.75 10.2V8.08M12 11C12.55 11 13 11.45 13 12S12.55 13 12 13 11 12.55 11 12 11.45 11 12 11M11.25 8.08V10.19L9.75 8.69C10.2 8.39 10.7 8.18 11.25 8.08M8.69 9.75L10.19 11.25H8.08C8.18 10.7 8.39 10.2 8.69 9.75M10.19 12.75L8.69 14.25C8.39 13.81 8.18 13.3 8.07 12.75H10.19Z"/></symbol>
+<symbol id="icon-home-thermometer" viewBox="0 0 24 24"><path d="M19 8C20.11 8 21 8.9 21 10V16.76C21.61 17.31 22 18.11 22 19C22 20.66 20.66 22 19 22C17.34 22 16 20.66 16 19C16 18.11 16.39 17.31 17 16.76V10C17 8.9 17.9 8 19 8M19 9C18.45 9 18 9.45 18 10V11H20V10C20 9.45 19.55 9 19 9M5 20V12H2L12 3L16.4 6.96C15.54 7.69 15 8.78 15 10V16C14.37 16.83 14 17.87 14 19L14.1 20H5Z"/></symbol>
+<symbol id="icon-home-thermometer-outline" viewBox="0 0 24 24"><path d="M19 8C20.11 8 21 8.9 21 10V16.76C21.61 17.31 22 18.11 22 19C22 20.66 20.66 22 19 22C17.34 22 16 20.66 16 19C16 18.11 16.39 17.31 17 16.76V10C17 8.9 17.9 8 19 8M19 9C18.45 9 18 9.45 18 10V11H20V10C20 9.45 19.55 9 19 9M12 5.69L7 10.19V18H14.1L14 19L14.1 20H5V12H2L12 3L16.4 6.96C15.89 7.4 15.5 7.97 15.25 8.61L12 5.69Z"/></symbol>
+<symbol id="icon-pipe-valve" viewBox="0 0 24 24"><path d="M22 13V21H20V19H16.58C15.81 20.76 14.05 22 12 22S8.19 20.76 7.42 19H4V21H2V13H4V15H7.43C7.93 13.85 8.85 12.93 10 12.42V11H8V9H16V11H14V12.42C15.15 12.93 16.07 13.85 16.57 15H20V13H22M17 2H7C6.45 2 6 2.45 6 3S6.45 4 7 4H10V5H11V8H13V5H14V4H17C17.55 4 18 3.55 18 3S17.55 2 17 2Z"/></symbol>
+<symbol id="icon-pump" viewBox="0 0 24 24"><path d="M2 21V15H3.5C3.18 14.06 3 13.05 3 12C3 7.03 7.03 3 12 3H22V9H20.5C20.82 9.94 21 10.95 21 12C21 16.97 16.97 21 12 21H2M5 12C5 13.28 5.34 14.47 5.94 15.5L9.4 13.5C9.15 13.06 9 12.55 9 12C9 11.35 9.21 10.75 9.56 10.26L6.3 7.93C5.5 9.08 5 10.5 5 12M12 19C14.59 19 16.85 17.59 18.06 15.5L14.6 13.5C14.08 14.4 13.11 15 12 15L11.71 15L11.33 18.97L12 19M12 9C13.21 9 14.26 9.72 14.73 10.76L18.37 9.1C17.27 6.68 14.83 5 12 5V9M12 11C11.45 11 11 11.45 11 12C11 12.55 11.45 13 12 13C12.55 13 13 12.55 13 12C13 11.45 12.55 11 12 11Z"/></symbol>
+<symbol id="icon-pump-off" viewBox="0 0 24 24"><path d="M22.1 21.5L2.4 1.7L1.1 3L4.8 6.7C3.7 8.2 3 10 3 12C3 13 3.2 14.1 3.5 15H2V21H12C14 21 15.8 20.3 17.3 19.2L20.8 22.7L22.1 21.5M5.9 15.5C5.3 14.5 5 13.3 5 12C5 10.6 5.5 9.2 6.2 8.1L9.2 11.1C9.1 11.3 9 11.7 9 12C9 12.5 9.2 13.1 9.4 13.5L5.9 15.5M12 19H11.3L11.7 15H12C12.3 15 12.6 14.9 12.9 14.8L15.9 17.8C14.8 18.5 13.4 19 12 19M12 8.8L7.4 4.2C8.8 3.5 10.3 3 12 3H22V9H20.5C20.8 9.9 21 11 21 12C21 13.7 20.5 15.2 19.8 16.6L12.2 9C13.3 9.1 14.3 9.8 14.7 10.7L18.3 9C17.3 6.7 14.8 5 12 5V8.8Z"/></symbol>
+<symbol id="icon-shield-check" viewBox="0 0 24 24"><path d="M10,17L6,13L7.41,11.59L10,14.17L16.59,7.58L18,9M12,1L3,5V11C3,16.55 6.84,21.74 12,23C17.16,21.74 21,16.55 21,11V5L12,1Z"/></symbol>
+<symbol id="icon-shield-check-outline" viewBox="0 0 24 24"><path d="M21,11C21,16.55 17.16,21.74 12,23C6.84,21.74 3,16.55 3,11V5L12,1L21,5V11M12,21C15.75,20 19,15.54 19,11.22V6.3L12,3.18L5,6.3V11.22C5,15.54 8.25,20 12,21M10,17L6,13L7.41,11.59L10,14.17L16.59,7.58L18,9"/></symbol>
+<symbol id="icon-snowflake" viewBox="0 0 24 24"><path d="M20.79,13.95L18.46,14.57L16.46,13.44V10.56L18.46,9.43L20.79,10.05L21.31,8.12L19.54,7.65L20,5.88L18.07,5.36L17.45,7.69L15.45,8.82L13,7.38V5.12L14.71,3.41L13.29,2L12,3.29L10.71,2L9.29,3.41L11,5.12V7.38L8.5,8.82L6.5,7.69L5.92,5.36L4,5.88L4.47,7.65L2.7,8.12L3.22,10.05L5.55,9.43L7.55,10.56V13.45L5.55,14.58L3.22,13.96L2.7,15.89L4.47,16.36L4,18.12L5.93,18.64L6.55,16.31L8.55,15.18L11,16.62V18.88L9.29,20.59L10.71,22L12,20.71L13.29,22L14.7,20.59L13,18.88V16.62L15.5,15.17L17.5,16.3L18.12,18.63L20,18.12L19.53,16.35L21.3,15.88L20.79,13.95M9.5,10.56L12,9.11L14.5,10.56V13.44L12,14.89L9.5,13.44V10.56Z"/></symbol>
+<symbol id="icon-snowflake-melt" viewBox="0 0 24 24"><path d="M8 17.85C8 19.04 7.11 20 6 20S4 19.04 4 17.85C4 16.42 6 14 6 14S8 16.42 8 17.85M16.46 12V10.56L18.46 9.43L20.79 10.05L21.31 8.12L19.54 7.65L20 5.88L18.07 5.36L17.45 7.69L15.45 8.82L13 7.38V5.12L14.71 3.41L13.29 2L12 3.29L10.71 2L9.29 3.41L11 5.12V7.38L8.5 8.82L6.5 7.69L5.92 5.36L4 5.88L4.47 7.65L2.7 8.12L3.22 10.05L5.55 9.43L7.55 10.56V12H2V13H22V12H16.46M9.5 12V10.56L12 9.11L14.5 10.56V12H9.5M20 17.85C20 19.04 19.11 20 18 20S16 19.04 16 17.85C16 16.42 18 14 18 14S20 16.42 20 17.85M14 20.85C14 22.04 13.11 23 12 23S10 22.04 10 20.85C10 19.42 12 17 12 17S14 19.42 14 20.85Z"/></symbol>
+<symbol id="icon-thermometer" viewBox="0 0 24 24"><path d="M15 13V5A3 3 0 0 0 9 5V13A5 5 0 1 0 15 13M12 4A1 1 0 0 1 13 5V8H11V5A1 1 0 0 1 12 4Z"/></symbol>
+<symbol id="icon-thermometer-chevron-up" viewBox="0 0 24 24"><path d="M17.41 11.83L20.58 15L22 13.59L17.41 9L12.82 13.59L14.24 15L17.41 11.83M10 13V5C10 3.34 8.66 2 7 2S4 3.34 4 5V13C1.79 14.66 1.34 17.79 3 20S7.79 22.66 10 21 12.66 16.21 11 14C10.72 13.62 10.38 13.28 10 13M7 4C7.55 4 8 4.45 8 5V8H6V5C6 4.45 6.45 4 7 4Z"/></symbol>
+<symbol id="icon-thermostat" viewBox="0 0 24 24"><path d="M16.95,16.95L14.83,14.83C15.55,14.1 16,13.1 16,12C16,11.26 15.79,10.57 15.43,10L17.6,7.81C18.5,9 19,10.43 19,12C19,13.93 18.22,15.68 16.95,16.95M12,5C13.57,5 15,5.5 16.19,6.4L14,8.56C13.43,8.21 12.74,8 12,8A4,4 0 0,0 8,12C8,13.1 8.45,14.1 9.17,14.83L7.05,16.95C5.78,15.68 5,13.93 5,12A7,7 0 0,1 12,5M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12C22,6.47 17.5,2 12,2Z"/></symbol>
+<symbol id="icon-thermostat-box" viewBox="0 0 24 24"><path d="M5,3A2,2 0 0,0 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5C21,3.89 20.1,3 19,3H5M12,5C13.57,5 15,5.5 16.19,6.4L14,8.56C13.43,8.21 12.74,8 12,8A4,4 0 0,0 8,12C8,13.1 8.45,14.1 9.17,14.83L7.05,16.95C5.78,15.68 5,13.93 5,12A7,7 0 0,1 12,5M17.6,7.81C18.5,9 19,10.43 19,12C19,13.93 18.22,15.68 16.95,16.95L14.83,14.83C15.55,14.1 16,13.1 16,12C16,11.26 15.79,10.57 15.43,10L17.6,7.81Z"/></symbol>
+<symbol id="icon-transmission-tower" viewBox="0 0 24 24"><path d="M8.28,5.45L6.5,4.55L7.76,2H16.23L17.5,4.55L15.72,5.44L15,4H9L8.28,5.45M18.62,8H14.09L13.3,5H10.7L9.91,8H5.38L4.1,10.55L5.89,11.44L6.62,10H17.38L18.1,11.45L19.89,10.56L18.62,8M17.77,22H15.7L15.46,21.1L12,15.9L8.53,21.1L8.3,22H6.23L9.12,11H11.19L10.83,12.35L12,14.1L13.16,12.35L12.81,11H14.88L17.77,22M11.4,15L10.5,13.65L9.32,18.13L11.4,15M14.68,18.12L13.5,13.64L12.6,15L14.68,18.12Z"/></symbol>
+<symbol id="icon-valve" viewBox="0 0 24 24"><path d="M4 22H2V2H4M22 2H20V22H22M17.24 5.34L13.24 9.34A3 3 0 0 0 9.24 13.34L5.24 17.34L6.66 18.76L10.66 14.76A3 3 0 0 0 14.66 10.76L18.66 6.76Z"/></symbol>
+<symbol id="icon-volume-high" viewBox="0 0 24 24"><path d="M14,3.23V5.29C16.89,6.15 19,8.83 19,12C19,15.17 16.89,17.84 14,18.7V20.77C18,19.86 21,16.28 21,12C21,7.72 18,4.14 14,3.23M16.5,12C16.5,10.23 15.5,8.71 14,7.97V16C15.5,15.29 16.5,13.76 16.5,12M3,9V15H7L12,20V4L7,9H3Z"/></symbol>
+<symbol id="icon-volume-low" viewBox="0 0 24 24"><path d="M7,9V15H11L16,20V4L11,9H7Z"/></symbol>
+<symbol id="icon-water-boiler" viewBox="0 0 24 24"><path d="M8 2C6.89 2 6 2.89 6 4V16C6 17.11 6.89 18 8 18H9V20H6V22H9C10.11 22 11 21.11 11 20V18H13V20C13 21.11 13.89 22 15 22H18V20H15V18H16C17.11 18 18 17.11 18 16V4C18 2.89 17.11 2 16 2H8M12 4.97A2 2 0 0 1 14 6.97A2 2 0 0 1 12 8.97A2 2 0 0 1 10 6.97A2 2 0 0 1 12 4.97M10 14.5H14V16H10V14.5Z"/></symbol>
+<symbol id="icon-water-boiler-off" viewBox="0 0 24 24"><path d="M10 6.82L6.25 3.05C6.59 2.42 7.24 2 8 2H16C17.11 2 18 2.89 18 4V14.8L12.16 8.96C13.19 8.87 14 8 14 6.97C14 5.87 13.11 4.97 12 4.97C10.95 4.97 10.1 5.78 10 6.82M15 18V20H18V22H15C13.89 22 13 21.11 13 20V18H11V20C11 21.11 10.11 22 9 22H6V20H9V18H8C6.89 18 6 17.11 6 16V7.89L1.11 3L2.39 1.73L22.11 21.46L20.84 22.73L16.1 18C16.06 18 16.03 18 16 18H15M14 16V15.89L12.61 14.5H10V16H14Z"/></symbol>
+<symbol id="icon-weather-partly-cloudy" viewBox="0 0 24 24"><path d="M12.74,5.47C15.1,6.5 16.35,9.03 15.92,11.46C17.19,12.56 18,14.19 18,16V16.17C18.31,16.06 18.65,16 19,16A3,3 0 0,1 22,19A3,3 0 0,1 19,22H6A4,4 0 0,1 2,18A4,4 0 0,1 6,14H6.27C5,12.45 4.6,10.24 5.5,8.26C6.72,5.5 9.97,4.24 12.74,5.47M11.93,7.3C10.16,6.5 8.09,7.31 7.31,9.07C6.85,10.09 6.93,11.22 7.41,12.13C8.5,10.83 10.16,10 12,10C12.7,10 13.38,10.12 14,10.34C13.94,9.06 13.18,7.86 11.93,7.3M13.55,3.64C13,3.4 12.45,3.23 11.88,3.12L14.37,1.82L15.27,4.71C14.76,4.29 14.19,3.93 13.55,3.64M6.09,4.44C5.6,4.79 5.17,5.19 4.8,5.63L4.91,2.82L7.87,3.5C7.25,3.71 6.65,4.03 6.09,4.44M18,9.71C17.91,9.12 17.78,8.55 17.59,8L19.97,9.5L17.92,11.73C18.03,11.08 18.05,10.4 18,9.71M3.04,11.3C3.11,11.9 3.24,12.47 3.43,13L1.06,11.5L3.1,9.28C3,9.93 2.97,10.61 3.04,11.3M19,18H16V16A4,4 0 0,0 12,12A4,4 0 0,0 8,16H6A2,2 0 0,0 4,18A2,2 0 0,0 6,20H19A1,1 0 0,0 20,19A1,1 0 0,0 19,18Z"/></symbol>
+</defs></svg>
+<main>
+<header><div><p class="eyebrow">DAIKIN HOME HUB · ENTITY REFERENCE</p><h1>Entity icon states</h1><p class="intro">One row per entity, grouped by its display name. Compare every normal state with its unknown and unavailable fallback. All icons are embedded; this page works offline.</p></div><button type="button" class="theme" id="theme" aria-pressed="false">Dark theme</button></header>
+<div class="stats" aria-label="Inventory"><span><b>60</b> entities</span><span><b>23</b> integration icons</span><span><b>37</b> HA defaults</span><span><b>8</b> functional groups</span></div>
+<div class="toolbar" role="search" aria-label="Filter entities">
+<div class="field search"><label for="search">Find an entity or icon</label><input type="search" id="search" placeholder="Name, key or mdi:icon-name…" autocomplete="off"></div>
+<div class="field"><label for="group">Functional group</label><select id="group"><option value="">All groups</option><option>DHW</option><option>Energy</option><option>Faults</option><option>Room</option><option>System</option><option>Water loop</option><option>Zone · Additional</option><option>Zone · Main</option></select></div>
+<div class="field"><label for="platform">Entity type</label><select id="platform"><option value="">All types</option><option value="binary_sensor">Binary sensor</option><option value="number">Number</option><option value="select">Select</option><option value="sensor">Sensor</option><option value="switch">Switch</option></select></div>
+<div class="field"><label for="model">Equipment</label><select id="model"><option value="">All equipment</option><option value="altherma">Altherma</option><option value="air_to_air">Air-to-air</option></select></div>
+<button class="theme" type="button" id="reset">Reset filters</button>
+</div>
+<div class="options"><label class="check"><input type="checkbox" id="changing">Only icons that change shape</label><label class="check"><input type="checkbox" id="colours" checked>Illustrative state colours</label><span class="result-count" id="count" role="status" aria-live="polite">Showing 60 of 60 entities</span></div>
+<p class="note">Colours here are illustrative: HA cards and themes decide the actual highlighting. Unknown and unavailable use the default icon, shown dimmed here for comparison. Custom entity icons can override these mappings. Equipment filters show the union of supported profiles; installation settings and model exclusions may hide some entities.</p>
+<div class="table-wrap">
+<table aria-label="Entity icons for every state"><colgroup><col class="entity"><col class="meta"><col></colgroup><thead><tr><th scope="col">Entity</th><th scope="col">Type / icon source</th><th scope="col">State → icon</th></tr></thead><tbody id="entities">
+<tr data-key="three_way_valve" data-group="DHW" data-platform="sensor" data-models="altherma" data-changing="false" data-source="integration">
+ <th scope="row"><span class="entity-name">DHW · 3-way valve</span><code class="entity-key">three_way_valve</code><span class="entity-tags"></span></th>
+ <td class="metadata"><span class="platform">sensor</span><span class="source">Integration icon</span></td>
+ <td><div class="states"><span class="state" data-state="space_heating" data-tone="neutral" title="Space heating: mdi:valve"><svg class="glyph" aria-hidden="true" viewBox="0 0 24 24"><use href="#icon-valve"/></svg><span class="state-label">Space heating</span><code>mdi:valve</code></span>
+<span class="state" data-state="dhw" data-tone="active" title="DHW: mdi:valve"><svg class="glyph" aria-hidden="true" viewBox="0 0 24 24"><use href="#icon-valve"/></svg><span class="state-label">DHW</span><code>mdi:valve</code></span>
+<span class="state" data-state="unknown" data-tone="muted" title="Unknown: mdi:valve"><svg class="glyph" aria-hidden="true" viewBox="0 0 24 24"><use href="#icon-valve"/></svg><span class="state-label">Unknown</span><code>mdi:valve</code></span>
+<span class="state" data-state="unavailable" data-tone="muted" title="Unavailable: mdi:valve"><svg class="glyph" aria-hidden="true" viewBox="0 0 24 24"><use href="#icon-valve"/></svg><span class="state-label">Unavailable</span><code>mdi:valve</code></span></div></td>
+</tr>
+<tr data-key="booster_heater_running" data-group="DHW" data-platform="binary_sensor" data-models="altherma" data-changing="true" data-source="integration">
+ <th scope="row"><span class="entity-name">DHW · Booster heater running</span><code class="entity-key">booster_heater_running</code><span class="entity-tags"></span></th>
+ <td class="metadata"><span class="platform">binary sensor</span><span class="source">Integration icon</span><span class="device-class">running class</span></td>
+ <td><div class="states"><span class="state" data-state="off" data-tone="neutral" title="Not running: mdi:fire-off"><svg class="glyph" aria-hidden="true" viewBox="0 0 24 24"><use href="#icon-fire-off"/></svg><span class="state-label">Not running</span><code>mdi:fire-off</code></span>
+<span class="state" data-state="on" data-tone="active" title="Running: mdi:fire"><svg class="glyph" aria-hidden="true" viewBox="0 0 24 24"><use href="#icon-fire"/></svg><span class="state-label">Running</span><code>mdi:fire</code></span>
+<span class="state" data-state="unknown" data-tone="muted" title="Unknown: mdi:fire"><svg class="glyph" aria-hidden="true" viewBox="0 0 24 24"><use href="#icon-fire"/></svg><span class="state-label">Unknown</span><code>mdi:fire</code></span>
+<span class="state" data-state="unavailable" data-tone="muted" title="Unavailable: mdi:fire"><svg class="glyph" aria-hidden="true" viewBox="0 0 24 24"><use href="#icon-fire"/></svg><span class="state-label">Unavailable</span><code>mdi:fire</code></span></div></td>
+</tr>
+<tr data-key="disinfection_running" data-group="DHW" data-platform="binary_sensor" data-models="altherma" data-changing="true" data-source="integration">
+ <th scope="row"><span class="entity-name">DHW · Disinfection operation</span><code class="entity-key">disinfection_running</code><span class="entity-tags"></span></th>
+ <td class="metadata"><span class="platform">binary sensor</span><span class="source">Integration icon</span><span class="device-class">running class</span></td>
+ <td><div class="states"><span class="state" data-state="off" data-tone="neutral" title="Not running: mdi:shield-check-outline"><svg class="glyph" aria-hidden="true" viewBox="0 0 24 24"><use href="#icon-shield-check-outline"/></svg><span class="state-label">Not running</span><code>mdi:shield-check-outline</code></span>
+<span class="state" data-state="on" data-tone="active" title="Running: mdi:shield-check"><svg class="glyph" aria-hidden="true" viewBox="0 0 24 24"><use href="#icon-shield-check"/></svg><span class="state-label">Running</span><code>mdi:shield-check</code></span>
+<span class="state" data-state="unknown" data-tone="muted" title="Unknown: mdi:shield-check-outline"><svg class="glyph" aria-hidden="true" viewBox="0 0 24 24"><use href="#icon-shield-check-outline"/></svg><span class="state-label">Unknown</span><code>mdi:shield-check-outline</code></span>
+<span class="state" data-state="unavailable" data-tone="muted" title="Unavailable: mdi:shield-check-outline"><svg class="glyph" aria-hidden="true" viewBox="0 0 24 24"><use href="#icon-shield-check-outline"/></svg><span class="state-label">Unavailable</span><code>mdi:shield-check-outline</code></span></div></td>
+</tr>
+<tr data-key="dhw_lower_temperature" data-group="DHW" data-platform="sensor" data-models="altherma" data-changing="false" data-source="ha">
+ <th scope="row"><span class="entity-name">DHW · Lower temperature</span><code class="entity-key">dhw_lower_temperature</code><span class="entity-tags"></span></th>
+ <td class="metadata"><span class="platform">sensor</span><span class="source">HA · temperature</span></td>
+ <td><div class="states"><span class="state" data-state="value" data-tone="neutral" title="Value (°C): mdi:thermometer"><svg class="glyph" aria-hidden="true" viewBox="0 0 24 24"><use href="#icon-thermometer"/></svg><span class="state-label">Value (°C)</span><code>mdi:thermometer</code></span>
+<span class="state" data-state="unknown" data-tone="muted" title="Unknown: mdi:thermometer"><svg class="glyph" aria-hidden="true" viewBox="0 0 24 24"><use href="#icon-thermometer"/></svg><span class="state-label">Unknown</span><code>mdi:thermometer</code></span>
+<span class="state" data-state="unavailable" data-tone="muted" title="Unavailable: mdi:thermometer"><svg class="glyph" aria-hidden="true" viewBox="0 0 24 24"><use href="#icon-thermometer"/></svg><span class="state-label">Unavailable</span><code>mdi:thermometer</code></span></div></td>
+</tr>
+<tr data-key="dhw_normal_operation" data-group="DHW" data-platform="binary_sensor" data-models="altherma" data-changing="true" data-source="integration">
+ <th scope="row"><span class="entity-name">DHW · Normal operation</span><code class="entity-key">dhw_normal_operation</code><span class="entity-tags"></span></th>
+ <td class="metadata"><span class="platform">binary sensor</span><span class="source">Integration icon</span><span class="device-class">running class</span></td>
+ <td><div class="states"><span class="state" data-state="off" data-tone="neutral" title="Not running: mdi:water-boiler-off"><svg class="glyph" aria-hidden="true" viewBox="0 0 24 24"><use href="#icon-water-boiler-off"/></svg><span class="state-label">Not running</span><code>mdi:water-boiler-off</code></span>
+<span class="state" data-state="on" data-tone="active" title="Running: mdi:water-boiler"><svg class="glyph" aria-hidden="true" viewBox="0 0 24 24"><use href="#icon-water-boiler"/></svg><span class="state-label">Running</span><code>mdi:water-boiler</code></span>
+<span class="state" data-state="unknown" data-tone="muted" title="Unknown: mdi:water-boiler"><svg class="glyph" aria-hidden="true" viewBox="0 0 24 24"><use href="#icon-water-boiler"/></svg><span class="state-label">Unknown</span><code>mdi:water-boiler</code></span>
+<span class="state" data-state="unavailable" data-tone="muted" title="Unavailable: mdi:water-boiler"><svg class="glyph" aria-hidden="true" viewBox="0 0 24 24"><use href="#icon-water-boiler"/></svg><span class="state-label">Unavailable</span><code>mdi:water-boiler</code></span></div></td>
+</tr>
+<tr data-key="dhw_booster" data-group="DHW" data-platform="switch" data-models="altherma" data-changing="true" data-source="integration">
+ <th scope="row"><span class="entity-name">DHW · Powerful mode</span><code class="entity-key">dhw_booster</code><span class="entity-tags"></span></th>
+ <td class="metadata"><span class="platform">switch</span><span class="source">Integration icon</span></td>
+ <td><div class="states"><span class="state" data-state="off" data-tone="neutral" title="Off: mdi:water-boiler-off"><svg class="glyph" aria-hidden="true" viewBox="0 0 24 24"><use href="#icon-water-boiler-off"/></svg><span class="state-label">Off</span><code>mdi:water-boiler-off</code></span>
+<span class="state" data-state="on" data-tone="active" title="On: mdi:water-boiler"><svg class="glyph" aria-hidden="true" viewBox="0 0 24 24"><use href="#icon-water-boiler"/></svg><span class="state-label">On</span><code>mdi:water-boiler</code></span>
+<span class="state" data-state="unknown" data-tone="muted" title="Unknown: mdi:water-boiler"><svg class="glyph" aria-hidden="true" viewBox="0 0 24 24"><use href="#icon-water-boiler"/></svg><span class="state-label">Unknown</span><code>mdi:water-boiler</code></span>
+<span class="state" data-state="unavailable" data-tone="muted" title="Unavailable: mdi:water-boiler"><svg class="glyph" aria-hidden="true" viewBox="0 0 24 24"><use href="#icon-water-boiler"/></svg><span class="state-label">Unavailable</span><code>mdi:water-boiler</code></span></div></td>
+</tr>
+<tr data-key="dhw_reheat" data-group="DHW" data-platform="switch" data-models="altherma" data-changing="true" data-source="integration">
+ <th scope="row"><span class="entity-name">DHW · Reheat</span><code class="entity-key">dhw_reheat</code><span class="entity-tags"></span></th>
+ <td class="metadata"><span class="platform">switch</span><span class="source">Integration icon</span></td>
+ <td><div class="states"><span class="state" data-state="off" data-tone="neutral" title="Off: mdi:water-boiler-off"><svg class="glyph" aria-hidden="true" viewBox="0 0 24 24"><use href="#icon-water-boiler-off"/></svg><span class="state-label">Off</span><code>mdi:water-boiler-off</code></span>
+<span class="state" data-state="on" data-tone="active" title="On: mdi:water-boiler"><svg class="glyph" aria-hidden="true" viewBox="0 0 24 24"><use href="#icon-water-boiler"/></svg><span class="state-label">On</span><code>mdi:water-boiler</code></span>
+<span class="state" data-state="unknown" data-tone="muted" title="Unknown: mdi:water-boiler"><svg class="glyph" aria-hidden="true" viewBox="0 0 24 24"><use href="#icon-water-boiler"/></svg><span class="state-label">Unknown</span><code>mdi:water-boiler</code></span>
+<span class="state" data-state="unavailable" data-tone="muted" title="Unavailable: mdi:water-boiler"><svg class="glyph" aria-hidden="true" viewBox="0 0 24 24"><use href="#icon-water-boiler"/></svg><span class="state-label">Unavailable</span><code>mdi:water-boiler</code></span></div></td>
+</tr>
+<tr data-key="dhw_reheat_setpoint" data-group="DHW" data-platform="number" data-models="altherma" data-changing="false" data-source="ha">
+ <th scope="row"><span class="entity-name">DHW · Reheat setpoint</span><code class="entity-key">dhw_reheat_setpoint</code><span class="entity-tags"></span></th>
+ <td class="metadata"><span class="platform">number</span><span class="source">HA · temperature</span></td>
+ <td><div class="states"><span class="state" data-state="value" data-tone="neutral" title="Value (°C): mdi:thermometer"><svg class="glyph" aria-hidden="true" viewBox="0 0 24 24"><use href="#icon-thermometer"/></svg><span class="state-label">Value (°C)</span><code>mdi:thermometer</code></span>
+<span class="state" data-state="unknown" data-tone="muted" title="Unknown: mdi:thermometer"><svg class="glyph" aria-hidden="true" viewBox="0 0 24 24"><use href="#icon-thermometer"/></svg><span class="state-label">Unknown</span><code>mdi:thermometer</code></span>
+<span class="state" data-state="unavailable" data-tone="muted" title="Unavailable: mdi:thermometer"><svg class="glyph" aria-hidden="true" viewBox="0 0 24 24"><use href="#icon-thermometer"/></svg><span class="state-label">Unavailable</span><code>mdi:thermometer</code></span></div></td>
+</tr>
+<tr data-key="dhw_temperature" data-group="DHW" data-platform="sensor" data-models="altherma" data-changing="false" data-source="ha">
+ <th scope="row"><span class="entity-name">DHW · Tank temperature</span><code class="entity-key">dhw_temperature</code><span class="entity-tags"></span></th>
+ <td class="metadata"><span class="platform">sensor</span><span class="source">HA · temperature</span></td>
+ <td><div class="states"><span class="state" data-state="value" data-tone="neutral" title="Value (°C): mdi:thermometer"><svg class="glyph" aria-hidden="true" viewBox="0 0 24 24"><use href="#icon-thermometer"/></svg><span class="state-label">Value (°C)</span><code>mdi:thermometer</code></span>
+<span class="state" data-state="unknown" data-tone="muted" title="Unknown: mdi:thermometer"><svg class="glyph" aria-hidden="true" viewBox="0 0 24 24"><use href="#icon-thermometer"/></svg><span class="state-label">Unknown</span><code>mdi:thermometer</code></span>
+<span class="state" data-state="unavailable" data-tone="muted" title="Unavailable: mdi:thermometer"><svg class="glyph" aria-hidden="true" viewBox="0 0 24 24"><use href="#icon-thermometer"/></svg><span class="state-label">Unavailable</span><code>mdi:thermometer</code></span></div></td>
+</tr>
+<tr data-key="dhw_upper_temperature" data-group="DHW" data-platform="sensor" data-models="altherma" data-changing="false" data-source="ha">
+ <th scope="row"><span class="entity-name">DHW · Upper temperature</span><code class="entity-key">dhw_upper_temperature</code><span class="entity-tags"></span></th>
+ <td class="metadata"><span class="platform">sensor</span><span class="source">HA · temperature</span></td>
+ <td><div class="states"><span class="state" data-state="value" data-tone="neutral" title="Value (°C): mdi:thermometer"><svg class="glyph" aria-hidden="true" viewBox="0 0 24 24"><use href="#icon-thermometer"/></svg><span class="state-label">Value (°C)</span><code>mdi:thermometer</code></span>
+<span class="state" data-state="unknown" data-tone="muted" title="Unknown: mdi:thermometer"><svg class="glyph" aria-hidden="true" viewBox="0 0 24 24"><use href="#icon-thermometer"/></svg><span class="state-label">Unknown</span><code>mdi:thermometer</code></span>
+<span class="state" data-state="unavailable" data-tone="muted" title="Unavailable: mdi:thermometer"><svg class="glyph" aria-hidden="true" viewBox="0 0 24 24"><use href="#icon-thermometer"/></svg><span class="state-label">Unavailable</span><code>mdi:thermometer</code></span></div></td>
+</tr>
+<tr data-key="buffering_power_limit" data-group="Energy" data-platform="number" data-models="altherma" data-changing="false" data-source="ha">
+ <th scope="row"><span class="entity-name">Energy · Buffering power limit</span><code class="entity-key">buffering_power_limit</code><span class="entity-tags"></span></th>
+ <td class="metadata"><span class="platform">number</span><span class="source">HA · power</span></td>
+ <td><div class="states"><span class="state" data-state="value" data-tone="neutral" title="Value (kW): mdi:flash"><svg class="glyph" aria-hidden="true" viewBox="0 0 24 24"><use href="#icon-flash"/></svg><span class="state-label">Value (kW)</span><code>mdi:flash</code></span>
+<span class="state" data-state="unknown" data-tone="muted" title="Unknown: mdi:flash"><svg class="glyph" aria-hidden="true" viewBox="0 0 24 24"><use href="#icon-flash"/></svg><span class="state-label">Unknown</span><code>mdi:flash</code></span>
+<span class="state" data-state="unavailable" data-tone="muted" title="Unavailable: mdi:flash"><svg class="glyph" aria-hidden="true" viewBox="0 0 24 24"><use href="#icon-flash"/></svg><span class="state-label">Unavailable</span><code>mdi:flash</code></span></div></td>
+</tr>
+<tr data-key="demand_power_limit" data-group="Energy" data-platform="number" data-models="air_to_air" data-changing="false" data-source="ha">
+ <th scope="row"><span class="entity-name">Energy · Demand Control power limit</span><code class="entity-key">demand_power_limit</code><span class="entity-tags"><span class="tag">Air-to-air</span></span></th>
+ <td class="metadata"><span class="platform">number</span><span class="source">HA · power</span></td>
+ <td><div class="states"><span class="state" data-state="value" data-tone="neutral" title="Value (kW): mdi:flash"><svg class="glyph" aria-hidden="true" viewBox="0 0 24 24"><use href="#icon-flash"/></svg><span class="state-label">Value (kW)</span><code>mdi:flash</code></span>
+<span class="state" data-state="unknown" data-tone="muted" title="Unknown: mdi:flash"><svg class="glyph" aria-hidden="true" viewBox="0 0 24 24"><use href="#icon-flash"/></svg><span class="state-label">Unknown</span><code>mdi:flash</code></span>
+<span class="state" data-state="unavailable" data-tone="muted" title="Unavailable: mdi:flash"><svg class="glyph" aria-hidden="true" viewBox="0 0 24 24"><use href="#icon-flash"/></svg><span class="state-label">Unavailable</span><code>mdi:flash</code></span></div></td>
+</tr>
+<tr data-key="general_power_limit" data-group="Energy" data-platform="number" data-models="altherma" data-changing="false" data-source="ha">
+ <th scope="row"><span class="entity-name">Energy · General power limit</span><code class="entity-key">general_power_limit</code><span class="entity-tags"></span></th>
+ <td class="metadata"><span class="platform">number</span><span class="source">HA · power</span></td>
+ <td><div class="states"><span class="state" data-state="value" data-tone="neutral" title="Value (kW): mdi:flash"><svg class="glyph" aria-hidden="true" viewBox="0 0 24 24"><use href="#icon-flash"/></svg><span class="state-label">Value (kW)</span><code>mdi:flash</code></span>
+<span class="state" data-state="unknown" data-tone="muted" title="Unknown: mdi:flash"><svg class="glyph" aria-hidden="true" viewBox="0 0 24 24"><use href="#icon-flash"/></svg><span class="state-label">Unknown</span><code>mdi:flash</code></span>
+<span class="state" data-state="unavailable" data-tone="muted" title="Unavailable: mdi:flash"><svg class="glyph" aria-hidden="true" viewBox="0 0 24 24"><use href="#icon-flash"/></svg><span class="state-label">Unavailable</span><code>mdi:flash</code></span></div></td>
+</tr>
+<tr data-key="power_consumption" data-group="Energy" data-platform="sensor" data-models="altherma" data-changing="false" data-source="ha">
+ <th scope="row"><span class="entity-name">Energy · Power consumption</span><code class="entity-key">power_consumption</code><span class="entity-tags"></span></th>
+ <td class="metadata"><span class="platform">sensor</span><span class="source">HA · power</span></td>
+ <td><div class="states"><span class="state" data-state="value" data-tone="neutral" title="Value (kW): mdi:flash"><svg class="glyph" aria-hidden="true" viewBox="0 0 24 24"><use href="#icon-flash"/></svg><span class="state-label">Value (kW)</span><code>mdi:flash</code></span>
+<span class="state" data-state="unknown" data-tone="muted" title="Unknown: mdi:flash"><svg class="glyph" aria-hidden="true" viewBox="0 0 24 24"><use href="#icon-flash"/></svg><span class="state-label">Unknown</span><code>mdi:flash</code></span>
+<span class="state" data-state="unavailable" data-tone="muted" title="Unavailable: mdi:flash"><svg class="glyph" aria-hidden="true" viewBox="0 0 24 24"><use href="#icon-flash"/></svg><span class="state-label">Unavailable</span><code>mdi:flash</code></span></div></td>
+</tr>
+<tr data-key="smart_grid_mode" data-group="Energy" data-platform="select" data-models="altherma air_to_air" data-changing="false" data-source="integration">
+ <th scope="row"><span class="entity-name">Energy · Smart Grid mode</span><code class="entity-key">smart_grid_mode</code><span class="entity-tags"><span class="tag">Air-to-air + Altherma</span></span></th>
+ <td class="metadata"><span class="platform">select</span><span class="source">Integration icon</span></td>
+ <td><div class="states"><span class="state" data-state="free_running" data-tone="neutral" title="Free running: mdi:transmission-tower"><svg class="glyph" aria-hidden="true" viewBox="0 0 24 24"><use href="#icon-transmission-tower"/></svg><span class="state-label">Free running</span><code>mdi:transmission-tower</code></span>
+<span class="state" data-state="forced_off" data-tone="neutral" title="Forced off: mdi:transmission-tower"><svg class="glyph" aria-hidden="true" viewBox="0 0 24 24"><use href="#icon-transmission-tower"/></svg><span class="state-label">Forced off</span><code>mdi:transmission-tower</code></span>
+<span class="state" data-state="recommended_on" data-tone="neutral" title="Recommended on: mdi:transmission-tower"><svg class="glyph" aria-hidden="true" viewBox="0 0 24 24"><use href="#icon-transmission-tower"/></svg><span class="state-label">Recommended on</span><code>mdi:transmission-tower</code></span>
+<span class="state" data-state="forced_on" data-tone="neutral" title="Forced on: mdi:transmission-tower"><svg class="glyph" aria-hidden="true" viewBox="0 0 24 24"><use href="#icon-transmission-tower"/></svg><span class="state-label">Forced on</span><code>mdi:transmission-tower</code></span>
+<span class="state" data-state="unknown" data-tone="muted" title="Unknown: mdi:transmission-tower"><svg class="glyph" aria-hidden="true" viewBox="0 0 24 24"><use href="#icon-transmission-tower"/></svg><span class="state-label">Unknown</span><code>mdi:transmission-tower</code></span>
+<span class="state" data-state="unavailable" data-tone="muted" title="Unavailable: mdi:transmission-tower"><svg class="glyph" aria-hidden="true" viewBox="0 0 24 24"><use href="#icon-transmission-tower"/></svg><span class="state-label">Unavailable</span><code>mdi:transmission-tower</code></span></div></td>
+</tr>
+<tr data-key="unit_abnormality_code" data-group="Faults" data-platform="sensor" data-models="altherma" data-changing="false" data-source="integration">
+ <th scope="row"><span class="entity-name">Faults · Code</span><code class="entity-key">unit_abnormality_code</code><span class="entity-tags"><span class="tag">Diagnostic</span></span></th>
+ <td class="metadata"><span class="platform">sensor</span><span class="source">Integration icon</span></td>
+ <td><div class="states"><span class="state" data-state="value" data-tone="neutral" title="Value: mdi:alert-circle-outline"><svg class="glyph" aria-hidden="true" viewBox="0 0 24 24"><use href="#icon-alert-circle-outline"/></svg><span class="state-label">Value</span><code>mdi:alert-circle-outline</code></span>
+<span class="state" data-state="unknown" data-tone="muted" title="Unknown: mdi:alert-circle-outline"><svg class="glyph" aria-hidden="true" viewBox="0 0 24 24"><use href="#icon-alert-circle-outline"/></svg><span class="state-label">Unknown</span><code>mdi:alert-circle-outline</code></span>
+<span class="state" data-state="unavailable" data-tone="muted" title="Unavailable: mdi:alert-circle-outline"><svg class="glyph" aria-hidden="true" viewBox="0 0 24 24"><use href="#icon-alert-circle-outline"/></svg><span class="state-label">Unavailable</span><code>mdi:alert-circle-outline</code></span></div></td>
+</tr>
+<tr data-key="unit_abnormality" data-group="Faults" data-platform="sensor" data-models="altherma" data-changing="true" data-source="integration">
+ <th scope="row"><span class="entity-name">Faults · Status</span><code class="entity-key">unit_abnormality</code><span class="entity-tags"><span class="tag">Diagnostic</span></span></th>
+ <td class="metadata"><span class="platform">sensor</span><span class="source">Integration icon</span></td>
+ <td><div class="states"><span class="state" data-state="no_error" data-tone="healthy" title="No error: mdi:check-circle-outline"><svg class="glyph" aria-hidden="true" viewBox="0 0 24 24"><use href="#icon-check-circle-outline"/></svg><span class="state-label">No error</span><code>mdi:check-circle-outline</code></span>
+<span class="state" data-state="fault" data-tone="fault" title="Fault: mdi:alert-circle"><svg class="glyph" aria-hidden="true" viewBox="0 0 24 24"><use href="#icon-alert-circle"/></svg><span class="state-label">Fault</span><code>mdi:alert-circle</code></span>
+<span class="state" data-state="warning" data-tone="warning" title="Warning: mdi:alert-outline"><svg class="glyph" aria-hidden="true" viewBox="0 0 24 24"><use href="#icon-alert-outline"/></svg><span class="state-label">Warning</span><code>mdi:alert-outline</code></span>
+<span class="state" data-state="unknown" data-tone="muted" title="Unknown: mdi:alert-circle-outline"><svg class="glyph" aria-hidden="true" viewBox="0 0 24 24"><use href="#icon-alert-circle-outline"/></svg><span class="state-label">Unknown</span><code>mdi:alert-circle-outline</code></span>
+<span class="state" data-state="unavailable" data-tone="muted" title="Unavailable: mdi:alert-circle-outline"><svg class="glyph" aria-hidden="true" viewBox="0 0 24 24"><use href="#icon-alert-circle-outline"/></svg><span class="state-label">Unavailable</span><code>mdi:alert-circle-outline</code></span></div></td>
+</tr>
+<tr data-key="unit_abnormality_subcode" data-group="Faults" data-platform="sensor" data-models="altherma" data-changing="false" data-source="integration">
+ <th scope="row"><span class="entity-name">Faults · Subcode</span><code class="entity-key">unit_abnormality_subcode</code><span class="entity-tags"><span class="tag">Diagnostic</span></span></th>
+ <td class="metadata"><span class="platform">sensor</span><span class="source">Integration icon</span></td>
+ <td><div class="states"><span class="state" data-state="value" data-tone="neutral" title="Value: mdi:alert-circle-outline"><svg class="glyph" aria-hidden="true" viewBox="0 0 24 24"><use href="#icon-alert-circle-outline"/></svg><span class="state-label">Value</span><code>mdi:alert-circle-outline</code></span>
+<span class="state" data-state="unknown" data-tone="muted" title="Unknown: mdi:alert-circle-outline"><svg class="glyph" aria-hidden="true" viewBox="0 0 24 24"><use href="#icon-alert-circle-outline"/></svg><span class="state-label">Unknown</span><code>mdi:alert-circle-outline</code></span>
+<span class="state" data-state="unavailable" data-tone="muted" title="Unavailable: mdi:alert-circle-outline"><svg class="glyph" aria-hidden="true" viewBox="0 0 24 24"><use href="#icon-alert-circle-outline"/></svg><span class="state-label">Unavailable</span><code>mdi:alert-circle-outline</code></span></div></td>
+</tr>
+<tr data-key="room_cooling_setpoint" data-group="Room" data-platform="number" data-models="altherma" data-changing="false" data-source="ha">
+ <th scope="row"><span class="entity-name">Room · Cooling setpoint</span><code class="entity-key">room_cooling_setpoint</code><span class="entity-tags"></span></th>
+ <td class="metadata"><span class="platform">number</span><span class="source">HA · temperature</span></td>
+ <td><div class="states"><span class="state" data-state="value" data-tone="neutral" title="Value (°C): mdi:thermometer"><svg class="glyph" aria-hidden="true" viewBox="0 0 24 24"><use href="#icon-thermometer"/></svg><span class="state-label">Value (°C)</span><code>mdi:thermometer</code></span>
+<span class="state" data-state="unknown" data-tone="muted" title="Unknown: mdi:thermometer"><svg class="glyph" aria-hidden="true" viewBox="0 0 24 24"><use href="#icon-thermometer"/></svg><span class="state-label">Unknown</span><code>mdi:thermometer</code></span>
+<span class="state" data-state="unavailable" data-tone="muted" title="Unavailable: mdi:thermometer"><svg class="glyph" aria-hidden="true" viewBox="0 0 24 24"><use href="#icon-thermometer"/></svg><span class="state-label">Unavailable</span><code>mdi:thermometer</code></span></div></td>
+</tr>
+<tr data-key="room_cooling_lower_limit" data-group="Room" data-platform="sensor" data-models="altherma" data-changing="false" data-source="ha">
+ <th scope="row"><span class="entity-name">Room · Cooling setpoint lower limit</span><code class="entity-key">room_cooling_lower_limit</code><span class="entity-tags"><span class="tag">Diagnostic</span></span></th>
+ <td class="metadata"><span class="platform">sensor</span><span class="source">HA · temperature</span></td>
+ <td><div class="states"><span class="state" data-state="value" data-tone="neutral" title="Value (°C): mdi:thermometer"><svg class="glyph" aria-hidden="true" viewBox="0 0 24 24"><use href="#icon-thermometer"/></svg><span class="state-label">Value (°C)</span><code>mdi:thermometer</code></span>
+<span class="state" data-state="unknown" data-tone="muted" title="Unknown: mdi:thermometer"><svg class="glyph" aria-hidden="true" viewBox="0 0 24 24"><use href="#icon-thermometer"/></svg><span class="state-label">Unknown</span><code>mdi:thermometer</code></span>
+<span class="state" data-state="unavailable" data-tone="muted" title="Unavailable: mdi:thermometer"><svg class="glyph" aria-hidden="true" viewBox="0 0 24 24"><use href="#icon-thermometer"/></svg><span class="state-label">Unavailable</span><code>mdi:thermometer</code></span></div></td>
+</tr>
+<tr data-key="room_cooling_upper_limit" data-group="Room" data-platform="sensor" data-models="altherma" data-changing="false" data-source="ha">
+ <th scope="row"><span class="entity-name">Room · Cooling setpoint upper limit</span><code class="entity-key">room_cooling_upper_limit</code><span class="entity-tags"><span class="tag">Diagnostic</span></span></th>
+ <td class="metadata"><span class="platform">sensor</span><span class="source">HA · temperature</span></td>
+ <td><div class="states"><span class="state" data-state="value" data-tone="neutral" title="Value (°C): mdi:thermometer"><svg class="glyph" aria-hidden="true" viewBox="0 0 24 24"><use href="#icon-thermometer"/></svg><span class="state-label">Value (°C)</span><code>mdi:thermometer</code></span>
+<span class="state" data-state="unknown" data-tone="muted" title="Unknown: mdi:thermometer"><svg class="glyph" aria-hidden="true" viewBox="0 0 24 24"><use href="#icon-thermometer"/></svg><span class="state-label">Unknown</span><code>mdi:thermometer</code></span>
+<span class="state" data-state="unavailable" data-tone="muted" title="Unavailable: mdi:thermometer"><svg class="glyph" aria-hidden="true" viewBox="0 0 24 24"><use href="#icon-thermometer"/></svg><span class="state-label">Unavailable</span><code>mdi:thermometer</code></span></div></td>
+</tr>
+<tr data-key="room_heating_setpoint" data-group="Room" data-platform="number" data-models="altherma" data-changing="false" data-source="ha">
+ <th scope="row"><span class="entity-name">Room · Heating setpoint</span><code class="entity-key">room_heating_setpoint</code><span class="entity-tags"></span></th>
+ <td class="metadata"><span class="platform">number</span><span class="source">HA · temperature</span></td>
+ <td><div class="states"><span class="state" data-state="value" data-tone="neutral" title="Value (°C): mdi:thermometer"><svg class="glyph" aria-hidden="true" viewBox="0 0 24 24"><use href="#icon-thermometer"/></svg><span class="state-label">Value (°C)</span><code>mdi:thermometer</code></span>
+<span class="state" data-state="unknown" data-tone="muted" title="Unknown: mdi:thermometer"><svg class="glyph" aria-hidden="true" viewBox="0 0 24 24"><use href="#icon-thermometer"/></svg><span class="state-label">Unknown</span><code>mdi:thermometer</code></span>
+<span class="state" data-state="unavailable" data-tone="muted" title="Unavailable: mdi:thermometer"><svg class="glyph" aria-hidden="true" viewBox="0 0 24 24"><use href="#icon-thermometer"/></svg><span class="state-label">Unavailable</span><code>mdi:thermometer</code></span></div></td>
+</tr>
+<tr data-key="room_heating_lower_limit" data-group="Room" data-platform="sensor" data-models="altherma" data-changing="false" data-source="ha">
+ <th scope="row"><span class="entity-name">Room · Heating setpoint lower limit</span><code class="entity-key">room_heating_lower_limit</code><span class="entity-tags"><span class="tag">Diagnostic</span></span></th>
+ <td class="metadata"><span class="platform">sensor</span><span class="source">HA · temperature</span></td>
+ <td><div class="states"><span class="state" data-state="value" data-tone="neutral" title="Value (°C): mdi:thermometer"><svg class="glyph" aria-hidden="true" viewBox="0 0 24 24"><use href="#icon-thermometer"/></svg><span class="state-label">Value (°C)</span><code>mdi:thermometer</code></span>
+<span class="state" data-state="unknown" data-tone="muted" title="Unknown: mdi:thermometer"><svg class="glyph" aria-hidden="true" viewBox="0 0 24 24"><use href="#icon-thermometer"/></svg><span class="state-label">Unknown</span><code>mdi:thermometer</code></span>
+<span class="state" data-state="unavailable" data-tone="muted" title="Unavailable: mdi:thermometer"><svg class="glyph" aria-hidden="true" viewBox="0 0 24 24"><use href="#icon-thermometer"/></svg><span class="state-label">Unavailable</span><code>mdi:thermometer</code></span></div></td>
+</tr>
+<tr data-key="room_heating_upper_limit" data-group="Room" data-platform="sensor" data-models="altherma" data-changing="false" data-source="ha">
+ <th scope="row"><span class="entity-name">Room · Heating setpoint upper limit</span><code class="entity-key">room_heating_upper_limit</code><span class="entity-tags"><span class="tag">Diagnostic</span></span></th>
+ <td class="metadata"><span class="platform">sensor</span><span class="source">HA · temperature</span></td>
+ <td><div class="states"><span class="state" data-state="value" data-tone="neutral" title="Value (°C): mdi:thermometer"><svg class="glyph" aria-hidden="true" viewBox="0 0 24 24"><use href="#icon-thermometer"/></svg><span class="state-label">Value (°C)</span><code>mdi:thermometer</code></span>
+<span class="state" data-state="unknown" data-tone="muted" title="Unknown: mdi:thermometer"><svg class="glyph" aria-hidden="true" viewBox="0 0 24 24"><use href="#icon-thermometer"/></svg><span class="state-label">Unknown</span><code>mdi:thermometer</code></span>
+<span class="state" data-state="unavailable" data-tone="muted" title="Unavailable: mdi:thermometer"><svg class="glyph" aria-hidden="true" viewBox="0 0 24 24"><use href="#icon-thermometer"/></svg><span class="state-label">Unavailable</span><code>mdi:thermometer</code></span></div></td>
+</tr>
+<tr data-key="room_temperature" data-group="Room" data-platform="sensor" data-models="altherma" data-changing="false" data-source="ha">
+ <th scope="row"><span class="entity-name">Room · Temperature</span><code class="entity-key">room_temperature</code><span class="entity-tags"></span></th>
+ <td class="metadata"><span class="platform">sensor</span><span class="source">HA · temperature</span></td>
+ <td><div class="states"><span class="state" data-state="value" data-tone="neutral" title="Value (°C): mdi:thermometer"><svg class="glyph" aria-hidden="true" viewBox="0 0 24 24"><use href="#icon-thermometer"/></svg><span class="state-label">Value (°C)</span><code>mdi:thermometer</code></span>
+<span class="state" data-state="unknown" data-tone="muted" title="Unknown: mdi:thermometer"><svg class="glyph" aria-hidden="true" viewBox="0 0 24 24"><use href="#icon-thermometer"/></svg><span class="state-label">Unknown</span><code>mdi:thermometer</code></span>
+<span class="state" data-state="unavailable" data-tone="muted" title="Unavailable: mdi:thermometer"><svg class="glyph" aria-hidden="true" viewBox="0 0 24 24"><use href="#icon-thermometer"/></svg><span class="state-label">Unavailable</span><code>mdi:thermometer</code></span></div></td>
+</tr>
+<tr data-key="actual_operation_mode" data-group="System" data-platform="sensor" data-models="altherma" data-changing="true" data-source="integration">
+ <th scope="row"><span class="entity-name">System · Actual mode</span><code class="entity-key">actual_operation_mode</code><span class="entity-tags"></span></th>
+ <td class="metadata"><span class="platform">sensor</span><span class="source">Integration icon</span></td>
+ <td><div class="states"><span class="state" data-state="heating" data-tone="heat" title="Heating: mdi:fire"><svg class="glyph" aria-hidden="true" viewBox="0 0 24 24"><use href="#icon-fire"/></svg><span class="state-label">Heating</span><code>mdi:fire</code></span>
+<span class="state" data-state="cooling" data-tone="cool" title="Cooling: mdi:snowflake"><svg class="glyph" aria-hidden="true" viewBox="0 0 24 24"><use href="#icon-snowflake"/></svg><span class="state-label">Cooling</span><code>mdi:snowflake</code></span>
+<span class="state" data-state="unknown" data-tone="muted" title="Unknown: mdi:thermostat"><svg class="glyph" aria-hidden="true" viewBox="0 0 24 24"><use href="#icon-thermostat"/></svg><span class="state-label">Unknown</span><code>mdi:thermostat</code></span>
+<span class="state" data-state="unavailable" data-tone="muted" title="Unavailable: mdi:thermostat"><svg class="glyph" aria-hidden="true" viewBox="0 0 24 24"><use href="#icon-thermostat"/></svg><span class="state-label">Unavailable</span><code>mdi:thermostat</code></span></div></td>
+</tr>
+<tr data-key="compressor_running" data-group="System" data-platform="binary_sensor" data-models="altherma" data-changing="true" data-source="integration">
+ <th scope="row"><span class="entity-name">System · Compressor running</span><code class="entity-key">compressor_running</code><span class="entity-tags"></span></th>
+ <td class="metadata"><span class="platform">binary sensor</span><span class="source">Integration icon</span><span class="device-class">running class</span></td>
+ <td><div class="states"><span class="state" data-state="off" data-tone="neutral" title="Not running: mdi:heat-pump-outline"><svg class="glyph" aria-hidden="true" viewBox="0 0 24 24"><use href="#icon-heat-pump-outline"/></svg><span class="state-label">Not running</span><code>mdi:heat-pump-outline</code></span>
+<span class="state" data-state="on" data-tone="active" title="Running: mdi:heat-pump"><svg class="glyph" aria-hidden="true" viewBox="0 0 24 24"><use href="#icon-heat-pump"/></svg><span class="state-label">Running</span><code>mdi:heat-pump</code></span>
+<span class="state" data-state="unknown" data-tone="muted" title="Unknown: mdi:heat-pump-outline"><svg class="glyph" aria-hidden="true" viewBox="0 0 24 24"><use href="#icon-heat-pump-outline"/></svg><span class="state-label">Unknown</span><code>mdi:heat-pump-outline</code></span>
+<span class="state" data-state="unavailable" data-tone="muted" title="Unavailable: mdi:heat-pump-outline"><svg class="glyph" aria-hidden="true" viewBox="0 0 24 24"><use href="#icon-heat-pump-outline"/></svg><span class="state-label">Unavailable</span><code>mdi:heat-pump-outline</code></span></div></td>
+</tr>
+<tr data-key="defrost" data-group="System" data-platform="binary_sensor" data-models="altherma" data-changing="true" data-source="integration">
+ <th scope="row"><span class="entity-name">System · Defrost active</span><code class="entity-key">defrost</code><span class="entity-tags"></span></th>
+ <td class="metadata"><span class="platform">binary sensor</span><span class="source">Integration icon</span><span class="device-class">running class</span></td>
+ <td><div class="states"><span class="state" data-state="off" data-tone="neutral" title="Not running: mdi:snowflake"><svg class="glyph" aria-hidden="true" viewBox="0 0 24 24"><use href="#icon-snowflake"/></svg><span class="state-label">Not running</span><code>mdi:snowflake</code></span>
+<span class="state" data-state="on" data-tone="active" title="Running: mdi:snowflake-melt"><svg class="glyph" aria-hidden="true" viewBox="0 0 24 24"><use href="#icon-snowflake-melt"/></svg><span class="state-label">Running</span><code>mdi:snowflake-melt</code></span>
+<span class="state" data-state="unknown" data-tone="muted" title="Unknown: mdi:snowflake"><svg class="glyph" aria-hidden="true" viewBox="0 0 24 24"><use href="#icon-snowflake"/></svg><span class="state-label">Unknown</span><code>mdi:snowflake</code></span>
+<span class="state" data-state="unavailable" data-tone="muted" title="Unavailable: mdi:snowflake"><svg class="glyph" aria-hidden="true" viewBox="0 0 24 24"><use href="#icon-snowflake"/></svg><span class="state-label">Unavailable</span><code>mdi:snowflake</code></span></div></td>
+</tr>
+<tr data-key="hot_start" data-group="System" data-platform="binary_sensor" data-models="altherma" data-changing="true" data-source="integration">
+ <th scope="row"><span class="entity-name">System · Hot start active</span><code class="entity-key">hot_start</code><span class="entity-tags"></span></th>
+ <td class="metadata"><span class="platform">binary sensor</span><span class="source">Integration icon</span><span class="device-class">running class</span></td>
+ <td><div class="states"><span class="state" data-state="off" data-tone="neutral" title="Not running: mdi:thermometer"><svg class="glyph" aria-hidden="true" viewBox="0 0 24 24"><use href="#icon-thermometer"/></svg><span class="state-label">Not running</span><code>mdi:thermometer</code></span>
+<span class="state" data-state="on" data-tone="active" title="Running: mdi:thermometer-chevron-up"><svg class="glyph" aria-hidden="true" viewBox="0 0 24 24"><use href="#icon-thermometer-chevron-up"/></svg><span class="state-label">Running</span><code>mdi:thermometer-chevron-up</code></span>
+<span class="state" data-state="unknown" data-tone="muted" title="Unknown: mdi:thermometer"><svg class="glyph" aria-hidden="true" viewBox="0 0 24 24"><use href="#icon-thermometer"/></svg><span class="state-label">Unknown</span><code>mdi:thermometer</code></span>
+<span class="state" data-state="unavailable" data-tone="muted" title="Unavailable: mdi:thermometer"><svg class="glyph" aria-hidden="true" viewBox="0 0 24 24"><use href="#icon-thermometer"/></svg><span class="state-label">Unavailable</span><code>mdi:thermometer</code></span></div></td>
+</tr>
+<tr data-key="liquid_refrigerant_temperature" data-group="System" data-platform="sensor" data-models="altherma" data-changing="false" data-source="ha">
+ <th scope="row"><span class="entity-name">System · Liquid refrigerant temperature</span><code class="entity-key">liquid_refrigerant_temperature</code><span class="entity-tags"></span></th>
+ <td class="metadata"><span class="platform">sensor</span><span class="source">HA · temperature</span></td>
+ <td><div class="states"><span class="state" data-state="value" data-tone="neutral" title="Value (°C): mdi:thermometer"><svg class="glyph" aria-hidden="true" viewBox="0 0 24 24"><use href="#icon-thermometer"/></svg><span class="state-label">Value (°C)</span><code>mdi:thermometer</code></span>
+<span class="state" data-state="unknown" data-tone="muted" title="Unknown: mdi:thermometer"><svg class="glyph" aria-hidden="true" viewBox="0 0 24 24"><use href="#icon-thermometer"/></svg><span class="state-label">Unknown</span><code>mdi:thermometer</code></span>
+<span class="state" data-state="unavailable" data-tone="muted" title="Unavailable: mdi:thermometer"><svg class="glyph" aria-hidden="true" viewBox="0 0 24 24"><use href="#icon-thermometer"/></svg><span class="state-label">Unavailable</span><code>mdi:thermometer</code></span></div></td>
+</tr>
+<tr data-key="space_normal_operation" data-group="System" data-platform="binary_sensor" data-models="altherma" data-changing="true" data-source="integration">
+ <th scope="row"><span class="entity-name">System · Normal space heating/cooling</span><code class="entity-key">space_normal_operation</code><span class="entity-tags"></span></th>
+ <td class="metadata"><span class="platform">binary sensor</span><span class="source">Integration icon</span><span class="device-class">running class</span></td>
+ <td><div class="states"><span class="state" data-state="off" data-tone="neutral" title="Not running: mdi:home-thermometer-outline"><svg class="glyph" aria-hidden="true" viewBox="0 0 24 24"><use href="#icon-home-thermometer-outline"/></svg><span class="state-label">Not running</span><code>mdi:home-thermometer-outline</code></span>
+<span class="state" data-state="on" data-tone="active" title="Running: mdi:home-thermometer"><svg class="glyph" aria-hidden="true" viewBox="0 0 24 24"><use href="#icon-home-thermometer"/></svg><span class="state-label">Running</span><code>mdi:home-thermometer</code></span>
+<span class="state" data-state="unknown" data-tone="muted" title="Unknown: mdi:home-thermometer-outline"><svg class="glyph" aria-hidden="true" viewBox="0 0 24 24"><use href="#icon-home-thermometer-outline"/></svg><span class="state-label">Unknown</span><code>mdi:home-thermometer-outline</code></span>
+<span class="state" data-state="unavailable" data-tone="muted" title="Unavailable: mdi:home-thermometer-outline"><svg class="glyph" aria-hidden="true" viewBox="0 0 24 24"><use href="#icon-home-thermometer-outline"/></svg><span class="state-label">Unavailable</span><code>mdi:home-thermometer-outline</code></span></div></td>
+</tr>
+<tr data-key="outside_temperature" data-group="System" data-platform="sensor" data-models="altherma" data-changing="false" data-source="ha">
+ <th scope="row"><span class="entity-name">System · Outside temperature</span><code class="entity-key">outside_temperature</code><span class="entity-tags"></span></th>
+ <td class="metadata"><span class="platform">sensor</span><span class="source">HA · temperature</span></td>
+ <td><div class="states"><span class="state" data-state="value" data-tone="neutral" title="Value (°C): mdi:thermometer"><svg class="glyph" aria-hidden="true" viewBox="0 0 24 24"><use href="#icon-thermometer"/></svg><span class="state-label">Value (°C)</span><code>mdi:thermometer</code></span>
+<span class="state" data-state="unknown" data-tone="muted" title="Unknown: mdi:thermometer"><svg class="glyph" aria-hidden="true" viewBox="0 0 24 24"><use href="#icon-thermometer"/></svg><span class="state-label">Unknown</span><code>mdi:thermometer</code></span>
+<span class="state" data-state="unavailable" data-tone="muted" title="Unavailable: mdi:thermometer"><svg class="glyph" aria-hidden="true" viewBox="0 0 24 24"><use href="#icon-thermometer"/></svg><span class="state-label">Unavailable</span><code>mdi:thermometer</code></span></div></td>
+</tr>
+<tr data-key="quiet_mode" data-group="System" data-platform="switch" data-models="altherma" data-changing="true" data-source="integration">
+ <th scope="row"><span class="entity-name">System · Quiet mode</span><code class="entity-key">quiet_mode</code><span class="entity-tags"></span></th>
+ <td class="metadata"><span class="platform">switch</span><span class="source">Integration icon</span></td>
+ <td><div class="states"><span class="state" data-state="off" data-tone="neutral" title="Off: mdi:volume-high"><svg class="glyph" aria-hidden="true" viewBox="0 0 24 24"><use href="#icon-volume-high"/></svg><span class="state-label">Off</span><code>mdi:volume-high</code></span>
+<span class="state" data-state="on" data-tone="active" title="On: mdi:volume-low"><svg class="glyph" aria-hidden="true" viewBox="0 0 24 24"><use href="#icon-volume-low"/></svg><span class="state-label">On</span><code>mdi:volume-low</code></span>
+<span class="state" data-state="unknown" data-tone="muted" title="Unknown: mdi:volume-high"><svg class="glyph" aria-hidden="true" viewBox="0 0 24 24"><use href="#icon-volume-high"/></svg><span class="state-label">Unknown</span><code>mdi:volume-high</code></span>
+<span class="state" data-state="unavailable" data-tone="muted" title="Unavailable: mdi:volume-high"><svg class="glyph" aria-hidden="true" viewBox="0 0 24 24"><use href="#icon-volume-high"/></svg><span class="state-label">Unavailable</span><code>mdi:volume-high</code></span></div></td>
+</tr>
+<tr data-key="operation_mode" data-group="System" data-platform="select" data-models="altherma" data-changing="true" data-source="integration">
+ <th scope="row"><span class="entity-name">System · Requested mode</span><code class="entity-key">operation_mode</code><span class="entity-tags"></span></th>
+ <td class="metadata"><span class="platform">select</span><span class="source">Integration icon</span></td>
+ <td><div class="states"><span class="state" data-state="auto" data-tone="neutral" title="Auto: mdi:thermostat"><svg class="glyph" aria-hidden="true" viewBox="0 0 24 24"><use href="#icon-thermostat"/></svg><span class="state-label">Auto</span><code>mdi:thermostat</code></span>
+<span class="state" data-state="heating" data-tone="heat" title="Heating: mdi:fire"><svg class="glyph" aria-hidden="true" viewBox="0 0 24 24"><use href="#icon-fire"/></svg><span class="state-label">Heating</span><code>mdi:fire</code></span>
+<span class="state" data-state="cooling" data-tone="cool" title="Cooling: mdi:snowflake"><svg class="glyph" aria-hidden="true" viewBox="0 0 24 24"><use href="#icon-snowflake"/></svg><span class="state-label">Cooling</span><code>mdi:snowflake</code></span>
+<span class="state" data-state="unknown" data-tone="muted" title="Unknown: mdi:thermostat"><svg class="glyph" aria-hidden="true" viewBox="0 0 24 24"><use href="#icon-thermostat"/></svg><span class="state-label">Unknown</span><code>mdi:thermostat</code></span>
+<span class="state" data-state="unavailable" data-tone="muted" title="Unavailable: mdi:thermostat"><svg class="glyph" aria-hidden="true" viewBox="0 0 24 24"><use href="#icon-thermostat"/></svg><span class="state-label">Unavailable</span><code>mdi:thermostat</code></span></div></td>
+</tr>
+<tr data-key="space_conditioning" data-group="System" data-platform="switch" data-models="altherma" data-changing="true" data-source="integration">
+ <th scope="row"><span class="entity-name">System · Space heating/cooling enabled</span><code class="entity-key">space_conditioning</code><span class="entity-tags"></span></th>
+ <td class="metadata"><span class="platform">switch</span><span class="source">Integration icon</span></td>
+ <td><div class="states"><span class="state" data-state="off" data-tone="neutral" title="Off: mdi:home-thermometer-outline"><svg class="glyph" aria-hidden="true" viewBox="0 0 24 24"><use href="#icon-home-thermometer-outline"/></svg><span class="state-label">Off</span><code>mdi:home-thermometer-outline</code></span>
+<span class="state" data-state="on" data-tone="active" title="On: mdi:home-thermometer"><svg class="glyph" aria-hidden="true" viewBox="0 0 24 24"><use href="#icon-home-thermometer"/></svg><span class="state-label">On</span><code>mdi:home-thermometer</code></span>
+<span class="state" data-state="unknown" data-tone="muted" title="Unknown: mdi:home-thermometer-outline"><svg class="glyph" aria-hidden="true" viewBox="0 0 24 24"><use href="#icon-home-thermometer-outline"/></svg><span class="state-label">Unknown</span><code>mdi:home-thermometer-outline</code></span>
+<span class="state" data-state="unavailable" data-tone="muted" title="Unavailable: mdi:home-thermometer-outline"><svg class="glyph" aria-hidden="true" viewBox="0 0 24 24"><use href="#icon-home-thermometer-outline"/></svg><span class="state-label">Unavailable</span><code>mdi:home-thermometer-outline</code></span></div></td>
+</tr>
+<tr data-key="circulation_pump_running" data-group="Water loop" data-platform="binary_sensor" data-models="altherma" data-changing="true" data-source="integration">
+ <th scope="row"><span class="entity-name">Water loop · Circulation pump running</span><code class="entity-key">circulation_pump_running</code><span class="entity-tags"></span></th>
+ <td class="metadata"><span class="platform">binary sensor</span><span class="source">Integration icon</span><span class="device-class">running class</span></td>
+ <td><div class="states"><span class="state" data-state="off" data-tone="neutral" title="Not running: mdi:pump-off"><svg class="glyph" aria-hidden="true" viewBox="0 0 24 24"><use href="#icon-pump-off"/></svg><span class="state-label">Not running</span><code>mdi:pump-off</code></span>
+<span class="state" data-state="on" data-tone="active" title="Running: mdi:pump"><svg class="glyph" aria-hidden="true" viewBox="0 0 24 24"><use href="#icon-pump"/></svg><span class="state-label">Running</span><code>mdi:pump</code></span>
+<span class="state" data-state="unknown" data-tone="muted" title="Unknown: mdi:pump"><svg class="glyph" aria-hidden="true" viewBox="0 0 24 24"><use href="#icon-pump"/></svg><span class="state-label">Unknown</span><code>mdi:pump</code></span>
+<span class="state" data-state="unavailable" data-tone="muted" title="Unavailable: mdi:pump"><svg class="glyph" aria-hidden="true" viewBox="0 0 24 24"><use href="#icon-pump"/></svg><span class="state-label">Unavailable</span><code>mdi:pump</code></span></div></td>
+</tr>
+<tr data-key="flow_rate" data-group="Water loop" data-platform="sensor" data-models="altherma" data-changing="false" data-source="ha">
+ <th scope="row"><span class="entity-name">Water loop · Flow rate</span><code class="entity-key">flow_rate</code><span class="entity-tags"></span></th>
+ <td class="metadata"><span class="platform">sensor</span><span class="source">HA · volume flow rate</span></td>
+ <td><div class="states"><span class="state" data-state="value" data-tone="neutral" title="Value (L/min): mdi:pipe-valve"><svg class="glyph" aria-hidden="true" viewBox="0 0 24 24"><use href="#icon-pipe-valve"/></svg><span class="state-label">Value (L/min)</span><code>mdi:pipe-valve</code></span>
+<span class="state" data-state="unknown" data-tone="muted" title="Unknown: mdi:pipe-valve"><svg class="glyph" aria-hidden="true" viewBox="0 0 24 24"><use href="#icon-pipe-valve"/></svg><span class="state-label">Unknown</span><code>mdi:pipe-valve</code></span>
+<span class="state" data-state="unavailable" data-tone="muted" title="Unavailable: mdi:pipe-valve"><svg class="glyph" aria-hidden="true" viewBox="0 0 24 24"><use href="#icon-pipe-valve"/></svg><span class="state-label">Unavailable</span><code>mdi:pipe-valve</code></span></div></td>
+</tr>
+<tr data-key="leaving_water_buh_temperature" data-group="Water loop" data-platform="sensor" data-models="altherma" data-changing="false" data-source="ha">
+ <th scope="row"><span class="entity-name">Water loop · Leaving temperature (BUH)</span><code class="entity-key">leaving_water_buh_temperature</code><span class="entity-tags"></span></th>
+ <td class="metadata"><span class="platform">sensor</span><span class="source">HA · temperature</span></td>
+ <td><div class="states"><span class="state" data-state="value" data-tone="neutral" title="Value (°C): mdi:thermometer"><svg class="glyph" aria-hidden="true" viewBox="0 0 24 24"><use href="#icon-thermometer"/></svg><span class="state-label">Value (°C)</span><code>mdi:thermometer</code></span>
+<span class="state" data-state="unknown" data-tone="muted" title="Unknown: mdi:thermometer"><svg class="glyph" aria-hidden="true" viewBox="0 0 24 24"><use href="#icon-thermometer"/></svg><span class="state-label">Unknown</span><code>mdi:thermometer</code></span>
+<span class="state" data-state="unavailable" data-tone="muted" title="Unavailable: mdi:thermometer"><svg class="glyph" aria-hidden="true" viewBox="0 0 24 24"><use href="#icon-thermometer"/></svg><span class="state-label">Unavailable</span><code>mdi:thermometer</code></span></div></td>
+</tr>
+<tr data-key="leaving_water_phe_temperature" data-group="Water loop" data-platform="sensor" data-models="altherma" data-changing="false" data-source="ha">
+ <th scope="row"><span class="entity-name">Water loop · Leaving temperature (PHE)</span><code class="entity-key">leaving_water_phe_temperature</code><span class="entity-tags"></span></th>
+ <td class="metadata"><span class="platform">sensor</span><span class="source">HA · temperature</span></td>
+ <td><div class="states"><span class="state" data-state="value" data-tone="neutral" title="Value (°C): mdi:thermometer"><svg class="glyph" aria-hidden="true" viewBox="0 0 24 24"><use href="#icon-thermometer"/></svg><span class="state-label">Value (°C)</span><code>mdi:thermometer</code></span>
+<span class="state" data-state="unknown" data-tone="muted" title="Unknown: mdi:thermometer"><svg class="glyph" aria-hidden="true" viewBox="0 0 24 24"><use href="#icon-thermometer"/></svg><span class="state-label">Unknown</span><code>mdi:thermometer</code></span>
+<span class="state" data-state="unavailable" data-tone="muted" title="Unavailable: mdi:thermometer"><svg class="glyph" aria-hidden="true" viewBox="0 0 24 24"><use href="#icon-thermometer"/></svg><span class="state-label">Unavailable</span><code>mdi:thermometer</code></span></div></td>
+</tr>
+<tr data-key="return_water_temperature" data-group="Water loop" data-platform="sensor" data-models="altherma" data-changing="false" data-source="ha">
+ <th scope="row"><span class="entity-name">Water loop · Return temperature</span><code class="entity-key">return_water_temperature</code><span class="entity-tags"></span></th>
+ <td class="metadata"><span class="platform">sensor</span><span class="source">HA · temperature</span></td>
+ <td><div class="states"><span class="state" data-state="value" data-tone="neutral" title="Value (°C): mdi:thermometer"><svg class="glyph" aria-hidden="true" viewBox="0 0 24 24"><use href="#icon-thermometer"/></svg><span class="state-label">Value (°C)</span><code>mdi:thermometer</code></span>
+<span class="state" data-state="unknown" data-tone="muted" title="Unknown: mdi:thermometer"><svg class="glyph" aria-hidden="true" viewBox="0 0 24 24"><use href="#icon-thermometer"/></svg><span class="state-label">Unknown</span><code>mdi:thermometer</code></span>
+<span class="state" data-state="unavailable" data-tone="muted" title="Unavailable: mdi:thermometer"><svg class="glyph" aria-hidden="true" viewBox="0 0 24 24"><use href="#icon-thermometer"/></svg><span class="state-label">Unavailable</span><code>mdi:thermometer</code></span></div></td>
+</tr>
+<tr data-key="additional_cooling_setpoint" data-group="Zone · Additional" data-platform="number" data-models="altherma" data-changing="false" data-source="ha">
+ <th scope="row"><span class="entity-name">Zone · Additional · Cooling setpoint</span><code class="entity-key">additional_cooling_setpoint</code><span class="entity-tags"></span></th>
+ <td class="metadata"><span class="platform">number</span><span class="source">HA · temperature</span></td>
+ <td><div class="states"><span class="state" data-state="value" data-tone="neutral" title="Value (°C): mdi:thermometer"><svg class="glyph" aria-hidden="true" viewBox="0 0 24 24"><use href="#icon-thermometer"/></svg><span class="state-label">Value (°C)</span><code>mdi:thermometer</code></span>
+<span class="state" data-state="unknown" data-tone="muted" title="Unknown: mdi:thermometer"><svg class="glyph" aria-hidden="true" viewBox="0 0 24 24"><use href="#icon-thermometer"/></svg><span class="state-label">Unknown</span><code>mdi:thermometer</code></span>
+<span class="state" data-state="unavailable" data-tone="muted" title="Unavailable: mdi:thermometer"><svg class="glyph" aria-hidden="true" viewBox="0 0 24 24"><use href="#icon-thermometer"/></svg><span class="state-label">Unavailable</span><code>mdi:thermometer</code></span></div></td>
+</tr>
+<tr data-key="additional_cooling_lower_limit" data-group="Zone · Additional" data-platform="sensor" data-models="altherma" data-changing="false" data-source="ha">
+ <th scope="row"><span class="entity-name">Zone · Additional · Cooling setpoint lower limit</span><code class="entity-key">additional_cooling_lower_limit</code><span class="entity-tags"><span class="tag">Diagnostic</span></span></th>
+ <td class="metadata"><span class="platform">sensor</span><span class="source">HA · temperature</span></td>
+ <td><div class="states"><span class="state" data-state="value" data-tone="neutral" title="Value (°C): mdi:thermometer"><svg class="glyph" aria-hidden="true" viewBox="0 0 24 24"><use href="#icon-thermometer"/></svg><span class="state-label">Value (°C)</span><code>mdi:thermometer</code></span>
+<span class="state" data-state="unknown" data-tone="muted" title="Unknown: mdi:thermometer"><svg class="glyph" aria-hidden="true" viewBox="0 0 24 24"><use href="#icon-thermometer"/></svg><span class="state-label">Unknown</span><code>mdi:thermometer</code></span>
+<span class="state" data-state="unavailable" data-tone="muted" title="Unavailable: mdi:thermometer"><svg class="glyph" aria-hidden="true" viewBox="0 0 24 24"><use href="#icon-thermometer"/></svg><span class="state-label">Unavailable</span><code>mdi:thermometer</code></span></div></td>
+</tr>
+<tr data-key="additional_cooling_upper_limit" data-group="Zone · Additional" data-platform="sensor" data-models="altherma" data-changing="false" data-source="ha">
+ <th scope="row"><span class="entity-name">Zone · Additional · Cooling setpoint upper limit</span><code class="entity-key">additional_cooling_upper_limit</code><span class="entity-tags"><span class="tag">Diagnostic</span></span></th>
+ <td class="metadata"><span class="platform">sensor</span><span class="source">HA · temperature</span></td>
+ <td><div class="states"><span class="state" data-state="value" data-tone="neutral" title="Value (°C): mdi:thermometer"><svg class="glyph" aria-hidden="true" viewBox="0 0 24 24"><use href="#icon-thermometer"/></svg><span class="state-label">Value (°C)</span><code>mdi:thermometer</code></span>
+<span class="state" data-state="unknown" data-tone="muted" title="Unknown: mdi:thermometer"><svg class="glyph" aria-hidden="true" viewBox="0 0 24 24"><use href="#icon-thermometer"/></svg><span class="state-label">Unknown</span><code>mdi:thermometer</code></span>
+<span class="state" data-state="unavailable" data-tone="muted" title="Unavailable: mdi:thermometer"><svg class="glyph" aria-hidden="true" viewBox="0 0 24 24"><use href="#icon-thermometer"/></svg><span class="state-label">Unavailable</span><code>mdi:thermometer</code></span></div></td>
+</tr>
+<tr data-key="additional_cooling_offset" data-group="Zone · Additional" data-platform="number" data-models="altherma" data-changing="false" data-source="ha">
+ <th scope="row"><span class="entity-name">Zone · Additional · Cooling weather offset</span><code class="entity-key">additional_cooling_offset</code><span class="entity-tags"></span></th>
+ <td class="metadata"><span class="platform">number</span><span class="source">HA · temperature</span></td>
+ <td><div class="states"><span class="state" data-state="value" data-tone="neutral" title="Value (°C): mdi:thermometer"><svg class="glyph" aria-hidden="true" viewBox="0 0 24 24"><use href="#icon-thermometer"/></svg><span class="state-label">Value (°C)</span><code>mdi:thermometer</code></span>
+<span class="state" data-state="unknown" data-tone="muted" title="Unknown: mdi:thermometer"><svg class="glyph" aria-hidden="true" viewBox="0 0 24 24"><use href="#icon-thermometer"/></svg><span class="state-label">Unknown</span><code>mdi:thermometer</code></span>
+<span class="state" data-state="unavailable" data-tone="muted" title="Unavailable: mdi:thermometer"><svg class="glyph" aria-hidden="true" viewBox="0 0 24 24"><use href="#icon-thermometer"/></svg><span class="state-label">Unavailable</span><code>mdi:thermometer</code></span></div></td>
+</tr>
+<tr data-key="additional_heating_setpoint" data-group="Zone · Additional" data-platform="number" data-models="altherma" data-changing="false" data-source="ha">
+ <th scope="row"><span class="entity-name">Zone · Additional · Heating setpoint</span><code class="entity-key">additional_heating_setpoint</code><span class="entity-tags"></span></th>
+ <td class="metadata"><span class="platform">number</span><span class="source">HA · temperature</span></td>
+ <td><div class="states"><span class="state" data-state="value" data-tone="neutral" title="Value (°C): mdi:thermometer"><svg class="glyph" aria-hidden="true" viewBox="0 0 24 24"><use href="#icon-thermometer"/></svg><span class="state-label">Value (°C)</span><code>mdi:thermometer</code></span>
+<span class="state" data-state="unknown" data-tone="muted" title="Unknown: mdi:thermometer"><svg class="glyph" aria-hidden="true" viewBox="0 0 24 24"><use href="#icon-thermometer"/></svg><span class="state-label">Unknown</span><code>mdi:thermometer</code></span>
+<span class="state" data-state="unavailable" data-tone="muted" title="Unavailable: mdi:thermometer"><svg class="glyph" aria-hidden="true" viewBox="0 0 24 24"><use href="#icon-thermometer"/></svg><span class="state-label">Unavailable</span><code>mdi:thermometer</code></span></div></td>
+</tr>
+<tr data-key="additional_heating_lower_limit" data-group="Zone · Additional" data-platform="sensor" data-models="altherma" data-changing="false" data-source="ha">
+ <th scope="row"><span class="entity-name">Zone · Additional · Heating setpoint lower limit</span><code class="entity-key">additional_heating_lower_limit</code><span class="entity-tags"><span class="tag">Diagnostic</span></span></th>
+ <td class="metadata"><span class="platform">sensor</span><span class="source">HA · temperature</span></td>
+ <td><div class="states"><span class="state" data-state="value" data-tone="neutral" title="Value (°C): mdi:thermometer"><svg class="glyph" aria-hidden="true" viewBox="0 0 24 24"><use href="#icon-thermometer"/></svg><span class="state-label">Value (°C)</span><code>mdi:thermometer</code></span>
+<span class="state" data-state="unknown" data-tone="muted" title="Unknown: mdi:thermometer"><svg class="glyph" aria-hidden="true" viewBox="0 0 24 24"><use href="#icon-thermometer"/></svg><span class="state-label">Unknown</span><code>mdi:thermometer</code></span>
+<span class="state" data-state="unavailable" data-tone="muted" title="Unavailable: mdi:thermometer"><svg class="glyph" aria-hidden="true" viewBox="0 0 24 24"><use href="#icon-thermometer"/></svg><span class="state-label">Unavailable</span><code>mdi:thermometer</code></span></div></td>
+</tr>
+<tr data-key="additional_heating_upper_limit" data-group="Zone · Additional" data-platform="sensor" data-models="altherma" data-changing="false" data-source="ha">
+ <th scope="row"><span class="entity-name">Zone · Additional · Heating setpoint upper limit</span><code class="entity-key">additional_heating_upper_limit</code><span class="entity-tags"><span class="tag">Diagnostic</span></span></th>
+ <td class="metadata"><span class="platform">sensor</span><span class="source">HA · temperature</span></td>
+ <td><div class="states"><span class="state" data-state="value" data-tone="neutral" title="Value (°C): mdi:thermometer"><svg class="glyph" aria-hidden="true" viewBox="0 0 24 24"><use href="#icon-thermometer"/></svg><span class="state-label">Value (°C)</span><code>mdi:thermometer</code></span>
+<span class="state" data-state="unknown" data-tone="muted" title="Unknown: mdi:thermometer"><svg class="glyph" aria-hidden="true" viewBox="0 0 24 24"><use href="#icon-thermometer"/></svg><span class="state-label">Unknown</span><code>mdi:thermometer</code></span>
+<span class="state" data-state="unavailable" data-tone="muted" title="Unavailable: mdi:thermometer"><svg class="glyph" aria-hidden="true" viewBox="0 0 24 24"><use href="#icon-thermometer"/></svg><span class="state-label">Unavailable</span><code>mdi:thermometer</code></span></div></td>
+</tr>
+<tr data-key="additional_heating_offset" data-group="Zone · Additional" data-platform="number" data-models="altherma" data-changing="false" data-source="ha">
+ <th scope="row"><span class="entity-name">Zone · Additional · Heating weather offset</span><code class="entity-key">additional_heating_offset</code><span class="entity-tags"></span></th>
+ <td class="metadata"><span class="platform">number</span><span class="source">HA · temperature</span></td>
+ <td><div class="states"><span class="state" data-state="value" data-tone="neutral" title="Value (°C): mdi:thermometer"><svg class="glyph" aria-hidden="true" viewBox="0 0 24 24"><use href="#icon-thermometer"/></svg><span class="state-label">Value (°C)</span><code>mdi:thermometer</code></span>
+<span class="state" data-state="unknown" data-tone="muted" title="Unknown: mdi:thermometer"><svg class="glyph" aria-hidden="true" viewBox="0 0 24 24"><use href="#icon-thermometer"/></svg><span class="state-label">Unknown</span><code>mdi:thermometer</code></span>
+<span class="state" data-state="unavailable" data-tone="muted" title="Unavailable: mdi:thermometer"><svg class="glyph" aria-hidden="true" viewBox="0 0 24 24"><use href="#icon-thermometer"/></svg><span class="state-label">Unavailable</span><code>mdi:thermometer</code></span></div></td>
+</tr>
+<tr data-key="additional_thermostat_input" data-group="Zone · Additional" data-platform="switch" data-models="altherma" data-changing="false" data-source="integration">
+ <th scope="row"><span class="entity-name">Zone · Additional · Thermostat input A</span><code class="entity-key">additional_thermostat_input</code><span class="entity-tags"></span></th>
+ <td class="metadata"><span class="platform">switch</span><span class="source">Integration icon</span></td>
+ <td><div class="states"><span class="state" data-state="off" data-tone="neutral" title="Off: mdi:thermostat-box"><svg class="glyph" aria-hidden="true" viewBox="0 0 24 24"><use href="#icon-thermostat-box"/></svg><span class="state-label">Off</span><code>mdi:thermostat-box</code></span>
+<span class="state" data-state="on" data-tone="active" title="On: mdi:thermostat-box"><svg class="glyph" aria-hidden="true" viewBox="0 0 24 24"><use href="#icon-thermostat-box"/></svg><span class="state-label">On</span><code>mdi:thermostat-box</code></span>
+<span class="state" data-state="unknown" data-tone="muted" title="Unknown: mdi:thermostat-box"><svg class="glyph" aria-hidden="true" viewBox="0 0 24 24"><use href="#icon-thermostat-box"/></svg><span class="state-label">Unknown</span><code>mdi:thermostat-box</code></span>
+<span class="state" data-state="unavailable" data-tone="muted" title="Unavailable: mdi:thermostat-box"><svg class="glyph" aria-hidden="true" viewBox="0 0 24 24"><use href="#icon-thermostat-box"/></svg><span class="state-label">Unavailable</span><code>mdi:thermostat-box</code></span></div></td>
+</tr>
+<tr data-key="additional_weather_mode" data-group="Zone · Additional" data-platform="select" data-models="altherma" data-changing="true" data-source="integration">
+ <th scope="row"><span class="entity-name">Zone · Additional · Weather mode</span><code class="entity-key">additional_weather_mode</code><span class="entity-tags"></span></th>
+ <td class="metadata"><span class="platform">select</span><span class="source">Integration icon</span></td>
+ <td><div class="states"><span class="state" data-state="fixed" data-tone="neutral" title="Fixed: mdi:thermometer"><svg class="glyph" aria-hidden="true" viewBox="0 0 24 24"><use href="#icon-thermometer"/></svg><span class="state-label">Fixed</span><code>mdi:thermometer</code></span>
+<span class="state" data-state="weather_dependent" data-tone="neutral" title="Weather dependent: mdi:weather-partly-cloudy"><svg class="glyph" aria-hidden="true" viewBox="0 0 24 24"><use href="#icon-weather-partly-cloudy"/></svg><span class="state-label">Weather dependent</span><code>mdi:weather-partly-cloudy</code></span>
+<span class="state" data-state="fixed_scheduled" data-tone="neutral" title="Fixed scheduled: mdi:calendar-clock"><svg class="glyph" aria-hidden="true" viewBox="0 0 24 24"><use href="#icon-calendar-clock"/></svg><span class="state-label">Fixed scheduled</span><code>mdi:calendar-clock</code></span>
+<span class="state" data-state="weather_dependent_scheduled" data-tone="neutral" title="Weather dependent scheduled: mdi:calendar-clock"><svg class="glyph" aria-hidden="true" viewBox="0 0 24 24"><use href="#icon-calendar-clock"/></svg><span class="state-label">Weather dependent scheduled</span><code>mdi:calendar-clock</code></span>
+<span class="state" data-state="unknown" data-tone="muted" title="Unknown: mdi:weather-partly-cloudy"><svg class="glyph" aria-hidden="true" viewBox="0 0 24 24"><use href="#icon-weather-partly-cloudy"/></svg><span class="state-label">Unknown</span><code>mdi:weather-partly-cloudy</code></span>
+<span class="state" data-state="unavailable" data-tone="muted" title="Unavailable: mdi:weather-partly-cloudy"><svg class="glyph" aria-hidden="true" viewBox="0 0 24 24"><use href="#icon-weather-partly-cloudy"/></svg><span class="state-label">Unavailable</span><code>mdi:weather-partly-cloudy</code></span></div></td>
+</tr>
+<tr data-key="main_cooling_setpoint" data-group="Zone · Main" data-platform="number" data-models="altherma" data-changing="false" data-source="ha">
+ <th scope="row"><span class="entity-name">Zone · Main · Cooling setpoint</span><code class="entity-key">main_cooling_setpoint</code><span class="entity-tags"></span></th>
+ <td class="metadata"><span class="platform">number</span><span class="source">HA · temperature</span></td>
+ <td><div class="states"><span class="state" data-state="value" data-tone="neutral" title="Value (°C): mdi:thermometer"><svg class="glyph" aria-hidden="true" viewBox="0 0 24 24"><use href="#icon-thermometer"/></svg><span class="state-label">Value (°C)</span><code>mdi:thermometer</code></span>
+<span class="state" data-state="unknown" data-tone="muted" title="Unknown: mdi:thermometer"><svg class="glyph" aria-hidden="true" viewBox="0 0 24 24"><use href="#icon-thermometer"/></svg><span class="state-label">Unknown</span><code>mdi:thermometer</code></span>
+<span class="state" data-state="unavailable" data-tone="muted" title="Unavailable: mdi:thermometer"><svg class="glyph" aria-hidden="true" viewBox="0 0 24 24"><use href="#icon-thermometer"/></svg><span class="state-label">Unavailable</span><code>mdi:thermometer</code></span></div></td>
+</tr>
+<tr data-key="main_cooling_lower_limit" data-group="Zone · Main" data-platform="sensor" data-models="altherma" data-changing="false" data-source="ha">
+ <th scope="row"><span class="entity-name">Zone · Main · Cooling setpoint lower limit</span><code class="entity-key">main_cooling_lower_limit</code><span class="entity-tags"><span class="tag">Diagnostic</span></span></th>
+ <td class="metadata"><span class="platform">sensor</span><span class="source">HA · temperature</span></td>
+ <td><div class="states"><span class="state" data-state="value" data-tone="neutral" title="Value (°C): mdi:thermometer"><svg class="glyph" aria-hidden="true" viewBox="0 0 24 24"><use href="#icon-thermometer"/></svg><span class="state-label">Value (°C)</span><code>mdi:thermometer</code></span>
+<span class="state" data-state="unknown" data-tone="muted" title="Unknown: mdi:thermometer"><svg class="glyph" aria-hidden="true" viewBox="0 0 24 24"><use href="#icon-thermometer"/></svg><span class="state-label">Unknown</span><code>mdi:thermometer</code></span>
+<span class="state" data-state="unavailable" data-tone="muted" title="Unavailable: mdi:thermometer"><svg class="glyph" aria-hidden="true" viewBox="0 0 24 24"><use href="#icon-thermometer"/></svg><span class="state-label">Unavailable</span><code>mdi:thermometer</code></span></div></td>
+</tr>
+<tr data-key="main_cooling_upper_limit" data-group="Zone · Main" data-platform="sensor" data-models="altherma" data-changing="false" data-source="ha">
+ <th scope="row"><span class="entity-name">Zone · Main · Cooling setpoint upper limit</span><code class="entity-key">main_cooling_upper_limit</code><span class="entity-tags"><span class="tag">Diagnostic</span></span></th>
+ <td class="metadata"><span class="platform">sensor</span><span class="source">HA · temperature</span></td>
+ <td><div class="states"><span class="state" data-state="value" data-tone="neutral" title="Value (°C): mdi:thermometer"><svg class="glyph" aria-hidden="true" viewBox="0 0 24 24"><use href="#icon-thermometer"/></svg><span class="state-label">Value (°C)</span><code>mdi:thermometer</code></span>
+<span class="state" data-state="unknown" data-tone="muted" title="Unknown: mdi:thermometer"><svg class="glyph" aria-hidden="true" viewBox="0 0 24 24"><use href="#icon-thermometer"/></svg><span class="state-label">Unknown</span><code>mdi:thermometer</code></span>
+<span class="state" data-state="unavailable" data-tone="muted" title="Unavailable: mdi:thermometer"><svg class="glyph" aria-hidden="true" viewBox="0 0 24 24"><use href="#icon-thermometer"/></svg><span class="state-label">Unavailable</span><code>mdi:thermometer</code></span></div></td>
+</tr>
+<tr data-key="main_cooling_offset" data-group="Zone · Main" data-platform="number" data-models="altherma" data-changing="false" data-source="ha">
+ <th scope="row"><span class="entity-name">Zone · Main · Cooling weather offset</span><code class="entity-key">main_cooling_offset</code><span class="entity-tags"></span></th>
+ <td class="metadata"><span class="platform">number</span><span class="source">HA · temperature</span></td>
+ <td><div class="states"><span class="state" data-state="value" data-tone="neutral" title="Value (°C): mdi:thermometer"><svg class="glyph" aria-hidden="true" viewBox="0 0 24 24"><use href="#icon-thermometer"/></svg><span class="state-label">Value (°C)</span><code>mdi:thermometer</code></span>
+<span class="state" data-state="unknown" data-tone="muted" title="Unknown: mdi:thermometer"><svg class="glyph" aria-hidden="true" viewBox="0 0 24 24"><use href="#icon-thermometer"/></svg><span class="state-label">Unknown</span><code>mdi:thermometer</code></span>
+<span class="state" data-state="unavailable" data-tone="muted" title="Unavailable: mdi:thermometer"><svg class="glyph" aria-hidden="true" viewBox="0 0 24 24"><use href="#icon-thermometer"/></svg><span class="state-label">Unavailable</span><code>mdi:thermometer</code></span></div></td>
+</tr>
+<tr data-key="main_heating_setpoint" data-group="Zone · Main" data-platform="number" data-models="altherma" data-changing="false" data-source="ha">
+ <th scope="row"><span class="entity-name">Zone · Main · Heating setpoint</span><code class="entity-key">main_heating_setpoint</code><span class="entity-tags"></span></th>
+ <td class="metadata"><span class="platform">number</span><span class="source">HA · temperature</span></td>
+ <td><div class="states"><span class="state" data-state="value" data-tone="neutral" title="Value (°C): mdi:thermometer"><svg class="glyph" aria-hidden="true" viewBox="0 0 24 24"><use href="#icon-thermometer"/></svg><span class="state-label">Value (°C)</span><code>mdi:thermometer</code></span>
+<span class="state" data-state="unknown" data-tone="muted" title="Unknown: mdi:thermometer"><svg class="glyph" aria-hidden="true" viewBox="0 0 24 24"><use href="#icon-thermometer"/></svg><span class="state-label">Unknown</span><code>mdi:thermometer</code></span>
+<span class="state" data-state="unavailable" data-tone="muted" title="Unavailable: mdi:thermometer"><svg class="glyph" aria-hidden="true" viewBox="0 0 24 24"><use href="#icon-thermometer"/></svg><span class="state-label">Unavailable</span><code>mdi:thermometer</code></span></div></td>
+</tr>
+<tr data-key="main_heating_lower_limit" data-group="Zone · Main" data-platform="sensor" data-models="altherma" data-changing="false" data-source="ha">
+ <th scope="row"><span class="entity-name">Zone · Main · Heating setpoint lower limit</span><code class="entity-key">main_heating_lower_limit</code><span class="entity-tags"><span class="tag">Diagnostic</span></span></th>
+ <td class="metadata"><span class="platform">sensor</span><span class="source">HA · temperature</span></td>
+ <td><div class="states"><span class="state" data-state="value" data-tone="neutral" title="Value (°C): mdi:thermometer"><svg class="glyph" aria-hidden="true" viewBox="0 0 24 24"><use href="#icon-thermometer"/></svg><span class="state-label">Value (°C)</span><code>mdi:thermometer</code></span>
+<span class="state" data-state="unknown" data-tone="muted" title="Unknown: mdi:thermometer"><svg class="glyph" aria-hidden="true" viewBox="0 0 24 24"><use href="#icon-thermometer"/></svg><span class="state-label">Unknown</span><code>mdi:thermometer</code></span>
+<span class="state" data-state="unavailable" data-tone="muted" title="Unavailable: mdi:thermometer"><svg class="glyph" aria-hidden="true" viewBox="0 0 24 24"><use href="#icon-thermometer"/></svg><span class="state-label">Unavailable</span><code>mdi:thermometer</code></span></div></td>
+</tr>
+<tr data-key="main_heating_upper_limit" data-group="Zone · Main" data-platform="sensor" data-models="altherma" data-changing="false" data-source="ha">
+ <th scope="row"><span class="entity-name">Zone · Main · Heating setpoint upper limit</span><code class="entity-key">main_heating_upper_limit</code><span class="entity-tags"><span class="tag">Diagnostic</span></span></th>
+ <td class="metadata"><span class="platform">sensor</span><span class="source">HA · temperature</span></td>
+ <td><div class="states"><span class="state" data-state="value" data-tone="neutral" title="Value (°C): mdi:thermometer"><svg class="glyph" aria-hidden="true" viewBox="0 0 24 24"><use href="#icon-thermometer"/></svg><span class="state-label">Value (°C)</span><code>mdi:thermometer</code></span>
+<span class="state" data-state="unknown" data-tone="muted" title="Unknown: mdi:thermometer"><svg class="glyph" aria-hidden="true" viewBox="0 0 24 24"><use href="#icon-thermometer"/></svg><span class="state-label">Unknown</span><code>mdi:thermometer</code></span>
+<span class="state" data-state="unavailable" data-tone="muted" title="Unavailable: mdi:thermometer"><svg class="glyph" aria-hidden="true" viewBox="0 0 24 24"><use href="#icon-thermometer"/></svg><span class="state-label">Unavailable</span><code>mdi:thermometer</code></span></div></td>
+</tr>
+<tr data-key="main_heating_offset" data-group="Zone · Main" data-platform="number" data-models="altherma" data-changing="false" data-source="ha">
+ <th scope="row"><span class="entity-name">Zone · Main · Heating weather offset</span><code class="entity-key">main_heating_offset</code><span class="entity-tags"></span></th>
+ <td class="metadata"><span class="platform">number</span><span class="source">HA · temperature</span></td>
+ <td><div class="states"><span class="state" data-state="value" data-tone="neutral" title="Value (°C): mdi:thermometer"><svg class="glyph" aria-hidden="true" viewBox="0 0 24 24"><use href="#icon-thermometer"/></svg><span class="state-label">Value (°C)</span><code>mdi:thermometer</code></span>
+<span class="state" data-state="unknown" data-tone="muted" title="Unknown: mdi:thermometer"><svg class="glyph" aria-hidden="true" viewBox="0 0 24 24"><use href="#icon-thermometer"/></svg><span class="state-label">Unknown</span><code>mdi:thermometer</code></span>
+<span class="state" data-state="unavailable" data-tone="muted" title="Unavailable: mdi:thermometer"><svg class="glyph" aria-hidden="true" viewBox="0 0 24 24"><use href="#icon-thermometer"/></svg><span class="state-label">Unavailable</span><code>mdi:thermometer</code></span></div></td>
+</tr>
+<tr data-key="main_thermostat_input" data-group="Zone · Main" data-platform="switch" data-models="altherma" data-changing="false" data-source="integration">
+ <th scope="row"><span class="entity-name">Zone · Main · Thermostat input A</span><code class="entity-key">main_thermostat_input</code><span class="entity-tags"></span></th>
+ <td class="metadata"><span class="platform">switch</span><span class="source">Integration icon</span></td>
+ <td><div class="states"><span class="state" data-state="off" data-tone="neutral" title="Off: mdi:thermostat-box"><svg class="glyph" aria-hidden="true" viewBox="0 0 24 24"><use href="#icon-thermostat-box"/></svg><span class="state-label">Off</span><code>mdi:thermostat-box</code></span>
+<span class="state" data-state="on" data-tone="active" title="On: mdi:thermostat-box"><svg class="glyph" aria-hidden="true" viewBox="0 0 24 24"><use href="#icon-thermostat-box"/></svg><span class="state-label">On</span><code>mdi:thermostat-box</code></span>
+<span class="state" data-state="unknown" data-tone="muted" title="Unknown: mdi:thermostat-box"><svg class="glyph" aria-hidden="true" viewBox="0 0 24 24"><use href="#icon-thermostat-box"/></svg><span class="state-label">Unknown</span><code>mdi:thermostat-box</code></span>
+<span class="state" data-state="unavailable" data-tone="muted" title="Unavailable: mdi:thermostat-box"><svg class="glyph" aria-hidden="true" viewBox="0 0 24 24"><use href="#icon-thermostat-box"/></svg><span class="state-label">Unavailable</span><code>mdi:thermostat-box</code></span></div></td>
+</tr>
+<tr data-key="main_weather_mode" data-group="Zone · Main" data-platform="select" data-models="altherma" data-changing="true" data-source="integration">
+ <th scope="row"><span class="entity-name">Zone · Main · Weather mode</span><code class="entity-key">main_weather_mode</code><span class="entity-tags"></span></th>
+ <td class="metadata"><span class="platform">select</span><span class="source">Integration icon</span></td>
+ <td><div class="states"><span class="state" data-state="fixed" data-tone="neutral" title="Fixed: mdi:thermometer"><svg class="glyph" aria-hidden="true" viewBox="0 0 24 24"><use href="#icon-thermometer"/></svg><span class="state-label">Fixed</span><code>mdi:thermometer</code></span>
+<span class="state" data-state="weather_dependent" data-tone="neutral" title="Weather dependent: mdi:weather-partly-cloudy"><svg class="glyph" aria-hidden="true" viewBox="0 0 24 24"><use href="#icon-weather-partly-cloudy"/></svg><span class="state-label">Weather dependent</span><code>mdi:weather-partly-cloudy</code></span>
+<span class="state" data-state="fixed_scheduled" data-tone="neutral" title="Fixed scheduled: mdi:calendar-clock"><svg class="glyph" aria-hidden="true" viewBox="0 0 24 24"><use href="#icon-calendar-clock"/></svg><span class="state-label">Fixed scheduled</span><code>mdi:calendar-clock</code></span>
+<span class="state" data-state="weather_dependent_scheduled" data-tone="neutral" title="Weather dependent scheduled: mdi:calendar-clock"><svg class="glyph" aria-hidden="true" viewBox="0 0 24 24"><use href="#icon-calendar-clock"/></svg><span class="state-label">Weather dependent scheduled</span><code>mdi:calendar-clock</code></span>
+<span class="state" data-state="unknown" data-tone="muted" title="Unknown: mdi:weather-partly-cloudy"><svg class="glyph" aria-hidden="true" viewBox="0 0 24 24"><use href="#icon-weather-partly-cloudy"/></svg><span class="state-label">Unknown</span><code>mdi:weather-partly-cloudy</code></span>
+<span class="state" data-state="unavailable" data-tone="muted" title="Unavailable: mdi:weather-partly-cloudy"><svg class="glyph" aria-hidden="true" viewBox="0 0 24 24"><use href="#icon-weather-partly-cloudy"/></svg><span class="state-label">Unavailable</span><code>mdi:weather-partly-cloudy</code></span></div></td>
+</tr>
+</tbody></table><div class="empty" id="empty" hidden>No entities match these filters.</div>
+</div>
+<footer><p>Snapshot of <code>icons.json</code>, <code>strings.json</code> and register metadata; HA defaults from the pinned Home Assistant 2026.10.2 installation.<br><a href="https://github.com/home-assistant/frontend/blob/dev/src/data/icons.ts">HA icon resolution</a> · Unknown/unavailable fall back to the default; numeric values use one icon throughout their range.</p><p>Icons © <a href="https://pictogrammers.com/library/mdi/">Pictogrammers</a> · <a href="https://github.com/Templarian/MaterialDesign/blob/master/LICENSE">Pictogrammers Free License</a> / <a href="https://www.apache.org/licenses/LICENSE-2.0">Apache 2.0</a><br>Self-contained HTML · No external fonts, scripts or requests</p></footer>
+</main>
+<script>
+"use strict";
+const entityRows = Array.from(document.querySelectorAll("#entities tr"));
+const controls = Object.fromEntries(["search", "group", "platform", "model", "changing"].map(id => [id, document.getElementById(id)]));
+const searchText = new Map(entityRows.map(row => [row, row.textContent.toLowerCase()]));
+function filterEntities() {
+  const query = controls.search.value.trim().toLowerCase();
+  let visible = 0;
+  for (const row of entityRows) {
+    const matches = (!query || searchText.get(row).includes(query))
+      && (!controls.group.value || row.dataset.group === controls.group.value)
+      && (!controls.platform.value || row.dataset.platform === controls.platform.value)
+      && (!controls.model.value || row.dataset.models.split(" ").includes(controls.model.value))
+      && (!controls.changing.checked || row.dataset.changing === "true");
+    row.hidden = !matches;
+    if (matches) visible++;
+  }
+  document.getElementById("count").textContent = "Showing " + visible + " of " + entityRows.length + " entities";
+  document.getElementById("empty").hidden = visible > 0;
+}
+for (const control of Object.values(controls)) control.addEventListener("input", filterEntities);
+document.getElementById("reset").addEventListener("click", () => {
+  for (const [id, control] of Object.entries(controls)) {
+    if (id === "changing") control.checked = false;
+    else control.value = "";
+  }
+  filterEntities();
+});
+document.getElementById("colours").addEventListener("change", event => document.body.classList.toggle("preview-colors", event.target.checked));
+document.getElementById("theme").addEventListener("click", event => {
+  const dark = document.body.classList.toggle("dark");
+  event.currentTarget.setAttribute("aria-pressed", String(dark));
+  event.currentTarget.textContent = dark ? "Light theme" : "Dark theme";
+});
+filterEntities();
+</script>
+<!-- Embedded icon paths from Templarian/MaterialDesign (Pictogrammers).
+Pictogrammers Free License
+--------------------------
+
+This icon collection is released as free, open source, and GPL friendly by
+the [Pictogrammers](http://pictogrammers.com/) icon group. You may use it
+for commercial projects, open source projects, or anything really.
+
+# Icons: Apache 2.0 (https://www.apache.org/licenses/LICENSE-2.0)
+Some of the icons are redistributed under the Apache 2.0 license. All other
+icons are either redistributed under their respective licenses or are
+distributed under the Apache 2.0 license.
+
+# Fonts: Apache 2.0 (https://www.apache.org/licenses/LICENSE-2.0)
+All web and desktop fonts are distributed under the Apache 2.0 license. Web
+and desktop fonts contain some icons that are redistributed under the Apache
+2.0 license. All other icons are either redistributed under their respective
+licenses or are distributed under the Apache 2.0 license.
+
+# Code: MIT (https://opensource.org/licenses/MIT)
+The MIT license applies to all non-font and non-icon files.
+
+-->
+</body>
+</html>

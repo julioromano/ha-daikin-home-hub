@@ -76,6 +76,10 @@ Altherma provides heating/cooling water setpoints, requested operation mode, spa
 
 Numeric controls are presented as sliders using each control's current minimum, maximum and step.
 
+Activity indicators use Home Assistant's **running** device class. Equipment, controls and fault states have function-specific icons, with state-dependent variants where useful (for example, pump/pump-off and heating/cooling). Active icon colours depend on the Home Assistant view and theme.
+
+Open the [entity icon reference](docs/entity-icons.html) in a browser to compare every entity's icon states. The page works offline and includes search, filters and a light/dark preview.
+
 Default entity names use functional prefixes separated by ` · `:
 
 | Prefix | Functions |
