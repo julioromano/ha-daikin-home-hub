@@ -74,6 +74,8 @@ Use **Reconfigure** to change the endpoint or correct a profile. Common entity/d
 
 Altherma provides heating/cooling water setpoints, requested operation mode, space operation, quiet mode, weather-dependent modes and offsets, Smart Grid controls, measurements, equipment state and fault reporting. Holding registers are exposed through their controls' actual readback states, without duplicate sensors.
 
+Numeric controls are presented as sliders using each control's current minimum, maximum and step.
+
 ### Installation options
 
 After the connection check, Altherma setup asks about the installation. You can change these choices later through **Configure**, alongside the refresh interval. Air-to-air skips this step and offers only the refresh interval in Configure.

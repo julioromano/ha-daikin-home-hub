@@ -32,7 +32,7 @@ async def async_setup_entry(
                 else NumberDeviceClass.TEMPERATURE,
                 native_unit_of_measurement=register.unit,
                 native_step=register.step,
-                mode=NumberMode.BOX,
+                mode=NumberMode.SLIDER,
             ),
         )
         for key, register in entry.runtime_data.device.registers.items()
