@@ -288,7 +288,7 @@ _ALTHERMA = [
     _sensor(
         "three_way_valve",
         37,
-        "Three-way valve",
+        "3-way valve",
         optional=True,
         options={0: "space_heating", 1: "dhw"},
     ),

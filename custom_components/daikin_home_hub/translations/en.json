@@ -116,7 +116,7 @@
         "name": "Faults · Subcode"
       },
       "three_way_valve": {
-        "name": "DHW · Three-way valve",
+        "name": "DHW · 3-way valve",
         "state": {
           "space_heating": "Space heating",
           "dhw": "Dhw"

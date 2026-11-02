@@ -80,7 +80,7 @@ Default entity names use functional prefixes separated by ` · `:
 
 | Prefix | Functions |
 | --- | --- |
-| **DHW** | Tank temperatures, reheat, powerful mode, booster heater, disinfection and three-way valve |
+| **DHW** | Tank temperatures, reheat, powerful mode, booster heater, disinfection and 3-way valve |
 | **Energy** | Smart Grid, power limits and power consumption |
 | **Faults** | Abnormality status, code and subcode |
 | **Room** | Room temperature, setpoints and limits |
@@ -97,7 +97,7 @@ After the connection check, Altherma setup asks about the installation. You can 
 
 | Setting | Entity behavior |
 | --- | --- |
-| **DHW tank present** | Enable the DHW controls, tank temperatures, booster/disinfection states and three-way valve state as a group. |
+| **DHW tank present** | Enable the DHW controls, tank temperatures, booster/disinfection states and 3-way valve state as a group. |
 | **Additional zone present** | Enable additional-zone water setpoints, weather settings, limits and the additional thermostat input where supported. |
 | **Main zone control method** | Choose leaving-water-temperature, room-thermostat or external-room-thermostat control. Room control enables the room temperature/setpoints/limits; external control enables the main thermostat input where supported. |
 | **Cooling available** | Enable cooling-related entities. Clear this for heating-only installations; the requested operation-mode selector is also disabled because its register is unavailable on heating-only units. The actual-operation-mode sensor remains available. |

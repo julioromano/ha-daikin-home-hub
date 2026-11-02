@@ -57,7 +57,7 @@ All eight Altherma profiles use this map. HR 59/61 are omitted for ERGA floor/wa
 | 33 | 32 | Disinfection operation<br>`disinfection_running` | binary_sensor | Int16, 0/1 | DHW | - | 43 |
 | 35 | 34 | Defrost<br>`defrost` | binary_sensor | Int16, 0/1 | Core | - | 43 |
 | 36 | 35 | Hot start<br>`hot_start` | binary_sensor | Int16, 0/1 | Core | - | 43 |
-| 37 | 36 | Three-way valve<br>`three_way_valve` | sensor | Int16 | DHW | 0: space_heating; 1: dhw | 43 |
+| 37 | 36 | 3-way valve<br>`three_way_valve` | sensor | Int16 | DHW | 0: space_heating; 1: dhw | 43 |
 | 38 | 37 | Actual operation mode<br>`actual_operation_mode` | sensor | Int16 | Core | 1: heating; 2: cooling | 43 |
 | 40 | 39 | Leaving water PHE temperature<br>`leaving_water_phe_temperature` | sensor | Temp16 / 100; °C | Core | - | 43 |
 | 41 | 40 | Leaving water BUH temperature<br>`leaving_water_buh_temperature` | sensor | Temp16 / 100; °C | Core | - | 43 |
