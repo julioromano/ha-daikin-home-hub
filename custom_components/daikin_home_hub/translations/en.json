@@ -102,7 +102,7 @@
   "entity": {
     "sensor": {
       "unit_abnormality": {
-        "name": "Unit abnormality",
+        "name": "Faults · Status",
         "state": {
           "no_error": "No error",
           "fault": "Fault",
@@ -110,168 +110,168 @@
         }
       },
       "unit_abnormality_code": {
-        "name": "Unit abnormality code"
+        "name": "Faults · Code"
       },
       "unit_abnormality_subcode": {
-        "name": "Unit abnormality subcode"
+        "name": "Faults · Subcode"
       },
       "three_way_valve": {
-        "name": "Three-way valve",
+        "name": "DHW · Three-way valve",
         "state": {
           "space_heating": "Space heating",
           "dhw": "Dhw"
         }
       },
       "actual_operation_mode": {
-        "name": "Actual operation mode",
+        "name": "System · Actual mode",
         "state": {
           "heating": "Heating",
           "cooling": "Cooling"
         }
       },
       "leaving_water_phe_temperature": {
-        "name": "Leaving water PHE temperature"
+        "name": "Water loop · Leaving temperature (PHE)"
       },
       "leaving_water_buh_temperature": {
-        "name": "Leaving water BUH temperature"
+        "name": "Water loop · Leaving temperature (BUH)"
       },
       "return_water_temperature": {
-        "name": "Return water temperature"
+        "name": "Water loop · Return temperature"
       },
       "dhw_temperature": {
-        "name": "DHW temperature"
+        "name": "DHW · Tank temperature"
       },
       "outside_temperature": {
-        "name": "Outside temperature"
+        "name": "System · Outside temperature"
       },
       "liquid_refrigerant_temperature": {
-        "name": "Liquid refrigerant temperature"
+        "name": "System · Liquid refrigerant temperature"
       },
       "room_temperature": {
-        "name": "Remote controller room temperature"
+        "name": "Room · Temperature"
       },
       "flow_rate": {
-        "name": "Flow rate"
+        "name": "Water loop · Flow rate"
       },
       "power_consumption": {
-        "name": "Heat pump power consumption"
+        "name": "Energy · Power consumption"
       },
       "main_heating_lower_limit": {
-        "name": "Main heating setpoint lower limit"
+        "name": "Zone · Main · Heating setpoint lower limit"
       },
       "main_heating_upper_limit": {
-        "name": "Main heating setpoint upper limit"
+        "name": "Zone · Main · Heating setpoint upper limit"
       },
       "main_cooling_lower_limit": {
-        "name": "Main cooling setpoint lower limit"
+        "name": "Zone · Main · Cooling setpoint lower limit"
       },
       "main_cooling_upper_limit": {
-        "name": "Main cooling setpoint upper limit"
+        "name": "Zone · Main · Cooling setpoint upper limit"
       },
       "additional_heating_lower_limit": {
-        "name": "Additional heating setpoint lower limit"
+        "name": "Zone · Additional · Heating setpoint lower limit"
       },
       "additional_heating_upper_limit": {
-        "name": "Additional heating setpoint upper limit"
+        "name": "Zone · Additional · Heating setpoint upper limit"
       },
       "additional_cooling_lower_limit": {
-        "name": "Additional cooling setpoint lower limit"
+        "name": "Zone · Additional · Cooling setpoint lower limit"
       },
       "additional_cooling_upper_limit": {
-        "name": "Additional cooling setpoint upper limit"
+        "name": "Zone · Additional · Cooling setpoint upper limit"
       },
       "dhw_upper_temperature": {
-        "name": "DHW upper temperature"
+        "name": "DHW · Upper temperature"
       },
       "dhw_lower_temperature": {
-        "name": "DHW lower temperature"
+        "name": "DHW · Lower temperature"
       },
       "room_heating_lower_limit": {
-        "name": "Room heating setpoint lower limit"
+        "name": "Room · Heating setpoint lower limit"
       },
       "room_heating_upper_limit": {
-        "name": "Room heating setpoint upper limit"
+        "name": "Room · Heating setpoint upper limit"
       },
       "room_cooling_lower_limit": {
-        "name": "Room cooling setpoint lower limit"
+        "name": "Room · Cooling setpoint lower limit"
       },
       "room_cooling_upper_limit": {
-        "name": "Room cooling setpoint upper limit"
+        "name": "Room · Cooling setpoint upper limit"
       }
     },
     "binary_sensor": {
       "circulation_pump_running": {
-        "name": "Circulation pump running"
+        "name": "Water loop · Circulation pump running"
       },
       "compressor_running": {
-        "name": "Compressor running"
+        "name": "System · Compressor running"
       },
       "booster_heater_running": {
-        "name": "Booster heater running"
+        "name": "DHW · Booster heater running"
       },
       "disinfection_running": {
-        "name": "Disinfection operation"
+        "name": "DHW · Disinfection operation"
       },
       "defrost": {
-        "name": "Defrost"
+        "name": "System · Defrost active"
       },
       "hot_start": {
-        "name": "Hot start"
+        "name": "System · Hot start active"
       },
       "dhw_normal_operation": {
-        "name": "DHW normal operation"
+        "name": "DHW · Normal operation"
       },
       "space_normal_operation": {
-        "name": "Space heating/cooling normal operation"
+        "name": "System · Normal space heating/cooling"
       }
     },
     "number": {
       "main_heating_setpoint": {
-        "name": "Main heating water setpoint"
+        "name": "Zone · Main · Heating setpoint"
       },
       "main_cooling_setpoint": {
-        "name": "Main cooling water setpoint"
+        "name": "Zone · Main · Cooling setpoint"
       },
       "room_heating_setpoint": {
-        "name": "Room heating setpoint"
+        "name": "Room · Heating setpoint"
       },
       "room_cooling_setpoint": {
-        "name": "Room cooling setpoint"
+        "name": "Room · Cooling setpoint"
       },
       "dhw_reheat_setpoint": {
-        "name": "DHW reheat setpoint"
+        "name": "DHW · Reheat setpoint"
       },
       "main_heating_offset": {
-        "name": "Main weather dependent heating offset"
+        "name": "Zone · Main · Heating weather offset"
       },
       "main_cooling_offset": {
-        "name": "Main weather dependent cooling offset"
+        "name": "Zone · Main · Cooling weather offset"
       },
       "buffering_power_limit": {
-        "name": "Buffering power limit"
+        "name": "Energy · Buffering power limit"
       },
       "general_power_limit": {
-        "name": "General power limit"
+        "name": "Energy · General power limit"
       },
       "additional_heating_setpoint": {
-        "name": "Additional heating water setpoint"
+        "name": "Zone · Additional · Heating setpoint"
       },
       "additional_cooling_setpoint": {
-        "name": "Additional cooling water setpoint"
+        "name": "Zone · Additional · Cooling setpoint"
       },
       "additional_heating_offset": {
-        "name": "Additional weather dependent heating offset"
+        "name": "Zone · Additional · Heating weather offset"
       },
       "additional_cooling_offset": {
-        "name": "Additional weather dependent cooling offset"
+        "name": "Zone · Additional · Cooling weather offset"
       },
       "demand_power_limit": {
-        "name": "Demand Control power limit"
+        "name": "Energy · Demand Control power limit"
       }
     },
     "select": {
       "operation_mode": {
-        "name": "Requested operation mode",
+        "name": "System · Requested mode",
         "state": {
           "auto": "Auto",
           "heating": "Heating",
@@ -279,7 +279,7 @@
         }
       },
       "main_weather_mode": {
-        "name": "Main weather dependent mode",
+        "name": "Zone · Main · Weather mode",
         "state": {
           "fixed": "Fixed",
           "weather_dependent": "Weather dependent",
@@ -288,7 +288,7 @@
         }
       },
       "smart_grid_mode": {
-        "name": "Smart Grid mode",
+        "name": "Energy · Smart Grid mode",
         "state": {
           "free_running": "Free running",
           "forced_off": "Forced off",
@@ -297,7 +297,7 @@
         }
       },
       "additional_weather_mode": {
-        "name": "Additional weather dependent mode",
+        "name": "Zone · Additional · Weather mode",
         "state": {
           "fixed": "Fixed",
           "weather_dependent": "Weather dependent",
@@ -308,22 +308,22 @@
     },
     "switch": {
       "space_conditioning": {
-        "name": "Space heating/cooling"
+        "name": "System · Space heating/cooling enabled"
       },
       "quiet_mode": {
-        "name": "Quiet mode"
+        "name": "System · Quiet mode"
       },
       "dhw_reheat": {
-        "name": "DHW reheat"
+        "name": "DHW · Reheat"
       },
       "dhw_booster": {
-        "name": "DHW powerful mode"
+        "name": "DHW · Powerful mode"
       },
       "main_thermostat_input": {
-        "name": "Main thermostat input A"
+        "name": "Zone · Main · Thermostat input A"
       },
       "additional_thermostat_input": {
-        "name": "Additional thermostat input A"
+        "name": "Zone · Additional · Thermostat input A"
       }
     }
   },

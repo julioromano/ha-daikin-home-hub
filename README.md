@@ -76,6 +76,21 @@ Altherma provides heating/cooling water setpoints, requested operation mode, spa
 
 Numeric controls are presented as sliders using each control's current minimum, maximum and step.
 
+Default entity names use functional prefixes separated by ` · `:
+
+| Prefix | Functions |
+| --- | --- |
+| **DHW** | Tank temperatures, reheat, powerful mode, booster heater, disinfection and three-way valve |
+| **Energy** | Smart Grid, power limits and power consumption |
+| **Faults** | Abnormality status, code and subcode |
+| **Room** | Room temperature, setpoints and limits |
+| **System** | Unit-wide modes, space heating/cooling, quiet mode, compressor, defrost, hot start, outside and refrigerant temperatures |
+| **Water loop** | Flow, circulation pump, leaving and return temperatures |
+| **Zone · Additional** | Additional-zone setpoints, weather settings, thermostat input and limits |
+| **Zone · Main** | Main-zone setpoints, weather settings, thermostat input and limits |
+
+For example, `Zone · Main · Heating setpoint` and `Zone · Main · Weather mode` sort together. Home Assistant still separates Controls, Sensors and Diagnostics into their own cards and sorts names alphabetically within each card. Existing entity IDs and user-assigned names are preserved when updating; custom names determine their own alphabetical position.
+
 ### Installation options
 
 After the connection check, Altherma setup asks about the installation. You can change these choices later through **Configure**, alongside the refresh interval. Air-to-air skips this step and offers only the refresh interval in Configure.
