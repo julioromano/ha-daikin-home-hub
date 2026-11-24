@@ -1,10 +1,10 @@
-# Daikin Home Hub Modbus
+# Daikin HomeHub Modbus
 
 <img src="custom_components/daikin_home_hub/brand/logo.png" alt="Daikin" width="206">
 
 A Home Assistant custom integration for compatible **Daikin Altherma 3** and **air-to-air installations**, through a **Daikin HomeHub EKRHH in unencrypted Modbus TCP mode**. Requires **Home Assistant 2026.10.2 or newer**.
 
-**Unofficial, independent project.** This repository and its code are not affiliated with, developed by, sponsored by, endorsed by, or supported by Daikin or any of its subsidiaries. Daikin, Altherma and Home Hub names, trademarks and logos belong to their respective owners and are used solely to identify compatible equipment.
+**Unofficial, independent project.** This repository and its code are not affiliated with, developed by, sponsored by, endorsed by, or supported by Daikin or any of its subsidiaries. Daikin, Altherma and HomeHub names, trademarks and logos belong to their respective owners and are used solely to identify compatible equipment.
 
 Support is based on Daikin's published compatibility and register tables, unit tests and an independent TCP simulator. **Physical hardware validation is pending for every profile.** Selecting a profile does not identify the connected equipment or prove that an optional function is installed.
 
@@ -36,8 +36,8 @@ The [complete register reference](docs/register-map.md) inventories all 61 publi
 
 1. In HACS, open the menu and choose **Custom repositories**.
 2. Add `https://github.com/julioromano/ha-daikin-home-hub` and select **Integration**.
-3. Open **Daikin Home Hub Modbus**, download the latest release, and restart Home Assistant.
-4. Open **Settings → Devices & services → Add integration → Daikin Home Hub Modbus**. Follow the gateway preparation and setup below.
+3. Open **Daikin HomeHub Modbus**, download the latest release, and restart Home Assistant.
+4. Open **Settings → Devices & services → Add integration → Daikin HomeHub Modbus**. Follow the gateway preparation and setup below.
 
 ### Manual
 
@@ -48,7 +48,7 @@ ssh USER@HA_HOST 'mkdir -p /config/custom_components'
 scp -r custom_components/daikin_home_hub USER@HA_HOST:/config/custom_components/
 ```
 
-Replace the SSH login and host; for HA Container use the host directory mounted as `/config`. The resulting file must be `/config/custom_components/daikin_home_hub/manifest.json`. Copy the entire directory, including translations and branding. Restart HA, then open **Settings → Devices & services → Add integration → Daikin Home Hub Modbus**.
+Replace the SSH login and host; for HA Container use the host directory mounted as `/config`. The resulting file must be `/config/custom_components/daikin_home_hub/manifest.json`. Copy the entire directory, including translations and branding. Restart HA, then open **Settings → Devices & services → Add integration → Daikin HomeHub Modbus**.
 
 ## Gateway preparation and setup
 

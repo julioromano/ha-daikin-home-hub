@@ -14,7 +14,7 @@ Use current stable development tooling within the HA/Python constraints. Run for
 
 ## GitHub settings
 
-Enable issues and Actions. Use the description "Home Assistant integration for Daikin Home Hub Modbus TCP" and topics `home-assistant`, `hacs`, `daikin`, `homehub`, `modbus`.
+Enable issues and Actions. Use the description "Home Assistant integration for Daikin HomeHub Modbus TCP" and topics `home-assistant`, `hacs`, `daikin`, `homehub`, `modbus`.
 
 Require up-to-date pull requests, squash merges and four passing GitHub Actions checks on `main`:
 

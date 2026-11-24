@@ -1,7 +1,7 @@
 [project]
 name = "ha-daikin-home-hub"
 version = "0.1.0"
-description = "Home Assistant integration for Daikin Home Hub Modbus TCP"
+description = "Home Assistant integration for Daikin HomeHub Modbus TCP"
 license = "MIT"
 license-files = ["LICENSE"]
 requires-python = ">=3.14.2,<3.15"
