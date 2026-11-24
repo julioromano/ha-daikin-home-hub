@@ -32,6 +32,13 @@ The [complete register reference](docs/register-map.md) inventories all 61 publi
 
 ## Installation
 
+### HACS custom repository
+
+1. In HACS, open the menu and choose **Custom repositories**.
+2. Add `https://github.com/julioromano/ha-daikin-home-hub` and select **Integration**.
+3. Open **Daikin Home Hub Modbus**, download the latest release, and restart Home Assistant.
+4. Open **Settings → Devices & services → Add integration → Daikin Home Hub Modbus**. Follow the gateway preparation and setup below.
+
 ### Manual
 
 From a checkout of this repository:
@@ -42,10 +49,6 @@ scp -r custom_components/daikin_home_hub USER@HA_HOST:/config/custom_components/
 ```
 
 Replace the SSH login and host; for HA Container use the host directory mounted as `/config`. The resulting file must be `/config/custom_components/daikin_home_hub/manifest.json`. Copy the entire directory, including translations and branding. Restart HA, then open **Settings → Devices & services → Add integration → Daikin Home Hub Modbus**.
-
-### HACS custom repository
-
-The distribution target is `julioromano/ha-daikin-home-hub` on GitHub. Repository publication is separate from this initial implementation. Once that repository and a release are published, add `https://github.com/julioromano/ha-daikin-home-hub` under **HACS → Custom repositories**, choose **Integration**, download, restart HA and add the integration. HACS default-directory inclusion is not claimed.
 
 ## Gateway preparation and setup
 

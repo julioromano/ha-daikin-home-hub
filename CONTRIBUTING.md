@@ -1,6 +1,6 @@
 # Contributing
 
-Keep changes scoped and reviewable. The intended public repository is [julioromano/ha-daikin-home-hub](https://github.com/julioromano/ha-daikin-home-hub); publication and initial hardware verification are pending.
+Keep changes scoped and reviewable. Report issues and open pull requests at [julioromano/ha-daikin-home-hub on GitHub](https://github.com/julioromano/ha-daikin-home-hub).
 
 ## Development
 
@@ -24,4 +24,4 @@ For control issues, describe commissioning, operating mode, schedules and the si
 
 ## Review and release
 
-After publication, propose changes through a pull request and wait for all required checks. User-visible behavior changes require documentation and release notes. Follow [MAINTAINING.md](MAINTAINING.md); publishing or changing repository settings is a separate maintenance operation.
+Propose changes through a pull request and wait for all required checks before squash merging. Document user-visible changes and include them in the release notes. Follow [MAINTAINING.md](MAINTAINING.md) for repository settings and the release process.

@@ -1,6 +1,6 @@
 # Maintaining and releasing
 
-The distribution target is [julioromano/ha-daikin-home-hub](https://github.com/julioromano/ha-daikin-home-hub). Initial repository creation, remote changes and publication are separate from the implementation. The existing local remote is preserved.
+[julioromano/ha-daikin-home-hub on GitHub](https://github.com/julioromano/ha-daikin-home-hub) is the source of truth for code, issues, pull requests and releases. Use GitHub as `origin` and Forgejo as the release mirror.
 
 ## Architecture and dependencies
 
@@ -12,19 +12,26 @@ Installation options apply a field mask to polling and writes, and set entity de
 
 Use current stable development tooling within the HA/Python constraints. Run formatting, linting, basedpyright, unit coverage, independent TCP tests and hassfest. HACS validation runs on GitHub pushes, pull requests, weekly and manual dispatch.
 
-## GitHub setup after publication
+## GitHub settings
 
 Enable issues and Actions. Use the description "Home Assistant integration for Daikin Home Hub Modbus TCP" and topics `home-assistant`, `hacs`, `daikin`, `homehub`, `modbus`.
 
-Protect `main` with reviewed pull requests and required checks: **Lint, types and unit coverage**, **Simulated Modbus TCP**, **Home Assistant metadata** and **HACS repository validation**. Prevent force pushes and branch deletion. Keep workflows read-only except where an explicit future publishing workflow requires more.
+Require up-to-date pull requests, squash merges and four passing GitHub Actions checks on `main`:
+
+- **Lint, types and unit coverage**
+- **Simulated Modbus TCP**
+- **Home Assistant metadata**
+- **HACS repository validation**
+
+Reviews are optional and the bypass list is empty. Require linear history, block force pushes and branch deletion, and use read-only workflow permissions.
 
 ## Releases
 
-1. Update matching versions in the project metadata and integration manifest; initial version is `0.1.0`. Keep the HA minimum synchronized in the integration constants and HACS metadata.
-2. Run all checks and merge the version change through a reviewed pull request once publication is configured.
-3. Create an annotated `vVERSION` tag from the tested commit and publish a GitHub Release. Tags/releases are immutable; corrections require a new version.
-4. Describe supported profiles, manual revision, HA minimum, changes and limitations. Until hardware verification is recorded, describe all profiles as manufacturer-documented and simulator-tested.
-5. Verify installation through a HACS custom repository. Use the ordinary `custom_components/daikin_home_hub` layout; no custom ZIP asset is required. HACS default-directory submission is a later step.
+1. Update the version in the project metadata, integration manifest and metadata test, and regenerate the lockfile when changing the version. Keep the HA minimum synchronized in the integration constants and HACS metadata.
+2. Squash merge the version change through a pull request and wait for all four checks to pass on the resulting `main` commit.
+3. Create an annotated `vVERSION` tag at that commit and push it to GitHub. Publish a GitHub Release using the standard source archive. Describe supported profiles, the manual revision, HA minimum, changes and limitations. Until hardware verification is recorded, describe all profiles as manufacturer-documented and simulator-tested.
+4. Verify the released tag installs through HACS as a custom repository and Home Assistant can load it after restarting. Publish corrections as a new version.
+5. After verification, atomically fast-forward `forgejo/main` to the released commit and push the same annotated tag. Confirm both refs match GitHub. Resolve any remote divergence or conflicting tag before retrying.
 
 Unit coverage XML/HTML reports are uploaded even if tests fail. The minimum is 95% combined statement/branch coverage. TCP tests have a separate job without a line-coverage gate. Do not suppress HACS or hassfest checks to conceal metadata problems.
 
