@@ -25,7 +25,7 @@ def test_distribution_metadata_and_translations():
     manifest = json.loads((COMPONENT / "manifest.json").read_text())
     project = tomllib.loads((ROOT / "pyproject.toml").read_text())["project"]
     hacs = json.loads((ROOT / "hacs.json").read_text())
-    assert manifest["version"] == project["version"] == "0.1.0"
+    assert manifest["version"] == project["version"] == "0.2.0"
     assert manifest["requirements"] == []
     assert manifest["dependencies"] == ["modbus"]
     assert hacs["homeassistant"] == MIN_HA_VERSION
