@@ -1,4 +1,4 @@
-"""Daikin HomeHub Modbus TCP integration."""
+"""Daikin HomeHub integration over Modbus TCP."""
 
 from awesomeversion import AwesomeVersion
 from homeassistant.components.modbus import async_get_unit

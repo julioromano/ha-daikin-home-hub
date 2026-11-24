@@ -60,7 +60,17 @@ async def test_gui_form_and_validation_errors_are_serializable(
     assert len(form["data_schema"]) == 4
 
 
-async def test_form_and_read_only_validation(hass, unit, connection):
+@pytest.mark.parametrize(
+    "host,normalized_host",
+    [
+        (" GATEWAY.local. ", "gateway.local"),
+        ("192.168.1.5", "192.168.1.5"),
+        ("[2001:0DB8::1]", "2001:db8::1"),
+    ],
+)
+async def test_form_and_read_only_validation(
+    hass, unit, connection, host, normalized_host
+):
     writes = []
     unit.on_write(writes.append)
     result = await hass.config_entries.flow.async_init(
@@ -74,7 +84,7 @@ async def test_form_and_read_only_validation(hass, unit, connection):
             result["flow_id"],
             {
                 **CONNECTION_DATA,
-                "host": " GATEWAY.local. ",
+                "host": host,
                 "port": 502.0,
                 "unit_id": 1.0,
             },
@@ -83,7 +93,8 @@ async def test_form_and_read_only_validation(hass, unit, connection):
         result = await hass.config_entries.flow.async_configure(result["flow_id"], {})
         await hass.async_block_till_done()
     assert result["type"] is FlowResultType.CREATE_ENTRY
-    assert result["data"] == CONNECTION_DATA
+    assert result["title"] == f"HomeHub at {normalized_host}"
+    assert result["data"] == {**CONNECTION_DATA, "host": normalized_host}
     assert result["options"] == DEFAULT_INSTALLATION_OPTIONS
     assert type(result["data"]["port"]) is int
     assert type(result["data"]["unit_id"]) is int
@@ -136,6 +147,21 @@ async def test_duplicates_are_rejected_before_probe(hass, entry, unit):
     assert unit.read_events == []
 
 
+async def test_entries_on_the_same_host_can_share_a_title(hass, unit):
+    with patch(
+        "custom_components.daikin_home_hub.async_setup_entry", return_value=True
+    ):
+        for port in (502, 1502):
+            result = await hass.config_entries.flow.async_init(
+                DOMAIN,
+                context={"source": "user"},
+                data={**CONNECTION_DATA, "model": "air_to_air", "port": port},
+            )
+            assert result["type"] is FlowResultType.CREATE_ENTRY
+            assert result["title"] == "HomeHub at gateway.local"
+            await hass.async_block_till_done()
+
+
 @pytest.mark.parametrize(
     "updates",
     [
@@ -157,6 +183,7 @@ async def test_invalid_input(hass, updates):
 async def test_reconfigure_preserves_entry_and_validates_before_change(
     hass, entry, unit
 ):
+    hass.config_entries.async_update_entry(entry, title="My custom HomeHub title")
     result = await hass.config_entries.flow.async_init(
         DOMAIN, context={"source": "reconfigure", "entry_id": entry.entry_id}
     )
@@ -167,6 +194,7 @@ async def test_reconfigure_preserves_entry_and_validates_before_change(
     )
     assert result["errors"] == {"base": "invalid_response"}
     assert entry.data["host"] == "gateway.local"
+    assert entry.title == "My custom HomeHub title"
     unit.input[20] = 0
     with patch(
         "custom_components.daikin_home_hub.async_setup_entry", return_value=True
@@ -177,6 +205,7 @@ async def test_reconfigure_preserves_entry_and_validates_before_change(
         await hass.async_block_till_done()
     assert result["reason"] == "reconfigure_successful"
     assert entry.data["host"] == "new.local"
+    assert entry.title == "HomeHub at new.local"
 
 
 async def test_reconfigure_cannot_take_another_entry_endpoint(hass, entry):
