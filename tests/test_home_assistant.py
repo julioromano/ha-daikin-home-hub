@@ -13,6 +13,8 @@ from homeassistant.helpers.icon import async_get_icons
 from modbus_connection.exceptions import ModbusTimeoutError
 from pytest_homeassistant_custom_component.common import MockConfigEntry
 
+from custom_components.daikin_home_hub.models import MODELS
+
 from .conftest import CONNECTION_DATA, DOMAIN
 from .reference import PROFILES
 
@@ -39,6 +41,10 @@ async def test_all_profiles_entities_and_defaults(
     devices = dr.async_entries_for_config_entry(dr.async_get(hass), entry.entry_id)
     assert len(devices) == 1
     assert devices[0].manufacturer == "Daikin"
+    assert devices[0].name == "Heat Pump"
+    assert devices[0].model == MODELS[model].name
+    assert devices[0].identifiers == {(DOMAIN, entry.entry_id)}
+    assert all(e.entity_id.split(".", 1)[1].startswith("heat_pump_") for e in entities)
     assert entry.runtime_data.update_interval == timedelta(seconds=5)
 
 
@@ -144,25 +150,51 @@ async def test_service_errors_and_unload(hass, configured, unit, connection):
 
 
 async def test_reconfigure_preserves_common_identity_and_removes_old_map(
-    hass, configured
+    hass, entry, unit, mock_connection, enable_custom_integrations
 ):
+    legacy_name = "Daikin Altherma 3 M E-series"
+    devices = dr.async_get(hass)
+    device = devices.async_get_or_create(
+        config_entry_id=entry.entry_id,
+        identifiers={(DOMAIN, entry.entry_id)},
+        name=legacy_name,
+    )
+    devices.async_update_device(device.id, name_by_user="My heat pump")
     registry = er.async_get(hass)
-    common = entity_id(hass, configured, "smart_grid_mode", "select")
+    common = registry.async_get_or_create(
+        "select",
+        DOMAIN,
+        f"{entry.entry_id}_smart_grid_mode",
+        config_entry=entry,
+        device_id=device.id,
+        suggested_object_id="daikin_altherma_3_m_e_series_energy_smart_grid_mode",
+    ).entity_id
     registry.async_update_entity(common, name="My grid control")
-    device_id = registry.async_get(common).device_id
-    hass.config_entries.async_update_entry(configured, options={"scan_interval": 30})
+    hass.config_entries.async_update_entry(
+        entry, title=legacy_name, options={"scan_interval": 30}
+    )
+    assert await hass.config_entries.async_setup(entry.entry_id)
+    await hass.async_block_till_done()
+    assert entry.title == legacy_name
+    assert entity_id(hass, entry, "smart_grid_mode", "select") == common
+
     result = await hass.config_entries.flow.async_init(
         DOMAIN,
-        context={"source": "reconfigure", "entry_id": configured.entry_id},
-        data={**configured.data, "model": "air_to_air"},
+        context={"source": "reconfigure", "entry_id": entry.entry_id},
+        data={**entry.data, "model": "air_to_air"},
     )
     assert result["reason"] == "reconfigure_successful"
     await hass.async_block_till_done()
-    assert entity_id(hass, configured, "smart_grid_mode", "select") == common
-    assert registry.async_get(common).device_id == device_id
+    assert entry.title == "HomeHub at gateway.local"
+    assert entity_id(hass, entry, "smart_grid_mode", "select") == common
+    assert registry.async_get(common).device_id == device.id
     assert registry.async_get(common).name == "My grid control"
-    assert len(er.async_entries_for_config_entry(registry, configured.entry_id)) == 2
-    assert configured.runtime_data.update_interval == timedelta(seconds=30)
+    updated_device = devices.async_get(device.id)
+    assert updated_device.name == "Heat Pump"
+    assert updated_device.name_by_user == "My heat pump"
+    assert updated_device.model == "Daikin air-to-air installation"
+    assert len(er.async_entries_for_config_entry(registry, entry.entry_id)) == 2
+    assert entry.runtime_data.update_interval == timedelta(seconds=30)
 
 
 async def test_startup_retries_on_timeout(

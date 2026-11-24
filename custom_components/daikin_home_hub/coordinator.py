@@ -49,7 +49,7 @@ class HomeHubCoordinator(DataUpdateCoordinator[Snapshot]):
         )
         self.device_info = DeviceInfo(
             identifiers={(DOMAIN, entry.entry_id)},
-            name=self.device.profile.name,
+            name="Heat Pump",
             manufacturer="Daikin",
             model=self.device.profile.name,
         )

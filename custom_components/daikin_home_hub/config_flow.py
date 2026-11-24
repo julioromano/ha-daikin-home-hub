@@ -247,22 +247,15 @@ class HomeHubConfigFlow(ConfigFlow, domain=DOMAIN):
         entry: ConfigEntry | None,
         options: dict[str, Any] | None = None,
     ) -> ConfigFlowResult:
+        title = f"HomeHub at {data[CONF_HOST]}"
         if entry is not None:
-            # Preserve custom titles, identities and unrelated options.
-            title = (
-                MODELS[data[CONF_MODEL]].name
-                if entry.title == MODELS[entry.data[CONF_MODEL]].name
-                else entry.title
-            )
             return self.async_update_reload_and_abort(
                 entry,
                 title=title,
                 data_updates=data,
                 options={**entry.options, **(options or {})},
             )
-        return self.async_create_entry(
-            title=MODELS[data[CONF_MODEL]].name, data=data, options=options or {}
-        )
+        return self.async_create_entry(title=title, data=data, options=options or {})
 
     async def async_step_installation(
         self, user_input: dict[str, Any] | None = None

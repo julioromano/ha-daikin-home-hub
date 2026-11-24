@@ -1,4 +1,4 @@
-# Daikin HomeHub Modbus
+# Daikin HomeHub
 
 <img src="custom_components/daikin_home_hub/brand/logo.png" alt="Daikin" width="206">
 
@@ -36,8 +36,8 @@ The [complete register reference](docs/register-map.md) inventories all 61 publi
 
 1. In HACS, open the menu and choose **Custom repositories**.
 2. Add `https://github.com/julioromano/ha-daikin-home-hub` and select **Integration**.
-3. Open **Daikin HomeHub Modbus**, download the latest release, and restart Home Assistant.
-4. Open **Settings → Devices & services → Add integration → Daikin HomeHub Modbus**. Follow the gateway preparation and setup below.
+3. Open **Daikin HomeHub**, download the latest release, and restart Home Assistant.
+4. Open **Settings → Devices & services → Add integration → Daikin HomeHub**. Follow the gateway preparation and setup below.
 
 ### Manual
 
@@ -48,7 +48,7 @@ ssh USER@HA_HOST 'mkdir -p /config/custom_components'
 scp -r custom_components/daikin_home_hub USER@HA_HOST:/config/custom_components/
 ```
 
-Replace the SSH login and host; for HA Container use the host directory mounted as `/config`. The resulting file must be `/config/custom_components/daikin_home_hub/manifest.json`. Copy the entire directory, including translations and branding. Restart HA, then open **Settings → Devices & services → Add integration → Daikin HomeHub Modbus**.
+Replace the SSH login and host; for HA Container use the host directory mounted as `/config`. The resulting file must be `/config/custom_components/daikin_home_hub/manifest.json`. Copy the entire directory, including translations and branding. Restart HA, then open **Settings → Devices & services → Add integration → Daikin HomeHub**.
 
 ## Gateway preparation and setup
 
@@ -71,7 +71,9 @@ Setup reads Altherma input register 21 or air-to-air holding register 1001. Faul
 
 Duplicate normalized host/port/unit combinations are rejected across profiles. DNS aliases cannot be recognized as the same physical gateway; use consistent endpoint spelling when sharing a connection.
 
-Use **Reconfigure** to change the endpoint or correct a profile. Common entity/device identifiers, custom names and options are preserved. After successful setup, obsolete fields are removed from the registry. For example, changing to a `20002203` profile removes thermostat input entities; changing between Altherma and air-to-air retains the common Smart Grid entity while changing its register address. Update automations referring to removed entities. Failed probe validation leaves saved configuration and registries intact.
+New entries are titled **HomeHub at gateway.local**, using the normalized hostname or IP address. Entries on the same host can share a title. Home Assistant applies the default device name **Heat Pump** when it loads the integration and shows the selected equipment profile as the model.
+
+Use **Reconfigure** to change the endpoint or correct a profile. Existing entries keep their current title until a successful Reconfigure, which replaces it with the host-based title. Common entity and device identifiers, custom entity and device names, and options are preserved. After successful setup, obsolete fields are removed from the registry. For example, changing to a `20002203` profile removes thermostat input entities; changing between Altherma and air-to-air retains the common Smart Grid entity while changing its register address. Update automations referring to removed entities. Failed probe validation leaves saved configuration and registries intact.
 
 ## Entities and control behavior
 
@@ -96,7 +98,7 @@ Default entity names use functional prefixes separated by ` · `:
 | **Zone · Additional** | Additional-zone setpoints, weather settings, thermostat input and limits |
 | **Zone · Main** | Main-zone setpoints, weather settings, thermostat input and limits |
 
-For example, `Zone · Main · Heating setpoint` and `Zone · Main · Weather mode` sort together. Home Assistant still separates Controls, Sensors and Diagnostics into their own cards and sorts names alphabetically within each card. Existing entity IDs and user-assigned names are preserved when updating; custom names determine their own alphabetical position.
+For example, `Zone · Main · Heating setpoint` and `Zone · Main · Weather mode` sort together. Home Assistant still separates Controls, Sensors and Diagnostics into their own cards and sorts names alphabetically within each card. IDs for newly created entities normally start with `heat_pump_` after the domain, for example `sensor.heat_pump_system_outside_temperature`. Existing entity IDs and user-assigned names are preserved when updating; custom names determine their own alphabetical position.
 
 ### Installation options
 
