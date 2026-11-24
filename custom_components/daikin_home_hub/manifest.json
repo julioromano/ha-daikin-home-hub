@@ -1,6 +1,6 @@
 {
   "domain": "daikin_home_hub",
-  "name": "Daikin Home Hub Modbus",
+  "name": "Daikin HomeHub Modbus",
   "codeowners": ["@julioromano"],
   "config_flow": true,
   "dependencies": ["modbus"],

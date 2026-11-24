@@ -1,1 +1,1 @@
-"""HomeHub PRO tests."""
+"""Daikin HomeHub Modbus tests."""

@@ -29,8 +29,10 @@ def test_distribution_metadata_and_translations():
     assert manifest["requirements"] == []
     assert manifest["dependencies"] == ["modbus"]
     assert hacs["homeassistant"] == MIN_HA_VERSION
-    assert manifest["name"] == hacs["name"] == "Daikin Home Hub Modbus"
     strings = json.loads((COMPONENT / "strings.json").read_text())
+    assert (
+        manifest["name"] == hacs["name"] == strings["title"] == "Daikin HomeHub Modbus"
+    )
     assert strings == json.loads((COMPONENT / "translations/en.json").read_text())
     assert set(strings["selector"]["model"]["options"]) == set(MODELS)
     for register in [*ALTHERMA_REGISTERS.values(), *AIR_TO_AIR_REGISTERS.values()]:
